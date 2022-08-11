@@ -1,0 +1,113 @@
+# vim filetype=i3status
+
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        output_format = "i3bar"
+        interval = 1
+        colors = true
+        
+        markup = pango
+        color_good = "#9ece6a"
+        color_degraded = "#e0af68"
+        color_bad = "#f7768e"
+}
+
+# Enabled
+order += "wireless _first_"
+order += "battery all"
+order += "cpu_usage"
+order += "disk /"
+order += "memory"
+order += "load"
+order += "read_file uptime"
+order += "volume master"
+order += "tztime local"
+
+# Disabled
+#order += "read_file BRIGHTNESS"
+#order += "cpu_temperature 0"
+#order += "ethernet _first_"
+#order += "ipv6"
+
+volume master {
+format = "🔉 %volume"
+	format_muted = "🔇 %volume"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+# read_file BRIGHTNESS {
+#         format = "BRI %content%"
+#         path = "/home/ll/.config/brightness"
+#         max_characters = 5
+# }
+
+cpu_usage {
+        format= "CPU %usage [%cpu0 %cpu1]"
+        max_threshold= 75
+}
+
+cpu_temperature 0 {
+        format = "T %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/temp1_input"
+}
+
+disk "/" {
+        format = "<span color='#c0caf5'> HDD %avail | USED %percentage_used </span>"
+}
+ 
+wireless _first_ {
+        format_up = "<span color='#c0caf5'>W (%quality at %essid, %bitrate) %ip </span>" 
+        format_down = "<span color='#c0caf5'> WIFI DOWN </span>"
+}
+
+ethernet _first_ {
+        format_up = "<span color='#c0caf5'> E %ip (%speed) </span>"
+        # format_up = "E %ip (%speed)"
+        format_down = "E down"
+}
+
+battery all {
+        format = "<span color='#c0caf5'>⚡ %status %percentage %remaining %emptytime</span>"
+        format_down = ""
+        status_chr = "CHR"
+        status_bat = "BAT"
+        status_unk = "UNK"
+        status_full = "FULL"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+read_file uptime {
+          format = "<span color='#c0caf5'> UPTIME %content% </span>"
+          path = "/proc/uptime"
+         # path = "neofetch uptime --uptime_shorthand tiny"
+}
+
+memory {
+        format = "MEM %used | %available"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+        # threshold_degraded = "1G"
+        # format_degraded = "MEMORY < %available"
+}
+
+load {
+        format = "<span color='#c0caf5'> LOAD %1min %5min %15min </span>"
+}
+
+tztime local {
+	format = "🕛 %Y-%m-%d %H:%M:%S"
+}
+
+# Keyboard LED indicator.
+# xset q | grep Caps | tr -s ' ' | cut -d ' ' -f 5,9,13 | sed 's/on/▣/g' | sed 's/off/▢/g'
+
