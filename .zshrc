@@ -19,4 +19,4 @@ bindkey -v
 alias config='/usr/bin/git --git-dir=/home/ll/.cfg/ --work-tree=/home/ll'
 # eval "$(navi widget bash)"
 # Run neofetch at the end
-alias config='/usr/bin/git --git-dir=/home/ll/.cfg/ --work-tree=/home/ll'
+macchina
