@@ -1,0 +1,8 @@
+/* configuration { */
+/*  modi: "window,drun,combi"; */
+/*  @theme: "onedarker"; */
+/*  font: "Fira Code 15"; */
+/*  combi-modi: "window,drun,ssh"; */
+/*  } */
+
+/* https://github.com/Mach-OS/Machfiles/blob/old/.config/rofi/config*/
