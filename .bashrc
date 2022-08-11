@@ -9,5 +9,10 @@ PS1='[\u@\h \W]\$ '
 
 alias config='/usr/bin/git --git-dir=/home/ll/.cfg/ --work-tree=/home/ll'
 # eval "$(navi widget bash)"
+
+# STARSHIP COMMAND PROMPT 
+eval "$(starship init bash)"
+
+# NEOFETCH MACCHINA SYS INFO
 neofetch
 # macchina
