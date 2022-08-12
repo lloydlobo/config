@@ -1,8 +1,9 @@
-# vim filetype=i3
 # i3 config file (v4)
+# vim filetype=i3
 
 # Font for window titles & inherited by i3bar
-font pango:Source Code Pro Medium 8
+# font pango:Source Code Pro Medium 8
+font pango:Fira Code 8
 include $HOME/.config/i3/theme.conf
 include $HOME/.config/i3/i3bar.conf
 include $HOME/.config/i3/i3-gaps.conf
