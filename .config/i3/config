@@ -9,16 +9,16 @@ font pango:monospace 8
 # font xft:Source Code Pro Medium 6
 font pango:Fira Code Light 8
 
-# Window borders
+include $HOME/.config/i3/theme.conf
+include $HOME/.config/i3/i3bar.conf
 # tokyo night theme
 # class                   border  backgr. text  indicator child_border
-client.focused            #9ece6a #24283b #c0caf5 #7aa2f7 #ff9e64 
-client.focused_inactive   #333333 #5f676a #ffffff #484e50 #a9b1d6
-client.unfocused          #333333 #1D202F #888888 #292d2e #24293b
-client.urgent             #2f343a #f7768e #ffffff #f7768e #f7768e
-client.placeholder        #000000 #0c0c0c #ffffff #000000 #0c0c0c
-# client.background         #24283b
-client.background         #c0caf5
+# client.focused            #9ece6a #24283b #c0caf5 #7aa2f7 #ff9e64 
+# client.focused_inactive   #333333 #5f676a #ffffff #484e50 #a9b1d6
+# client.unfocused          #333333 #1D202F #888888 #292d2e #24293b
+# client.urgent             #2f343a #f7768e #ffffff #f7768e #f7768e
+# client.placeholder        #000000 #0c0c0c #ffffff #000000 #0c0c0c
+# client.background         #c0caf5
 
 # GET DEM BORDERS OUT OF HEREc:w
 for_window [class="^.*"] border pixel 2
@@ -483,38 +483,6 @@ set $music spotify
 
 # run dmenu (dracula theme)
 bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu%'"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-     # status_command i3status
-# 	# Obey Fitts's law
-	# tray_padding 0
-# 	# show tray icons on the primary monitor - primary | none
-	# tray_output none 
-	# output primary
-	# Remove i3bar_command i3bar FOR POLYBAR
-#     	i3bar_command i3bar --transparency
-        # font pango:Source Code Pro Medium 10
-        # separator_symbol ⁞
-#         # Height in pixels
-#         height 25
-# 	position top
-# 	# mode hide
-#     	# colors
-# 	colors {
-#      	   focused_workspace  #15161E #7aa2f7 #1f2335
-#      	   active_workspace   #15161E #7aa2f7 #1f2335
-#      	   inactive_workspace #15161E #292e42 #545c7e
-#      	   urgent_workspace   #15161E #db4b4b #ffffff
-#      	   binding_mode       #15161E #db4b4b #ffffff
-#      	   
-#      	   background #15161E
-#      	   statusline #c0caf5
-#      	   separator  #ff9364
-#     	}	
-#         # status_command ~/.config/i3/bumblebee-status/bumblebee-status \ -m spotify pasink pasource brightness battery date time \ -p time.format="%H:%M" date.format="%d %b %Y"\ -t dracula-powerline \
-# }
 
 ########################################################################
 
