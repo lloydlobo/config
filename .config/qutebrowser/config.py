@@ -117,13 +117,16 @@ c.colors.downloads.bar.bg = '#191724'
 # Type: QtColor
 c.colors.downloads.error.bg = '#eb6f92'
 
+# When you press 'f'
 # Font color for hints.
 # Type: QssColor
-c.colors.hints.fg = '#ebbcba'
+# c.colors.hints.fg = '#ebbcba'
+c.colors.hints.fg = '#191724'
 
 # Font color for the matched part of hints.
 # Type: QtColor
-c.colors.hints.match.fg = '#9ccfd8'
+# c.colors.hints.match.fg = '#9ccfd8'
+c.colors.hints.match.fg = '#eccfd8'
 
 # Background color of an info message.
 # Type: QssColor
@@ -149,6 +152,7 @@ c.colors.statusbar.passthrough.bg = '#191724'
 c.colors.statusbar.command.bg = '#191724'
 
 # Foreground color of the URL in the statusbar when there's a warning.
+# c.colors.statusbar.url.warn.fg = '#05C075'
 c.colors.statusbar.url.warn.fg = '#E5C075'
 
 # Background color of the tab bar.
