@@ -147,14 +147,16 @@ configuration {
 }
 
 /* THEMES */
-@theme "onedarker.rasi"
+@theme "tokyonight.rasi"
 
+/* @theme "onedarker.rasi" */
 /* @theme "frost.rasi" */
 /* @theme "arc-dark.rasi" */
 
 /* MENUS */
-@import "rofi_launch.rasi"
+@import "rofi-launch-tokyonight.rasi"
 
+/* @import "rofi_launch.rasi" */
 /* @import "rofi_menu.rasi" */
 /* @import "nord-menu.rasi" */
 /* @import "menu.rasi" */
