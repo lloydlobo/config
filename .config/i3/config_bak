@@ -12,17 +12,16 @@ font pango:Fira Code Light 8
 # Window borders
 # tokyo night theme
 # class                   border  backgr. text  indicator child_border
-# client.focused            #9ece6a #24283b #c0caf5 #7aa2f7 #ff9e64 
-# client.focused_inactive   #333333 #5f676a #ffffff #484e50 #a9b1d6
-# client.unfocused          #333333 #1D202F #888888 #292d2e #24293b
-# client.urgent             #2f343a #f7768e #ffffff #f7768e #f7768e
-# client.placeholder        #000000 #0c0c0c #ffffff #000000 #0c0c0c
-# client.background         #c0caf5
+client.focused            #9ece6a #24283b #c0caf5 #7aa2f7 #ff9e64 
+client.focused_inactive   #333333 #5f676a #ffffff #484e50 #a9b1d6
+client.unfocused          #333333 #1D202F #888888 #292d2e #24293b
+client.urgent             #2f343a #f7768e #ffffff #f7768e #f7768e
+client.placeholder        #000000 #0c0c0c #ffffff #000000 #0c0c0c
 # client.background         #24283b
+client.background         #c0caf5
 
 # GET DEM BORDERS OUT OF HEREc:w
 for_window [class="^.*"] border pixel 2
-default_floating_border normal 0
                          # class                 border  backgr. text    indicator child_border
 # for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4  #e0af68
 
@@ -390,11 +389,11 @@ mode "$mode_gaps_left" {
 
 # def border type is pixel, which eliminates title bar
 # but floating window borders are normal, which has titles
-# default_border pixel
-# default_floating_border normal
+default_border pixel
+default_floating_border normal
 
 # Hide edge borders only if there is one window with no gaps
-# hide_edge_borders smart_no_gaps
+hide_edge_borders smart_no_gaps
 
 # execute nitrogen to establish a wallpaper on screen and restore it
 exec_always [--no nitrogen --restore]
@@ -406,18 +405,18 @@ popup_during_fullscreen smart
 # GAPS
 
 # gaps inner|outer|horizontal|vertical|top|right|bottom|left current|all set|plus|minus|toggle <px>
-# set $inner_gaps 5
-# set $outer_gaps 5
+set $inner_gaps 5
+set $outer_gaps 5
 
 # https://github.com/Mach-OS/Machfiles/blob/old/.config/i3/config
-# gaps inner $inner_gaps
-# gaps outer $outer_gaps
+gaps inner $inner_gaps
+gaps outer $outer_gaps
 
 # Activate smart borders (always)
-# smart_borders on
+smart_borders on
 
 # Only enable outer gaps when there is exactly one container
-# smart_gaps inverse_outer
+smart_gaps inverse_outer
 # gaps inner all set 20 gaps outer current plus 5 gaps horizontal current plus 40 gaps outer current toggle 60
 # Only enable gaps on a workspace when there is at least one container
 # smart_gaps on
@@ -465,7 +464,6 @@ bindsym $mod+Mod1+u exec st -e calcurse
 bindsym $mod+Mod1+j exec st -e joplin
 
 # start a terminator by pressing Mod key + x or ENTER
-set $term uxrt
 set $terminator kitty
 set $browser microsoft-edge-dev
 set $music spotify

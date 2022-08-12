@@ -17,7 +17,7 @@ xrandr -s 1920x1080 &
 # background
 ~/.fehbg &
 # clipmenud &
-# dunst &
+dunst &
 autotiling &
 # pcloud &
 
@@ -27,7 +27,7 @@ setxkbmap -option ctrl:nocaps &
 
 # [ ~ -s ~/.config/mpd/pid ] && mpd &
 # /usr/lib/polkit-1/polkitd &
-
+/usr/lib/polkit-1/polkit-agent-helper-1 &
 
 # sxhkd
-# sxhkd -x ~/.config/i3/sxhkd/sxhkdrc &
+sxhkd -x ~/.config/i3/sxhkd/sxhkdrc &
