@@ -15,10 +15,12 @@ include $HOME/.config/i3/keymap-controls.conf
 
 set $mod Mod4
 
+set $fm DisplayPort-1
+set $sm HDMI-A-1
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-# GET DEM BORDERS OUT OF HEREc:w
-for_window [class="^.*"] border pixel 2
+
 # Cursor speed
 exec --no-startup-id xinput set-prop 11 295 1.9
 
@@ -39,6 +41,8 @@ exec --no-startup-id unclutter
 # execute nitrogen to establish a wallpaper on screen and restore it
 exec --no-startup-id nitrogen --restore
 
+# Remaps the Caps_Lock button to escape
+# exec --no-startup-id setxkbmap -option caps:escape
 # exec --no-startup-id dex --autostart --environment i3
 # exec VBoxClient-all
 
@@ -47,6 +51,9 @@ exec --no-startup-id nitrogen --restore
 # You don’t need to remember where you came from now, you can just press $mod+2 again to switch back to "1: www".
 workspace_auto_back_and_forth yes
 
+# GET DEM BORDERS OUT OF HEREc:w
+for_window [class="^.*"] border pixel 3
+new_window 1pixel
 # def border type is pixel, which eliminates title bar 
 # but floating window borders are normal, which has titles
 default_border pixel
