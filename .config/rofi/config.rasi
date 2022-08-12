@@ -145,12 +145,17 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "onedarker.rasi"
-@import "nord-menu.rasi"
 
-/* @import "menu.rasi" */
+/* THEMES */
+@theme "onedarker.rasi"
+
 /* @theme "frost.rasi" */
 /* @theme "arc-dark.rasi" */
+
+/* MENUS */
+@import "rofi_launch.rasi"
+
 /* @import "rofi_menu.rasi" */
-/* @import "rofi_launch.rasi" */
+/* @import "nord-menu.rasi" */
+/* @import "menu.rasi" */
 /* @import "sidetab.rasi" */
