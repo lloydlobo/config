@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# $HOME/.config/i3/autostart.sh
+
 # compositor
 killall picom
 while pqrep -u $UID -x picom >/dev/null; do sleep 1; done
