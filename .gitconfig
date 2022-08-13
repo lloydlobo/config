@@ -1,0 +1,20 @@
+[user]
+	name = lloydlobo
+	email = 76430758+lloydlobo@users.noreply.github.com
+[alias]
+	ad = add .
+	br = branch
+	ci = commit
+	co = checkout
+	lo = log --oneline -n 15
+	st = status
+	up = pull --rebase
+	re = restore
+[push]
+	default = current
+[rebase]
+	autoStash = true
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
