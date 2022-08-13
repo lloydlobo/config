@@ -43,7 +43,7 @@ config.set('content.notifications.enabled', True, 'https://www.youtube.com')
 # Directory to save downloads to. If unset, a sensible OS-specific
 # default is used.
 # Type: Directory
-c.downloads.location.directory = '/home/ll/Downloads'
+c.downloads.location.directory = '$HOME/Downloads'
 
 # When to show the tab bar.
 # Type: String
@@ -187,21 +187,21 @@ c.colors.tabs.pinned.selected.odd.bg = '#191724'
 c.colors.tabs.pinned.selected.even.bg = '#191724'
 
 c.fonts.default_family = "Hermit"
-c.fonts.default_size = '6pt'
+c.fonts.default_size = '10pt'
 
 # Font used in the completion widget.
 # Type: Font
-c.fonts.completion.entry = '6pt "Hermit"'
+c.fonts.completion.entry = '10pt "Hermit"'
 
 # Font used for the debugging console.
 # Type: Font
-c.fonts.debug_console = '6pt "Hermit"'
+c.fonts.debug_console = '10pt "Hermit"'
 
 # Font used for prompts.
-c.fonts.prompts = '6pt "Hermit"'
+c.fonts.prompts = '10pt "Hermit"'
 
 # Font used in the statusbar.
-c.fonts.statusbar = '6pt "Hermit"'
+c.fonts.statusbar = '10pt "Hermit"'
 
 c.auto_save.session = True
 c.url.start_pages = ["https://youtube.com"] 
