@@ -7,12 +7,12 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-alias config='/usr/bin/git --git-dir=/home/ll/.cfg/ --work-tree=/home/ll'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # eval "$(navi widget bash)"
 
 # STARSHIP COMMAND PROMPT 
 eval "$(starship init bash)"
 
 # NEOFETCH MACCHINA SYS INFO
-neofetch
-# macchina
+# neofetch
+macchina
