@@ -16,7 +16,7 @@ setopt autocd beep extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-alias config='/usr/bin/git --git-dir=/home/ll/.cfg/ --work-tree=/home/ll'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # eval "$(navi widget bash)"
 
 # STARSHIP COMMAND PROMPT
