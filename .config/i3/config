@@ -5,6 +5,7 @@
 # font pango:Source Code Pro Medium 8
 font pango:Fira Code 8
 include $HOME/.config/i3/theme.conf
+# include $HOME/.config/i3/theme-pywal.conf
 include $HOME/.config/i3/i3bar.conf
 include $HOME/.config/i3/i3-gaps.conf
 include $HOME/.config/i3/mode.conf
@@ -40,7 +41,7 @@ exec --no-startup-id unclutter
 
 # WALLPAPERS
 # execute nitrogen to establish a wallpaper on screen and restore it
-exec --no-startup-id nitrogen --restore
+# exec --no-startup-id nitrogen --restore
 
 # Remaps the Caps_Lock button to escape
 # exec --no-startup-id setxkbmap -option caps:escape
@@ -57,7 +58,8 @@ workspace_auto_back_and_forth yes
 
 # GET DEM BORDERS OUT OF HEREc:w
 for_window [class="^.*"] border pixel 3
-new_window 1pixel
+new_window pixel 1
+new_float normal 
 # def border type is pixel, which eliminates title bar 
 # but floating window borders are normal, which has titles
 default_border pixel

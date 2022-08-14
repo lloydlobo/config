@@ -24,7 +24,7 @@ autotiling &
 
 
 # setxkbmap -option ctrl:nocaps &
-#setxkbmap -layout colemak &
+# setxkbmap -layout colemak &
 
 # [ ~ -s ~/.config/mpd/pid ] && mpd &
 # /usr/lib/polkit-1/polkitd &
