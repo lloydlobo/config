@@ -27,18 +27,18 @@ order += "disk /"
 order += "memory"
 order += "load"
 order += "read_file uptime"
-order += "volume master"
 order += "tztime local"
 
 # Disabled
+#order += "volume master"
 #order += "read_file BRIGHTNESS"
 #order += "cpu_temperature 0"
 #order += "ethernet _first_"
 #order += "ipv6"
 
 volume master {
-format = "🔉 %volume"
-	format_muted = "🔇 %volume"
+format = "VOL %volume"
+	format_muted = "MUT %volume"
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
@@ -61,22 +61,25 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-        format = "<span color='#c0caf5'> HDD %avail | USED %percentage_used </span>"
+        format = " HDD %avail | USED %percentage_used "
+        # format = "<span color='#c0caf5'> HDD %avail | USED %percentage_used </span>"
 }
  
 wireless _first_ {
-        format_up = "<span color='#c0caf5'>W (%quality at %essid, %bitrate) %ip </span>" 
+        format_up = " W (%quality at %essid, %bitrate) %ip " 
+        # format_up = "<span color='#c0caf5'>W (%quality at %essid, %bitrate) %ip </span>" 
         format_down = "<span color='#c0caf5'> WIFI DOWN </span>"
 }
 
 ethernet _first_ {
-        format_up = "<span color='#c0caf5'> E %ip (%speed) </span>"
+        format_up = " E %ip (%speed) "
+        # format_up = "<span color='#c0caf5'> E %ip (%speed) </span>"
         # format_up = "E %ip (%speed)"
         format_down = "E down"
 }
 
 battery all {
-        format = "<span color='#c0caf5'>⚡ %status %percentage %remaining %emptytime</span>"
+        format = " ⚡ %status %percentage %remaining %emptytime "
         format_down = ""
         status_chr = "CHR"
         status_bat = "BAT"
@@ -101,11 +104,12 @@ memory {
 }
 
 load {
-        format = "<span color='#c0caf5'> LOAD %1min %5min %15min </span>"
+        # format = "<span color='#c0caf5'> LOAD %1min %5min %15min </span>"
+        format = " LOAD %1min %5min %15min "
 }
 
 tztime local {
-	format = "🕛 %Y-%m-%d %H:%M:%S"
+	format = " %Y-%m-%d %H:%M:%S "
 }
 
 # Keyboard LED indicator.

@@ -8,6 +8,7 @@
   ],
   "window_swallow_criteria": {},
   "terminals": [
+    "kitty",
     "Gnome-terminal",
     "Alacritty"
   ]
