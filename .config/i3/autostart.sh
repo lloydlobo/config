@@ -2,7 +2,7 @@
 # $HOME/.config/i3/autostart.sh
 
 # Fit the VM Virtual Machine display to fullscreen
-xrandr -s 1920x1080 &
+# xrandr -s 1920x1080 &
 
 # compositor
 killall picom
