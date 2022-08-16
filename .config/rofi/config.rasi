@@ -146,21 +146,13 @@ configuration {
   }
 }
 
-/* */
 /* python-pywal automatic wallpaper based themes*/
-/* */
-
 /* Dark theme. */
 @import "~/.cache/wal/colors-rofi-dark"
 
-
-@import "rofi-launch-tokyonight.rasi"
+/* ARCHIVE */
 
 /* THEMES */
-
-/* Light theme. */
-/* @import "~/.cache/wal/colors-rofi-light" */
-
 /* @theme "tokyonight.rasi" */
 /* @theme "onedarker.rasi" */
 /* @theme "frost.rasi" */
@@ -168,7 +160,11 @@ configuration {
 
 /* MENUS */
 /* @import "rofi_launch.rasi" */
-/* @import "rofi_menu.rasi" */
+/* @import "rofi-launch-tokyonight.rasi" */
 /* @import "nord-menu.rasi" */
 /* @import "menu.rasi" */
+/* @import "rofi_menu.rasi" */
 /* @import "sidetab.rasi" */
+
+/* Light theme. */
+/* @import "~/.cache/wal/colors-rofi-light" */
