@@ -25,9 +25,11 @@ cat ~/.cache/wal/sequences
 # To add support for TTYs this line can be optionally added.
 source ~/.cache/wal/colors-tty.sh
 
+# CLI tool to redo spelling errors in commands
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias oops)"
+
 # NEOFETCH MACCHINA SYS INFO
 # neofetch
 macchina
 
-eval "$(thefuck --alias)"
-eval "$(thefuck --alias oops)"

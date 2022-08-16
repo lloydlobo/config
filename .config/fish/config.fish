@@ -9,6 +9,9 @@ if status is-interactive
     # STARSHIP COMMAND PROMPT
     starship init fish | source
 
+    # CLI tool to redo spelling errors in commands
+    thefuck --alias | source 
+    thefuck --alias oops | source 
     # similar to neofetch --> display system info
     macchina
 end
