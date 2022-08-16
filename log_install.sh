@@ -24,8 +24,6 @@ rustup update
 # MUSIC | MPD | MPV
 #
 
-# Prerequisite mpc mpd ncmpcpp
-sudo pacman -S timidity
 
 #
 # YAY
@@ -44,6 +42,8 @@ yay -Y --devel --save
 # https://wiki.archlinux.org/title/Dotfiles
 # Dotfiles bare config alias
 yay bash-complete-alias
+# bash-complete-alias dependency is bash-completion --> needed?
+yay bash-completion
 echo "complete -F _complete_alias config" >> .bashrc
 
 #
@@ -66,6 +66,7 @@ yay lf
 yay ripgrep
 
 # OTHER YAY
+yay git-delta
 yay nerd-fonts
 yay macchina-bin
 yay procs
@@ -92,6 +93,10 @@ echo "source /usr/share/doc/mcfly/mcfly.bash" >> .bashrc
 # wallppaper theme
 yay python-pywal
 
+# Prerequisite mpc mpd ncmpcpp
+sudo pacman -S timidity
+# feature rich ncurses-based music player
+yay cmus
 
 #
 # PARU
