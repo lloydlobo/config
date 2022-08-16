@@ -12,6 +12,8 @@ if status is-interactive
     # CLI tool to redo spelling errors in commands
     thefuck --alias | source 
     thefuck --alias oops | source 
+    set -x THEFUCK_OVERRIDDEN_ALIASES '"add .",branch,commit,"log --oneline -n 15",checkout,status,"pull --rebase",restore'
+
     # similar to neofetch --> display system info
     macchina
 end
