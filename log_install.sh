@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# put `&` later when creating the final script
+
 gh auth login
 
 #
@@ -17,7 +19,6 @@ config config --local status.showUntrackedFiles no
 # Setup rustup cargo & update it
 rustup default stable
 rustup update
-
 
 #
 # MUSIC | MPD | MPV
@@ -39,6 +40,11 @@ makepkg -si
 yay -Y --gendb
 yay -Syu devel
 yay -Y --devel --save
+
+# https://wiki.archlinux.org/title/Dotfiles
+# Dotfiles bare config alias
+yay bash-complete-alias
+echo "complete -F _complete_alias config" >> .bashrc
 
 #
 # i3 - PLUGINS
@@ -68,10 +74,6 @@ yay hyperfine
 # Shell Prompt
 yay starship
 
-# https://wiki.archlinux.org/title/Dotfiles
-# Dotfiles bare config alias
-yay bash-complete-alias
-
 # Navi & dependencies
 yay navi # man-page alternative in Rust
 yay fzf
@@ -99,5 +101,4 @@ yay paru
 
 # wallpapers
 paru -S nordic-wallpapers
-
 
