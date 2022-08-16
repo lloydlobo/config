@@ -35,7 +35,7 @@ exec --no-startup-id nm-applet
 # Remaps the menu button (Alt_R and Control_R to Super)
 exec_always --no-startup-id xmodmap ~/.Xmodmap
 # Use URxvt settings from Xresources
-exec_always --no-startup-id xrdb ~/.Xresources
+# exec_always --no-startup-id xrdb ~/.Xresources
 # Makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 

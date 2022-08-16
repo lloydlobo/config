@@ -1,26 +1,6 @@
 !https://github.com/k-vernooy/dotfiles/blob/master/home/Xresources
 ! run $ xrdb .Xresources after change
 !
-! basic configuration
-URxvt.scrollBar: false
-URxvt.cursorBlink: true
-URxvt.internalBorder: 4
-URxvt.urlLauncher: firefox
-
-URxvt.keysym.Control-Up:     \033[1;5A
-URxvt.keysym.Control-Down:   \033[1;5B
-URxvt.keysym.Control-Left:   \033[1;5D
-URxvt.keysym.Control-Right:  \033[1;5C
-
-! URxvt.transparent: true
-! URxvt.shading:20
-
-! Included this so you know how to make your foreground not match the color of your background
-URxvt.foreground: #eeeeee
-
-! font options
-! URxvt.font:       xft:Hack Nerd Font Mono: size=10: antialiasing=true
-URxvt.font:       xft:Fira Code: size=12.5: antialiasing=true
 Xft*dpi:          96
 Xft*antialias:    true
 Xft*hinting:      full
@@ -49,7 +29,6 @@ Xft*hinting:      full
 
 !f2d472 (light yellow)
 
-
 ! yellow
 *.color3: #ffa578
 *.color11: #ffa578
@@ -69,6 +48,27 @@ Xft*hinting:      full
 ! white
 *.color7: #e4e9ff
 *.color15: #e4e9ff
+
+! basic configuration
+URxvt.scrollBar: false
+URxvt.cursorBlink: true
+URxvt.internalBorder: 4
+URxvt.urlLauncher: firefox
+
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C
+
+! URxvt.transparent: true
+! URxvt.shading:20
+
+! Included this so you know how to make your foreground not match the color of your background
+URxvt.foreground: #eeeeee
+
+! font options
+! URxvt.font:       xft:Hack Nerd Font Mono: size=10: antialiasing=true
+URxvt.font:       xft:Fira Code: size=12.5: antialiasing=true
 
 ! Enable normal copy/paste
 URxvt.iso14755:        false
