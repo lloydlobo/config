@@ -1,6 +1,6 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    # navi widget fish | source
+    navi widget fish | source
     
     # alaias for git | config == git. 
     # Usage: config status; config add; config commit; config push
@@ -12,7 +12,7 @@ if status is-interactive
     # CLI tool to redo spelling errors in commands
     thefuck --alias | source 
     thefuck --alias oops | source 
-    set -x THEFUCK_OVERRIDDEN_ALIASES '"add .",branch,commit,"log --oneline -n 15",checkout,status,"pull --rebase",restore'
+    # set -x THEFUCK_OVERRIDDEN_ALIASES '"add .",branch,commit,"log --oneline -n 15",checkout,status,"pull --rebase",restore'
 
     # similar to neofetch --> display system info
     macchina
