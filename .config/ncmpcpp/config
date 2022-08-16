@@ -1,10 +1,11 @@
 # vim: filetype=conf
 
 # https://gitlab.com/thelinuxcast/my-dots/-/blob/2d568e60145ae5a05feace6999247976e4964b3b/ncmpcpp/config
+# https://computingforgeeks.com/how-to-configure-mpd-and-ncmpcpp-on-linux/
 
+mpd_music_dir = "~/Media/Music"
 ncmpcpp_directory = "~/.config/ncmpcpp"
 lyrics_directory = "~/.local/share/lyrics"
-mpd_music_dir = "~/media/Music"
 
 autocenter_mode = "yes"
 follow_now_playing_lyrics = "yes"
