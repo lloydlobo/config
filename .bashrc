@@ -28,3 +28,6 @@ source ~/.cache/wal/colors-tty.sh
 # NEOFETCH MACCHINA SYS INFO
 # neofetch
 macchina
+
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias oops)"
