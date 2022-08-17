@@ -17,14 +17,15 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
 # eval "$(navi widget bash)"
 
 # CLI tool to redo spelling errors in commands
-eval "$(thefuck --alias)"
-eval "$(thefuck --alias oops)"
+#eval "$(thefuck --alias)"
+#eval "$(thefuck --alias oops)"
 
 # STARSHIP COMMAND PROMPT
 eval "$(starship init zsh)"
 
-# Run neofetch at the end
+# Run neofetch or at the end
 macchina
