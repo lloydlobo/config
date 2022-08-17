@@ -65,6 +65,10 @@ yay lazygit
 yay lf
 yay ripgrep
 
+# BROWSER
+yay qutebrowser
+yay python-adblock
+
 # OTHER YAY
 yay git-delta
 yay nerd-fonts
@@ -107,3 +111,7 @@ yay paru
 # wallpapers
 paru -S nordic-wallpapers
 
+# FONTS
+sudo pacman -S ttf-dejavu ttf-liberation ttf-droid ttf-ubuntu-font-family noto-fonts
+yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-fonts
+# sudo pacman -S ttf-font-awesome-4
