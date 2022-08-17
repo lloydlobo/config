@@ -22,7 +22,6 @@ error_symbol = "[✗](bold red) "
 [cmd_duration]
 min_time = 60_0000
 
-
 #
 # [](#9A348E)\
 # $username\
@@ -154,4 +153,4 @@ format = '[ $symbol ($version) ]($style)'
 disabled = false
 time_format = "%R" # Hour:Minute Format
 #style = "bg:#33658A"
-format = '[ $time ]($style)'
+format = '[ $time ]($style) '
