@@ -137,3 +137,4 @@ yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-
 # ASCII 
 # live ascii bonsai tree animation @chonsai
 yay cbonsai
+yay rmatrix
