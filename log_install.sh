@@ -2,6 +2,7 @@
 
 # put `&` later when creating the final script
 
+# Connect to github cli
 gh auth login
 
 #
@@ -65,9 +66,22 @@ yay lazygit
 yay lf
 yay ripgrep
 
+#
+# EMACS
+#
+yay emacs
+# Doom Emacs
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+   ~/.emacs.d/bin/doom install
+# source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
+doom sync 
+
 # BROWSER
+# Qutebrowser & dependecy
 yay qutebrowser
 yay python-adblock
+# yay python-pygments # for :view-source syntax highlighting
+yay asciidoc
 
 # OTHER YAY
 yay git-delta
