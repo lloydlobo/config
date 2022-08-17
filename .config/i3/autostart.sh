@@ -34,4 +34,4 @@ autotiling &
 # sxhkd -c ~/.config/i3/sxhkd/sxhkdrc &
 
 # emacs daemon server running in the background
-emacs --daemon &
+# emacs --daemon &
