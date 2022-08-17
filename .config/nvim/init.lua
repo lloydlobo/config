@@ -1,7 +1,9 @@
 -- https://github.com/krady21/dotfiles/blob/master/.config/nvim/init.vim
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
  
+--
 -- Install packer
+--
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -59,6 +61,12 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = vim.fn.expand '$MYVIMRC',
 })
 
+--
 -- [[ Setting options ]]
+--
 -- See `:help vim.o`
+
+-- Set highlight on search
+vim.o.hlsearch = false
+
 
