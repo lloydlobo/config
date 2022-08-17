@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# GUIDE for instal.sh dotfiles =>> https://github.com/bobwhitelock/dotfiles
 # put `&` later when creating the final script
 
 # Connect to github cli
@@ -62,9 +63,12 @@ yay thefuck
 #
 yay astronvim
 yay lazygit
+# disk analyzer with ncurses interface
+yay ncdu
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 yay lf
 yay ripgrep
+sudo pacman -S fd
 
 #
 # EMACS
@@ -129,3 +133,7 @@ paru -S nordic-wallpapers
 sudo pacman -S ttf-dejavu ttf-liberation ttf-droid ttf-ubuntu-font-family noto-fonts
 yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-fonts
 # sudo pacman -S ttf-font-awesome-4
+
+# ASCII 
+# live ascii bonsai tree animation @chonsai
+yay cbonsai
