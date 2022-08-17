@@ -1,3 +1,5 @@
 # Add this to your .xinitrc or whatever file starts programs on startup.
 # -R restores the last colorscheme that was in use.
-wal -R
+# wal -R
+# https://github.com/dylanaraps/pywal/issues/125
+(cat ~/.cache/wal/sequences &)
