@@ -69,6 +69,7 @@ yay ncdu
 yay lf
 yay ripgrep
 sudo pacman -S fd
+yay exa # 10 - ls replacement
 
 #
 # EMACS
@@ -114,6 +115,7 @@ echo "source /usr/share/doc/mcfly/mcfly.bash" >> .bashrc
 
 # wallppaper theme
 yay python-pywal
+yay redshift
 
 # Prerequisite mpc mpd ncmpcpp
 sudo pacman -S timidity
