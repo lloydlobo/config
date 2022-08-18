@@ -200,7 +200,26 @@ require('telescope').setup {
       },
     },
   },
+  extensions = {
+    file_browser = {
+      theme = "ivy",
+      -- disable netrw and use telescope-file--browser
+      hijack_netrw = true,
+      mappinngs = {
+        ["i"] = {
+          -- custom insert mode
+        },
+        ["n"] = {
+          -- custom normal mode
+        },
+      },
+    },
+  },
 }
+-- To get telescope-file-browser loaded and working with telescope,
+-- you need to call load_extension, somewhere after setup function:
+-- require("telescope").load_extension "file_browser"
+pcall(require("telescope").load_extension "file_browser")
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -217,4 +236,15 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' }) 
 
-
+-- vim.api.keymap.set('n', '<leader>fb', ':Telescope file_browser', { noremap = true })
+  -- require("telescope").load_extension 'file_browser'
+-- vim.keymap.set('n', '<leader>fb', function() 
+--   require('telescope').extensions.file_browser.file_browser
+-- end, { desc = '[F]ile [B]rowser' })
+  -- require('telescope').load_extension(require('file_browser')) 
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fb",
+  ":Telescope file_browser",
+  { noremap = true }
+)
