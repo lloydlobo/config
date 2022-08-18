@@ -1,4 +1,3 @@
-
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
  
 -- 
@@ -99,6 +98,7 @@ vim.o.completeopt = 'menuone,noselect'
 --
 -- [[ Basic Keymaps ]]
 --
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -136,6 +136,7 @@ require('lualine').setup {
 }
 
 -- Enable Comment.nvim
+-- Stock commands gcc - linewise; gbc -blockwise
 require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -157,6 +158,18 @@ require('gitsigns').setup {
   }
 }
 
+-- [[ Configure Telescope ]]
+-- See `:help telescope` and `:help telescope.setup()`
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ['<C-u>'] = false,
+        ['<C-d>'] = false,
+      },
+    },
+  },
+}
 -- TODO
 --
 -- Visual
