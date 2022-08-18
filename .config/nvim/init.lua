@@ -1,7 +1,7 @@
 
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
  
---
+-- 
 -- Install packer
 --
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -138,10 +138,29 @@ require('lualine').setup {
 -- Enable Comment.nvim
 require('Comment').setup()
 
+-- Enable `lukas-reineke/indent-blankline.nvim`
+-- See `:help indent_blankline.txt`
+require('indent_blankline').setup {
+  char = '┊',
+  show_trailing_blankline_indent = false,
+}
+
+-- Gitsigns
+-- See `:help gitsigns.txt`
+require('gitsigns').setup {
+  signs = {
+    add = { text = "+" },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  }
+}
+
+-- TODO
 --
 -- Visual
 -- Stay in indent mode
--- TODO
 -- Move text up and down
 --keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 --keymap("v", "<A-j>", ":m .-2<CR>==", opts)
