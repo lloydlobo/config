@@ -1,5 +1,8 @@
--- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+-- print('init.lua loaded')
+require('base')
  
+-- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+--
 -- 
 -- Install packer
 --
@@ -62,14 +65,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 --
 -- [[ Setting options ]]
---
 -- See `:help vim.o`
+--
 
 -- Set highlight on search
-vim.o.hlsearch = false
-
+-- vim.o.hlsearch = false
 -- Make line numbers default
-vim.wo.number = true
+-- vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -170,12 +172,20 @@ require('telescope').setup {
     },
   },
 }
--- TODO
---
--- Visual
--- Stay in indent mode
--- Move text up and down
---keymap("v", "<A-j>", ":m .+1<CR>==", opts)
---keymap("v", "<A-j>", ":m .-2<CR>==", opts)
---keymap("v", "p", "= dP", opts)               --  yank and paste once ;chris@machine 25 custom keymaps set with lua
+
+-- Enable telescope fzf native, if installed
+pcall(require('telescope').load_extension, 'fzf')
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').buffers, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', function()
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
+
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' }) 
+
 
