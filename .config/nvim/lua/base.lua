@@ -11,7 +11,7 @@ vim.wo.relativenumber = true
 
 vim.opt.title = true
 vim.opt.autoindent = true
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
 vim.opt.expandtab = true

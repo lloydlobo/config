@@ -32,9 +32,24 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'                                       -- Add indentation guides even on blank lines
   use 'tpope/vim-sleuth'                                                          -- Detect tabstop and shiftwidth automatically
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy Finder (files, lsp, etc)
+  use { "nvim-telescope/telescope-file-browser.nvim" }                            -- File Browser extension for telescope.nvim
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
+
+  -- use({ "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, })
+  -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
+  use { "folke/twilight.nvim", config = function()
+      require("twilight").setup {
+      }
+    end
+  }                                                                               --  Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're editing using TreeSitter.
+  use { "folke/zen-mode.nvim", config = function() 
+    require("zen-mode").setup {
+      } 
+    end
+  }                                                                               --  Distraction-free coding for Neovim
 
   if is_bootstrap then
     require('packer').sync()
@@ -106,6 +121,12 @@ vim.o.completeopt = 'menuone,noselect'
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -147,6 +168,14 @@ require('indent_blankline').setup {
   char = '┊',
   show_trailing_blankline_indent = false,
 }
+
+-- Zen Mode
+-- See `:help ZenMode` `:ZenMode`
+-- require("zen-mode").toggle({
+--   window = {
+--     width = .85                                               -- width will be 85% of the editor width
+--   }
+-- })
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
