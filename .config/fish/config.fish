@@ -1,5 +1,8 @@
+# Load all saved ssh keys
+# /usr/bin/ssh-add -A ^/dev/null
+
 set fish_greeting ""
-set -gx TERM xterm-256color
+#set -gx TERM xterm-256color
 
 if status is-interactive
     # neofetch replacement --> display system info
@@ -8,8 +11,9 @@ end
 # Usage: config status; config add; config commit; config push
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-# STARSHIP COMMAND PROMPT
-starship init fish | source
+
+# ZOXIDE | cd alternative
+zoxide init fish | source
 
 # Credits: https://github.com/craftzdog/dotfiles-public/blob/master/.config/fish/config.fish
 #
@@ -68,6 +72,35 @@ if test -f $LOCAL_CONFIG
   source $LOCAL_CONFIG
 end
 
+# Fish syntax highlighting
+set -g fish_color_autosuggestion '555'  'brblack'
+set -g fish_color_cancel -r
+set -g fish_color_command --bold
+set -g fish_color_comment red
+set -g fish_color_cwd green
+set -g fish_color_cwd_root red
+set -g fish_color_end brmagenta
+set -g fish_color_error brred
+set -g fish_color_escape 'bryellow'  '--bold'
+set -g fish_color_history_current --bold
+set -g fish_color_host normal
+set -g fish_color_match --background=brblue
+set -g fish_color_normal normal
+set -g fish_color_operator bryellow
+set -g fish_color_param cyan
+set -g fish_color_quote yellow
+set -g fish_color_redirection brblue
+set -g fish_color_search_match 'bryellow'  '--background=brblack'
+set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
+set -g fish_color_user brgreen
+set -g fish_color_valid_path --underline
+
+# Install Starship
+starship init fish | source
+
+# ##################################################
+#                   EOF
+# ##################################################
 # Commands to run in interactive sessions can go here
 # navi widget fish | source
 # https://dev.to/manan30/what-is-the-best-zshrc-config-you-have-seen-14id

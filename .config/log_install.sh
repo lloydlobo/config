@@ -22,10 +22,6 @@ config config --local status.showUntrackedFiles no
 rustup default stable
 rustup update
 
-#
-# MUSIC | MPD | MPV
-#
-
 
 #
 # YAY
@@ -48,6 +44,9 @@ yay bash-complete-alias
 yay bash-completion
 echo "complete -F _complete_alias config" >> .bashrc
 
+# GHQ git local repo management
+yay ghq
+
 #
 # i3 - PLUGINS
 #
@@ -55,11 +54,15 @@ yay autotiling
 yay -S i3-resurrect
 yay xorg-xbacklight
 yay light
-yay bat
-yay thefuck
+
+##
+# MUSIC | MPD | MPV
+#
+# Prerequisite mpc mpd ncmpcpp
+sudo pacman -S timidity
 
 #
-# ASTRONVIM
+# NeoVim
 #
 yay astronvim
 yay lazygit
@@ -68,19 +71,13 @@ yay ncdu
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 yay lf
 yay ripgrep
+yay zoxide                                # A smarter cd command
+yay bat
+yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
 yay exa # 10 - ls replacement
 
-#
-# EMACS
-#
-yay emacs
-# Doom Emacs
-git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
-   ~/.emacs.d/bin/doom install
-# source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
-doom sync 
 
 # BROWSER
 # Qutebrowser & dependecy
@@ -118,8 +115,6 @@ echo "source /usr/share/doc/mcfly/mcfly.bash" >> .bashrc
 yay python-pywal
 yay redshift
 
-# Prerequisite mpc mpd ncmpcpp
-sudo pacman -S timidity
 # feature rich ncurses-based music player
 yay cmus
 
@@ -133,11 +128,22 @@ yay paru
 paru -S nordic-wallpapers
 
 # FONTS
-sudo pacman -S ttf-dejavu ttf-liberation ttf-droid ttf-ubuntu-font-family noto-fonts
+sudo pacman -S ttf-dejavu ttf-liberation ttf-droid ttf-ubuntu-font-family noto-fonts 
 yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-fonts
+yay noto-fonts-emoji noto-fonts-extra                             # Essential for starship glyphs emoji etc
 # sudo pacman -S ttf-font-awesome-4
 
 # ASCII 
 # live ascii bonsai tree animation @chonsai
 yay cbonsai
 yay rmatrix
+
+#
+# EMACS
+#
+yay emacs
+# Doom Emacs
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+   ~/.emacs.d/bin/doom install
+# source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
+doom sync 

@@ -2,6 +2,10 @@
 # ~/.bashrc
 #
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 alias ls='ls --color=auto'
@@ -20,6 +24,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 # Command prompt
 eval "$(starship init bash)"
 # eval "$(navi widget bash)"
+eval "$(zoxide init bash)"
 
 # Import colorscheme from 'wal' asynchronously & Run the process in the background.  
 # ( ) # Hide shell job control messages. # Not supported in the "fish" shell.

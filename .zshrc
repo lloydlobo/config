@@ -16,16 +16,17 @@ setopt autocd beep extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+# dotfiles .cfg/ alias
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # eval "$(navi widget bash)"
-
-# CLI tool to redo spelling errors in commands
-#eval "$(thefuck --alias)"
-#eval "$(thefuck --alias oops)"
-
 # STARSHIP COMMAND PROMPT
 eval "$(starship init zsh)"
 
+# ZOXIDE | cd replacement
+eval "$(zoxide init zsh)"
+
+
 # Run neofetch or at the end
 macchina
+
