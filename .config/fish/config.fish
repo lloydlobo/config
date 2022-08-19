@@ -5,14 +5,13 @@ if status is-interactive
     # neofetch replacement --> display system info
     macchina
 end
-    # Usage: config status; config add; config commit; config push
-    alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# Usage: config status; config add; config commit; config push
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-    # STARSHIP COMMAND PROMPT
-    starship init fish | source
+# STARSHIP COMMAND PROMPT
+starship init fish | source
 
 # Credits: https://github.com/craftzdog/dotfiles-public/blob/master/.config/fish/config.fish
-
 #
 # aliases
 #
