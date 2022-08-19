@@ -72,6 +72,7 @@ format = """
 [directory.substitutions]
 "Documents" = " "
 "Downloads" = " "
+"Media" = " "
 "Music" = " "
 "Pictures" = " "
 # Keep in mind that the order matters. For example:
