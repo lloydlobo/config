@@ -30,10 +30,14 @@ packer.startup(function(use)
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
   -- use 'nvim-lualine/lualine.nvim'           -- Statusline
+  use {
+    'nvim-lualine/lualine.nvim',               -- Statusline
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
   -- use 'windwp/nvim-autopairs'
   -- use 'windwp/nvim-ts-autotag'
   -- use 'norcalli/nvim-colorizer.lua'
-  -- use 'folke/zen-mode.nvim'
+   use 'folke/zen-mode.nvim'
   -- use 'akinsho/nvim-bufferline.lua'
   -- use 'lewis6991/gitsigns.nvim'
   -- use 'dinhhuy/git.nvim'                    -- For git blame & browse

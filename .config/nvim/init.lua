@@ -1,6 +1,6 @@
 require('base')
 require('highlights')
-require('maps')
+require('mappings')
 require('plugins')
 
 local has = function(x)
