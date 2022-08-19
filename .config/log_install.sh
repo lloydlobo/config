@@ -68,6 +68,7 @@ yay ncdu
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 yay lf
 yay ripgrep
+sudo pacman -S ack
 sudo pacman -S fd
 yay exa # 10 - ls replacement
 
