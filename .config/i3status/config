@@ -2,7 +2,6 @@
 
 # i3status configuration file.
 # see "man i3status" for documentation.
-
 # It is important that this file is edited as UTF-8.
 # The following line should contain a sharp s:
 # ß
@@ -21,13 +20,13 @@ general {
 
 # Enabled
 order += "wireless _first_"
-order += "battery all"
-order += "cpu_usage"
+# order += "battery all"
+# order += "cpu_usage"
 order += "disk /"
 order += "memory"
 order += "load"
-order += "read_file uptime"
-order += "tztime local"
+# order += "read_file uptime"
+# order += "tztime local"
 
 # Disabled
 #order += "volume master"
@@ -66,7 +65,8 @@ disk "/" {
 }
  
 wireless _first_ {
-        format_up = " W (%quality at %essid, %bitrate) %ip " 
+        format_up = " W (%quality at %essid, %bitrate) " 
+        # format_up = " W (%quality at %essid, %bitrate) %ip " 
         # format_up = "<span color='#c0caf5'>W (%quality at %essid, %bitrate) %ip </span>" 
         format_down = "<span color='#c0caf5'> WIFI DOWN </span>"
 }
