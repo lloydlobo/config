@@ -68,7 +68,8 @@ fnm install --lts      			 # Install latest node version
 #
 # NeoVim
 #
-yay astronvim
+yay lua-language-server
+npm install -g typescript-language-server typescript
 yay lazygit
 # disk analyzer with ncurses interface
 yay ncdu
