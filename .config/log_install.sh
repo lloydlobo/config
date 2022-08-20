@@ -62,7 +62,7 @@ sudo pacman -S timidity
 
 # fast Node Version Manager
 yay fnm-bin
-eval "$(fnm env)"			 # source the shell instead of restarting terminal
+eval "$(fnm env)"     			 # source the shell instead of restarting terminal
 fnm install --lts      			 # Install latest node version
 
 #
@@ -70,13 +70,14 @@ fnm install --lts      			 # Install latest node version
 #
 yay lua-language-server
 npm install -g typescript-language-server typescript
+yay tree-sitter               #  An incremental parsing system for programming tools 
 yay lazygit
 # disk analyzer with ncurses interface
 yay ncdu
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 yay lf
 yay ripgrep
-yay zoxide                                # A smarter cd command
+yay zoxide                    # A smarter cd command
 yay bat
 yay thefuck
 sudo pacman -S ack
