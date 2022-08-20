@@ -2,11 +2,10 @@
 # vim filetype=i3
 
 # Font for window titles & inherited by i3bar
-# font pango:Source Code Pro Medium 8
-font pango:Fira Code 8
+font pango:Source Code Pro Medium 8
 # include $HOME/.config/i3/theme.conf
 include $HOME/.config/i3/theme-pywal.conf
-include $HOME/.config/i3/i3bar.conf
+# include $HOME/.config/i3/i3bar.conf
 include $HOME/.config/i3/i3-gaps.conf
 include $HOME/.config/i3/mode.conf
 include $HOME/.config/i3/workspaces.conf
@@ -36,21 +35,10 @@ exec --no-startup-id nm-applet
 
 # Remaps the menu button (Alt_R and Control_R to Super)
 exec_always --no-startup-id xmodmap ~/.Xmodmap
-# Use URxvt settings from Xresources
-# exec_always --no-startup-id xrdb ~/.Xresources
+
 # Makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 
-# WALLPAPERS
-# execute nitrogen to establish a wallpaper on screen and restore it
-# exec --no-startup-id nitrogen --restore
-
-# Remaps the Caps_Lock button to escape
-# exec --no-startup-id setxkbmap -option caps:escape
-# exec --no-startup-id dex --autostart --environment i3
-# exec VBoxClient-all
-
-# ELEMENTS
 # Rename And Hence Move entire workspace number
 bindsym $mod+m exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
@@ -62,6 +50,7 @@ workspace_auto_back_and_forth yes
 for_window [class="^.*"] border pixel 3
 new_window pixel 1
 new_float normal 
+
 # def border type is pixel, which eliminates title bar 
 # but floating window borders are normal, which has titles
 default_border pixel
@@ -73,5 +62,5 @@ popup_during_fullscreen smart
 
 # start a terminator by pressing Mod key + x or ENTER
 set $terminator kitty
-set $browser microsoft-edge-dev
+set $browser qutebrowser
 set $music spotify
