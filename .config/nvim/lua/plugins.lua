@@ -33,6 +33,9 @@ packer.startup(function(use)
     'nvim-lualine/lualine.nvim',               -- Statusline
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
+  use 'hrsh7th/cmp-buffer'                     -- nvim-cmp source for buffer words
+  use 'hrsh7th/cmp-nvim-lsp'                   -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/nvim-cmp'                       -- Completion
   use 'neovim/nvim-lspconfig'                  -- LSP
   -- use 'windwp/nvim-autopairs'
   -- use 'windwp/nvim-ts-autotag'
@@ -62,6 +65,8 @@ end)
 --   }
 -- }})
 
+-- require('hclipboard'.start()
+
 -- Do not execute rest of init.lua while vootstrapping config
 -- Restart nvim
 if is_bootstrap then
@@ -80,8 +85,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = packer_group,
   pattern = vim.fn.expand '$MYVIMRC',
 })
- 
- 
+
 -- You can configure Neovim to automatically run :PackerCompile whenever plugins.lua is updated with an autocommand:
 -- augroup packer_user_config
 --   autocmd!
