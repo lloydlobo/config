@@ -29,11 +29,11 @@ packer.startup(function(use)
     'svrana/neosolarized.nvim',
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
-  -- use 'nvim-lualine/lualine.nvim'           -- Statusline
   use {
     'nvim-lualine/lualine.nvim',               -- Statusline
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
+  }
+  use 'neovim/nvim-lspconfig'                  -- LSP
   -- use 'windwp/nvim-autopairs'
   -- use 'windwp/nvim-ts-autotag'
   -- use 'norcalli/nvim-colorizer.lua'
