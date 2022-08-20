@@ -35,6 +35,7 @@ packer.startup(function(use)
   }
   use 'nvim-lua/plenary.nvim'                   -- Common utilities
   use 'jose-elias-alvarez/null-ls.nvim'         -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+  use 'L3MON4D3/LuaSnip'                       -- LSP Engine for cmp - snippet
   use 'onsails/lspkind-nvim'                   -- vscode-like pictograms
   use 'hrsh7th/cmp-buffer'                     -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-nvim-lsp'                   -- nvim-cmp source for neovim's built-in LSP
