@@ -26,6 +26,9 @@ eval "$(starship init zsh)"
 # ZOXIDE | cd replacement
 eval "$(zoxide init zsh)"
 
+# fast Node version Manager
+eval "$(fnm env --use-on-cd)"
+
 
 # Run neofetch or at the end
 macchina

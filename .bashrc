@@ -25,6 +25,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 eval "$(starship init bash)"
 # eval "$(navi widget bash)"
 eval "$(zoxide init bash)"
+eval "$(fnm env --use-on-cd)"
 
 # Import colorscheme from 'wal' asynchronously & Run the process in the background.  
 # ( ) # Hide shell job control messages. # Not supported in the "fish" shell.

@@ -22,7 +22,6 @@ config config --local status.showUntrackedFiles no
 rustup default stable
 rustup update
 
-
 #
 # YAY
 #
@@ -60,6 +59,11 @@ yay light
 #
 # Prerequisite mpc mpd ncmpcpp
 sudo pacman -S timidity
+
+# fast Node Version Manager
+yay fnm-bin
+eval "$(fnm env)"			 # source the shell instead of restarting terminal
+fnm install --lts      			 # Install latest node version
 
 #
 # NeoVim
