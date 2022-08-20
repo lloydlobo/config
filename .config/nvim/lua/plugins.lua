@@ -1,3 +1,4 @@
+-- https://blog.inkdrop.app/my-neovim-setup-for-react-typescript-tailwind-css-etc-in-2022-a7405862c9a4
 local status, packer = pcall(require, 'packer')
 
 -- You can also use the following command (with packer bootstrapped) to have packer setup your configuration (or simply run updates) and close once all operations are completed:
@@ -25,33 +26,36 @@ vim.cmd [[packadd packer.nvim]]
 -- stylua: ignore start
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'nvim-lua/plenary.nvim'                -- Common utilities
+  use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+  use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
+  use 'onsails/lspkind-nvim'                 --  vscode-like pictograms for neovim lsp completion items
+  use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source for buffer words
+  use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/nvim-cmp'                     -- Completion
+  use 'neovim/nvim-lspconfig'                -- LSP
   use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
+    'nvim-treesitter/nvim-treesitter',      -- Treesitter configurations and abstraction layer for Neovim
+     run = ':TSUpdate',
   }
-  use {
-    'nvim-lualine/lualine.nvim',               -- Statusline
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
-  use 'nvim-lua/plenary.nvim'                   -- Common utilities
-  use 'jose-elias-alvarez/null-ls.nvim'         -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-  use 'L3MON4D3/LuaSnip'                       -- LSP Engine for cmp - snippet
-  use 'onsails/lspkind-nvim'                   --  vscode-like pictograms for neovim lsp completion items
-  use 'hrsh7th/cmp-buffer'                     -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp'                   -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp'                       -- Completion
-  use 'neovim/nvim-lspconfig'                  -- LSP
-  use 'nvim-treesitter/nvim-treesitter'        --  Nvim Treesitter configurations and abstraction layer 
-  -- Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  use 'MunifTanjim/prettier.nvim'             -- Prettier plugin for Neovim's built-in LSP client
+  use 'williamboman/mason.nvim'               -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+  use 'williamboman/mason-lspconfig.nvim'     -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+  use 'glepnir/lspsaga.nvim'                  -- A light-weight lsp plugin based on neovim's built-in lsp with a highly performant UI
 
-  -- use 'windwp/nvim-autopairs'
-  -- use 'windwp/nvim-ts-autotag'
-  -- use 'norcalli/nvim-colorizer.lua'
-   use 'folke/zen-mode.nvim'
-  -- use 'akinsho/nvim-bufferline.lua'
-  -- use 'lewis6991/gitsigns.nvim'
-  -- use 'dinhhuy/git.nvim'                    -- For git blame & browse
+  use { 'svrana/neosolarized.nvim', requires = { 'tjdevries/colorbuddy.nvim' } }
+  use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- Statusline
+  use 'tjdevries/colorbuddy.nvim'
+  use 'kyazdani42/nvim-web-devicons'
 
+  use 'windwp/nvim-autopairs'                 -- Autopairs
+  use 'windwp/nvim-ts-autotag' -- Use treesitter to auto close and auto rename html tag
+  use 'norcalli/nvim-colorizer.lua' -- A high-performance color highlighter
+  use 'akinsho/nvim-bufferline.lua' -- A snazzy bufferline
+  use 'lewis6991/gitsigns.nvim' -- Git integration for buffers
+  use 'dinhhuy258/git.nvim'        -- A simple clone of the plugin vim-fugitive
+  use 'folke/zen-mode.nvim' -- Distraction-free mode
+  use 'iamcco/markdown-preview.nvim' -- Markdown live preview
   -- use {'kevinhwang91/nvim-hclipboard'}
 
 -- Automatically set up your configuration after cloning packer.nvim
@@ -98,3 +102,4 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 --   autocmd!
 --   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 -- augroup end
+  -- Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
