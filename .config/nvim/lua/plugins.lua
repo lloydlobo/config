@@ -49,13 +49,13 @@ packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
   use 'windwp/nvim-autopairs'                 -- Autopairs
-  use 'windwp/nvim-ts-autotag' -- Use treesitter to auto close and auto rename html tag
-  use 'norcalli/nvim-colorizer.lua' -- A high-performance color highlighter
-  use 'akinsho/nvim-bufferline.lua' -- A snazzy bufferline
-  use 'lewis6991/gitsigns.nvim' -- Git integration for buffers
-  use 'dinhhuy258/git.nvim'        -- A simple clone of the plugin vim-fugitive
-  use 'folke/zen-mode.nvim' -- Distraction-free mode
-  use 'iamcco/markdown-preview.nvim' -- Markdown live preview
+  use 'windwp/nvim-ts-autotag'                -- Use treesitter to auto close and auto rename html tag
+  use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
+  use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
+  use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers
+  use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
+  use 'iamcco/markdown-preview.nvim'          -- Markdown live preview
+  use 'folke/zen-mode.nvim'                   -- Distraction-free mode
   -- use {'kevinhwang91/nvim-hclipboard'}
 
 -- Automatically set up your configuration after cloning packer.nvim
