@@ -13,7 +13,7 @@ local Group = cb.Group
 local groups = cb.groups
 local styles = cb.styles
 
-Color.new('black', '#212121')
+Color.new('black', '#073642')
 Group.new('CursorLine', colors.none, colors.base03, styles.NONE, colors.base1)
 Group.new('CursorLineNr', colors.yellow, colors.black, styles.NONE, colors.base1)
 Group.new('Visual', colors.none, colors.base03, styles.reverse)
