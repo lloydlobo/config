@@ -1,3 +1,4 @@
+-- See `:help key-notation`
 local keymap = vim.keymap
 -- https://github.com/christoomey/your-first-vim-plugin
 -- https://elijahmanor.com/blog/neovim-tmux
