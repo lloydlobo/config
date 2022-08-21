@@ -71,6 +71,7 @@ fnm install --lts      			 # Install latest node version
 yay lua-language-server
 npm install -g typescript-language-server typescript
 yay tree-sitter               #  An incremental parsing system for programming tools 
+yay prettierd                 #  prettier, as a daemon, for ludicrous formatting speed. 
 yay lazygit
 # disk analyzer with ncurses interface
 yay ncdu
