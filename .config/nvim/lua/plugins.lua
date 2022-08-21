@@ -74,7 +74,7 @@ packer.startup(function(use)
   use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
   use 'iamcco/markdown-preview.nvim'          -- Markdown live preview
   use 'folke/zen-mode.nvim'                   -- Distraction-free mode
-  -- use {'kevinhwang91/nvim-hclipboard'}
+  use {'kevinhwang91/nvim-hclipboard'}
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
