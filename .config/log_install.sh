@@ -86,18 +86,25 @@ yay exa # 10 - ls replacement
 
 
 # BROWSER
-# Qutebrowser & dependecy
+# Qutebrowser & dependency
 yay qutebrowser
 yay python-adblock
-# yay python-pygments # for :view-source syntax highlighting
 yay asciidoc
+# yay python-pygments # for :view-source syntax highlighting
 
 # OTHER YAY
 yay git-delta
-yay nerd-fonts
 yay macchina-bin
 yay procs
 yay hyperfine
+
+# FONTS
+yay nerd-fonts-complete         # aur but conflicts with ttf-nerd-fonts-symbols
+yay powerline-fonts-git
+yay fontmatrix
+yay powerline-fonts
+yay powerline-common
+yay xorg-xlsfonts
 
 # Shell Prompt
 yay starship
@@ -153,3 +160,5 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
    ~/.emacs.d/bin/doom install
 # source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
 doom sync 
+
+
