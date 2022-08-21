@@ -1,6 +1,19 @@
 local keymap = vim.keymap
 -- https://github.com/christoomey/your-first-vim-plugin
+-- https://elijahmanor.com/blog/neovim-tmux
 
+-- COMMON COMMANDS
+-- --    gd - Go to definition
+-- --    gf - Go to file location
+-- --    K - Show hover documentation
+-- --    <leader>ca - Launch code actions
+-- --    <leader>ff - telescope find files across project
+-- --    <leader>fg - telescope live grep across project
+-- --    <leader>fc - telescope find by git status changed
+-- --    <leader>fs - telescope navigate file system
+-- --    <leader>fb - telescope switch between active buffers
+-- --    <C-n> - toggle file tree (specific to nvim-tree.lua)
+--
 keymap.set('n', 'x', '"_x')
 
 -- [[ Basic Keymaps ]]

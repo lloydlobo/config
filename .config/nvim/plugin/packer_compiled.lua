@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/home/i/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
     url = "https://github.com/tjdevries/colorbuddy.nvim"
   },
+  ["dashboard-nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/dashboard-nvim",
+    url = "https://github.com/glepnir/dashboard-nvim"
+  },
   fd = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/fd",
