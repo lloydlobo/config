@@ -48,6 +48,7 @@ telescope.setup {
 
 telescope.load_extension('file_browser')
 
+-- keymaps
 vim.keymap.set('n', ';f',
   function()
     builtin.find_files({
@@ -75,6 +76,8 @@ vim.keymap.set('n', ';e',
   function()
     builtin.diagnostics()
   end)
+
+-- file_browser
 vim.keymap.set('n', 'sf',
   function()
     telescope.extensions.file_browser.file_browser({
@@ -85,6 +88,6 @@ vim.keymap.set('n', 'sf',
       grouped = true,
       previewer = false,
       initial_mode = 'normal',
-      layout_config = { height = 40 }
+      layout_config = { height = 50 }            -- default height = 40
     })
   end)
