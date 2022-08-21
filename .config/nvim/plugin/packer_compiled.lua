@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/home/i/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
     url = "https://github.com/tjdevries/colorbuddy.nvim"
   },
+  fd = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/fd",
+    url = "https://github.com/sharkdp/fd"
+  },
   ["git.nvim"] = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/git.nvim",
@@ -193,6 +198,26 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
+  },
+  ripgrep = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/ripgrep",
+    url = "https://github.com/BurntSushi/ripgrep"
+  },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["zen-mode.nvim"] = {
     loaded = true,
