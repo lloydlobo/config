@@ -59,6 +59,7 @@ yay light
 #
 # Prerequisite mpc mpd ncmpcpp
 sudo pacman -S timidity
+yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
 
 # fast Node Version Manager
 yay fnm-bin
