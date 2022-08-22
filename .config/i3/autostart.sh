@@ -10,13 +10,13 @@ picom --config ~/.config/picom/picom.conf --experimental-backends --vsync &
 
 # Remaps the menu button (Alt_R and Control_R to Super)
 # xmodmap ~/.Xmodmap &
-# xrdb ~/.Xresources &
+xrdb ~/.Xresources &
 
 # set Background
 ~/.fehbg &
 
 # Theme
-wal -i ~/Media/Pictures/wallpapers/wall.png &
+# wal -i ~/Media/Pictures/wallpapers/wall.png &
 
 # Launch polybar
 ~/.config/polybar/launch.sh &

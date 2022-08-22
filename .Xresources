@@ -10,44 +10,42 @@ Xft*hinting:      full
 ! TODO: SET DIFFERENT BRIGHT/DARK VARIANTS
 
 ! special
-*.foreground: #707173
+*.foreground: #708183
 *.cursorColor: #708183
+! *.selection_background: #002731
+! *.selection_foreground: #001e26
 
 ! black
 *.color0: #001e26
 *.color8: #465a61
 
 ! red
-*.color1: #e46368
-*.color9: #e46368
+*.color1: #d01b24
+*.color9: #bd3612
 
 ! green
-*.color2:  #fa7a80
-*.color10: #fa7a80
-! #57ab33
-
-
-!f2d472 (light yellow)
+*.color2:  #728905
+*.color10: #465a61
 
 ! yellow
-*.color3: #ffa578
-*.color11: #ffa578
+*.color3: #a57705
+*.color11: #52676f
 
 ! blue
-*.color4: #5c94e0
-*.color12: #5c94e0
+*.color4: #2075c7
+*.color12: #708183
 
 ! magenta
-*.color5: #d295f6
-*.color13: #d295f6
+*.color5: #c61b6e
+*.color13: #5856b9
 
 ! cyan
-*.color6: #95bef8
-*.color14: #95bef8
+*.color6: #259185
+*.color14: #81908f
 
 ! white
-*.color7: #e4e9ff
-*.color15: #e4e9ff
+*.color7: #e9e2cb
+*.color15: #fcf4dc
 
 ! basic configuration
 URxvt.scrollBar: false
@@ -64,7 +62,7 @@ URxvt.keysym.Control-Right:  \033[1;5C
 ! URxvt.shading:20
 
 ! Included this so you know how to make your foreground not match the color of your background
-URxvt.foreground: #eeeeee
+URxvt.foreground: #708183
 
 ! font options
 ! URxvt.font:       xft:Hack Nerd Font Mono: size=10: antialiasing=true
@@ -80,35 +78,5 @@ URxvt.keysym.C-M-v:    builtin-string:
 URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
 URxvt.keysym.C-S-0x56: eval:paste_clipboard
 
+!urxvt*background:rgba:1400/1900/2900/ff00
 urxvt*depth:32
-
-! urxvt*background:rgba:0250/1100/1b00/dddd
-! urxvt*background:rgba:1500/1800/2600/fa00
-! urxvt*background:rgba:01e00/2100/3700/fa00
-
-! (old purp) urxvt*background:rgba:2400/1a00/3800/fa00
-
-!urxvt*background:rgba:1300/1a00/3100/fa00
-!urxvt*background:rgba:1c00/2100/3800/ff00
-!urxvt*background:rgba:2300/2700/3000/ff00
-!urxvt*background:rgba:1a00/2100/3200/ff00
-urxvt*background:rgba:1400/1900/2900/ff00
-
-! 141929
-! 1a2132
-! 1b212f
-! #232730
-! 1f2333
-! 1c1f36
-! 181b2c
-! 16192a
-! 191c2e
-! 1b2135
-! #181c2a
-
-! #161d33
-! #111426
-! #0f1930
-!
-!
-

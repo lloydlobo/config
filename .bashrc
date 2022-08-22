@@ -19,7 +19,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # complete -F _complete_alias config
 
 # Emacs
-export PATH="$HOME/.emacs.d/bin:$PATH"
+# export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # Command prompt
 eval "$(starship init bash)"
@@ -29,12 +29,12 @@ eval "$(fnm env --use-on-cd)"
 
 # Import colorscheme from 'wal' asynchronously & Run the process in the background.  
 # ( ) # Hide shell job control messages. # Not supported in the "fish" shell.
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 # Alternative (blocks terminal for 0-3ms)
 # cat ~/.cache/wal/sequences
 
 # To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
+# source ~/.cache/wal/colors-tty.sh
 
 # NEOFETCH MACCHINA SYS INFO
 # neofetch
