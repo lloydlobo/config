@@ -81,6 +81,7 @@ packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
   use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
+  use "Pocco81/true-zen.nvim"                 -- Clean and elegant distraction-free writing for NeoVim
   use 'folke/zen-mode.nvim'                   -- Distraction-free mode
   use 'folke/twilight.nvim'                   -- Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're editing.
   use 'folke/lsp-colors.nvim'                 -- Plugin that creates missing LSP diagnostics highlight groups for color schemes that don't yet support the Neovim 0.5 builtin LSP client.
