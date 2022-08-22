@@ -3,34 +3,22 @@ local keymap = vim.keymap
 -- https://github.com/christoomey/your-first-vim-plugin
 -- https://elijahmanor.com/blog/neovim-tmux
 
--- COMMON COMMANDS
--- --    gd - Go to definition
--- --    gf - Go to file location
--- --    K - Show hover documentation
--- --    <leader>ca - Launch code actions
--- --    <leader>ff - telescope find files across project
--- --    <leader>fg - telescope live grep across project
--- --    <leader>fc - telescope find by git status changed
--- --    <leader>fs - telescope navigate file system
--- --    <leader>fb - telescope switch between active buffers
--- --    <C-n> - toggle file tree (specific to nvim-tree.lua)
---
-keymap.set('n', 'x', '"_x')
-
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
 -- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
--- vim.g.mapleader = ' '
--- vim.g.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Keymaps for better default experience
 -- See `:hlep vim.keymap.set()`
--- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap.set('n', 'x', '"_x')         -- deletes forward chars
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -78,3 +66,14 @@ keymap.set('n', '<C-w><right>', '<C-w>>')
 keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
 
+-- COMMON COMMANDS
+-- --    gd - Go to definition
+-- --    gf - Go to file location
+-- --    K - Show hover documentation
+-- --    <leader>ca - Launch code actions
+-- --    <leader>ff - telescope find files across project
+-- --    <leader>fg - telescope live grep across project
+-- --    <leader>fc - telescope find by git status changed
+-- --    <leader>fs - telescope navigate file system
+-- --    <leader>fb - telescope switch between active buffers
+-- --    <C-n> - toggle file tree (specific to nvim-tree.lua)

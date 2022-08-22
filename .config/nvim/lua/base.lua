@@ -40,12 +40,12 @@ vim.opt.smarttab = true
 vim.opt.breakindent = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
-vim.opt.wrap = true                         -- Wrap lines
+vim.opt.wrap = false                         -- Wrap lines
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
 vim.opt.wildignore:append { '*/node_modules/*' }
 
--- Undercurl
+-- Undercurl (works well with lsp-colors) (also linked in tmux.conf)
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
@@ -62,3 +62,6 @@ vim.opt.formatoptions:append { 'r' }
  vim.cmd [[
   set clipboard+=unnamedplus
 ]]
+
+-- To ALWAYS use the clipboard for ALL operations (instead of interacting with the '+' and/or '*' registers explicitly): > set clipboard+=unnamedplus
+vim.opt.clipboard:append { 'unnamedplus' }       -- linux.lua | macos.lua | windows.lua
