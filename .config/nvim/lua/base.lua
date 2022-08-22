@@ -24,6 +24,8 @@ vim.o.completeopt = 'menuone,noselect'
 vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.hlsearch = false
 vim.opt.backup = false
 vim.opt.showcmd = true
@@ -38,8 +40,6 @@ vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in 
 vim.o.smartcase = true
 vim.opt.smarttab = true
 vim.opt.breakindent = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
 vim.opt.wrap = false                         -- Wrap lines
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
