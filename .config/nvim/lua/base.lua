@@ -63,5 +63,7 @@ vim.opt.formatoptions:append { 'r' }
   set clipboard+=unnamedplus
 ]]
 
+vim.o.clipboard = 'unnamedplus'
+
 -- To ALWAYS use the clipboard for ALL operations (instead of interacting with the '+' and/or '*' registers explicitly): > set clipboard+=unnamedplus
 vim.opt.clipboard:append { 'unnamedplus' }       -- linux.lua | macos.lua | windows.lua
