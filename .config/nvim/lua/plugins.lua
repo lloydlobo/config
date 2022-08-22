@@ -82,6 +82,7 @@ packer.startup(function(use)
   use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
   use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
   use 'folke/zen-mode.nvim'                   -- Distraction-free mode
+  use 'folke/lsp-colors.nvim'                 -- Plugin that creates missing LSP diagnostics highlight groups for color schemes that don't yet support the Neovim 0.5 builtin LSP client.
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
