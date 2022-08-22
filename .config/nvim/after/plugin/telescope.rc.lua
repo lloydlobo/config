@@ -48,7 +48,10 @@ telescope.setup {
 
 telescope.load_extension('file_browser')
 
--- keymaps
+--
+-- KEYMAPS
+--
+-- Find Files `;f`
 vim.keymap.set('n', ';f',
   function()
     builtin.find_files({
@@ -56,28 +59,33 @@ vim.keymap.set('n', ';f',
       hidden = true,
     })
   end)
+-- Live Grep `;r`
 vim.keymap.set('n', ';r',
   function()
     builtin.live_grep()
   end)
+-- Buffers `\\\\` => \ + \ (twice)
 vim.keymap.set('n', '\\\\',
   function()
     builtin.buffers()
   end)
+-- Tags Help `;t`
 vim.keymap.set('n', ';t',
   function()
     builtin.help_tags()
   end)
+-- Resume `;;` => Open the last telescope builtin buffer / extensions
 vim.keymap.set('n', ';;',
   function()
     builtin.resume()
   end)
+-- Diagnositcs `;e`
 vim.keymap.set('n', ';e',
   function()
     builtin.diagnostics()
   end)
 
--- file_browser
+-- File Browser `sf`
 vim.keymap.set('n', 'sf',
   function()
     telescope.extensions.file_browser.file_browser({
@@ -88,6 +96,6 @@ vim.keymap.set('n', 'sf',
       grouped = true,
       previewer = false,
       initial_mode = 'normal',
-      layout_config = { height = 50 }            -- default height = 40
+      layout_config = { height = 40 }            -- default height = 40
     })
   end)
