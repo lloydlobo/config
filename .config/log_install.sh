@@ -61,10 +61,6 @@ yay light
 sudo pacman -S timidity
 yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
 
-# fast Node Version Manager
-yay fnm-bin
-eval "$(fnm env)"     			 # source the shell instead of restarting terminal
-fnm install --lts      			 # Install latest node version
 
 #
 # NeoVim
@@ -116,6 +112,13 @@ yay starship
 yay navi # man-page alternative in Rust
 yay fzf
 yay skim
+
+# REPL 
+yay evcxr                       # a RUST based repl based on evcxr
+# fast Node Version Manager
+yay fnm-bin
+eval "$(fnm env)"     			 # source the shell instead of restarting terminal
+fnm install --lts      			 # Install latest node version -- $ node $ .exit
 
 # starship setup
 starship init bash
