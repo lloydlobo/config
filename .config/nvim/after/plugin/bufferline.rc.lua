@@ -1,9 +1,12 @@
 local status, bufferline = pcall(require, "bufferline")
-if (not status) then return end
+
+if (not status) then
+  return
+end
 
 bufferline.setup({
   options = {
-    mode = 'tabs',                               -- buffer gets crowded
+    mode = 'tabs',                               -- 'buffer' gets crowded
     separator_style = 'slant',
     always_show_bufferline = false,
     show_buffer_close_icons = false,
@@ -23,7 +26,7 @@ bufferline.setup({
       bg = '#002b36',
     },
     buffer_selected = {
-      fg = '#657b83',
+      fg = '#fdf6e3',
       bold = true,
     },
     fill = {
@@ -32,7 +35,7 @@ bufferline.setup({
   },
 })
 
-vim.keymap.set('n', '<Tab>', '<Cmd>BufferlineCycleNext<CR>', {})
+vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
 vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
 
 -- guifg -> fg
