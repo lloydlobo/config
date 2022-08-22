@@ -5,7 +5,7 @@
 font pango:Source Code Pro Medium 8
 include $HOME/.config/i3/theme.conf
 #include $HOME/.config/i3/theme-pywal.conf
-# include $HOME/.config/i3/i3bar.conf
+#include $HOME/.config/i3/i3bar.conf
 include $HOME/.config/i3/i3-gaps.conf
 include $HOME/.config/i3/mode.conf
 include $HOME/.config/i3/workspaces.conf
