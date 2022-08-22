@@ -1,6 +1,9 @@
 -- https://github.com/craftzdog/dotfiles-public/blob/master/.config/nvim/after/plugin/neosolarized.rc.lua 
 local status, n = pcall(require, "neosolarized")
-if (not status) then return end
+
+if (not status) then
+  return
+end
 
 n.setup({
   comment_italics = true,

@@ -10,9 +10,13 @@ local protocol = require('vim.lsp.protocol')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_keymap(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
 
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
 
   --Enable completion triggered by <C-x><C-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -35,7 +39,8 @@ protocol.CompletionItemKind = {
   '', -- Field
   '', -- Variable
   '', -- Class
-  'ﰮ', -- Interface
+  -- 'ﰮ', -- Interface
+  ' ﰮ ', -- Interface
   '', -- Module
   '', -- Property
   '', -- Unit
@@ -54,6 +59,7 @@ protocol.CompletionItemKind = {
   'ﬦ', -- Operator
   '', -- TypeParameter
 }
+
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
@@ -68,9 +74,7 @@ nvim_lsp.flow.setup {
 -- See `:help lspconfig-all.`
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
---
 -- TypeScript
---
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
