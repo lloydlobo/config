@@ -6,17 +6,26 @@
 killall picom
 while pqrep -u $UID -x picom >/dev/null; do sleep 1; done
 picom --config ~/.config/picom/picom.conf --experimental-backends --vsync &
-~/.config/polybar/launch.sh &
+
 
 # Remaps the menu button (Alt_R and Control_R to Super)
 # xmodmap ~/.Xmodmap &
 # xrdb ~/.Xresources &
 
-# background
+# set Background
 ~/.fehbg &
+
+# Theme
+wal -i ~/Media/Pictures/wallpapers/wall.png &
+
+# Launch polybar
+~/.config/polybar/launch.sh &
+
 # clipmenud &
 # dunst &
+# i3 autotiling enable
 autotiling &
+
 # pcloud &
 
 # setxkbmap -option ctrl:nocaps &

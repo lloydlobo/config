@@ -10,19 +10,19 @@ Xft*hinting:      full
 ! TODO: SET DIFFERENT BRIGHT/DARK VARIANTS
 
 ! special
-*.foreground: #eeeeee
-*.cursorColor: #eeeeee
+*.foreground: #707173
+*.cursorColor: #708183
 
 ! black
-*.color0: #262e47
-*.color8: #262e47
+*.color0: #001e26
+*.color8: #465a61
 
 ! red
 *.color1: #e46368
 *.color9: #e46368
 
 ! green
-*.color2:   #fa7a80
+*.color2:  #fa7a80
 *.color10: #fa7a80
 ! #57ab33
 
