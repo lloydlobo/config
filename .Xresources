@@ -12,12 +12,12 @@ Xft*hinting:      full
 ! special
 *.foreground: #708183
 *.cursorColor: #708183
-! *.selection_background: #002731
-! *.selection_foreground: #001e26
+*.selection_background: #002731
+*.selection_foreground: #001e26
 
 ! black
 *.color0: #001e26
-*.color8: #465a61
+*.color8: #002b36
 
 ! red
 *.color1: #d01b24
