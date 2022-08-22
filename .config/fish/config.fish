@@ -34,6 +34,9 @@ alias lla "ll -A"
 # git
 alias g git
 
+# REPL
+alias repl evcxr                        # A Rust REPL based on evcxr
+
 # neovim
 command -qv nvim && alias vim nvim
 
