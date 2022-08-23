@@ -5,7 +5,11 @@ if impatient_ok then impatient.enable_profile() end
 require('base')
 require('highlights')
 require('mappings')
-require('plugins')
+-- require('plugins')
+-- no need to load this immediately, since we have packer_compiled
+vim.defer_fn(function()
+  require("plugins")
+end, 0)
 
 local has = function(x)
 	return vim.fn.has(x) == 1

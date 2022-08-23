@@ -1,4 +1,5 @@
 -- https://blog.inkdrop.app/my-neovim-setup-for-react-typescript-tailwind-css-etc-in-2022-a7405862c9a4
+-- https://github.com/folke/dot/blob/master/config/nvim/lua/plugins.lua
 local status, packer = pcall(require, 'packer')
 
 -- You can also use the following command (with packer bootstrapped) to have packer setup your configuration (or simply run updates) and close once all operations are completed:
@@ -37,6 +38,17 @@ packer.startup(function(use)
 
     use 'williamboman/mason.nvim'              -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
     use 'williamboman/mason-lspconfig.nvim'    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+
+    -- Which key 
+    use "folke/which-key.nvim"
+    -- Comment
+      use({
+    "numToStr/Comment.nvim",
+    keys = { "gc", "gcc", "gbc" },
+    config = function()
+      require("after.plugin.comment.rc.lua")
+    end,
+  })
 
 
     -- Telescope
