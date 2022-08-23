@@ -5,7 +5,6 @@ Xft*dpi:          96
 Xft*antialias:    true
 Xft*hinting:      full
 
-
 ! Set terminal color scheme
 ! TODO: SET DIFFERENT BRIGHT/DARK VARIANTS
 
