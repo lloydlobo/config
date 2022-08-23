@@ -120,6 +120,9 @@ yay fnm-bin
 eval "$(fnm env)"     			 # source the shell instead of restarting terminal
 fnm install --lts      			 # Install latest node version -- $ node $ .exit
 
+# terminal 
+yay wezterm kitty alacritty
+
 # starship setup
 starship init bash
 starship init fish
