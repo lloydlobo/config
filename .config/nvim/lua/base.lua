@@ -64,17 +64,17 @@ vim.opt.splitright = true                   -- Put new windows right of curr
 vim.opt.breakindent = true
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' }                -- Finding files - Search down into subfolders
-vim.opt.termguicolors = true                -- True color support
+-- vim.opt.termguicolors = true                -- True color support
 vim.opt.wildignore:append { '*/node_modules/*' }
 vim.opt.wildmode = "longest:full,full"      -- Command-line completion mode
 vim.opt.wrap = false                        -- Disable line wrap
-vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+-- vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 
 
 
 -- Undercurl (works well with lsp-colors) (also linked in tmux.conf)
-vim.cmd([[let &t_Cs = "\e[4:3m"]])
-vim.cmd([[let &t_Ce = "\e[4:0m"]])
+-- vim.cmd([[let &t_Cs = "\e[4:3m"]])
+-- vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
@@ -90,67 +90,24 @@ vim.o.clipboard = 'unnamedplus'
 -- To ALWAYS use the clipboard for ALL operations (instead of interacting with the '+' and/or '*' registers explicitly): > set clipboard+=unnamedplus
 vim.opt.clipboard:append { 'unnamedplus' }  -- linux.lua | macos.lua | windows.lua
 
--- [[ Credits: https://github.com/folke/dot/blob/master/config/nvim/lua/options.lua ]]
--- don't load the plugins below
-local builtins = {
-    "gzip",
-    "zip",
-    "zipPlugin",
-    "fzf",
-    "tar",
-    "tarPlugin",
-    "getscript",
-    "getscriptPlugin",
-    "vimball",
-    "vimballPlugin",
-    "2html_plugin",
-    "matchit",
-    "matchparen",
-    "logiPat",
-    "rrhelper",
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-}
-
-for _, plugin in ipairs(builtins) do
-    vim.g["loaded_" .. plugin] = 1
-end
-
--- Use proper syntax highlighting in code blocks
-local fences = {
-    "lua",
-    --   "json",
-    "typescript",
-    "javascript",
-    "js=javascript",
-    "ts=typescript",
-    "shell=sh",
-    "python",
-    "sh",
-    "console=sh",
-}
-vim.g.markdown_fenced_languages = fences
-
--- Check if we need to reload the file when it changed
-cmd("au FocusGained * :checktime")
-
--- show cursor line only in active window
-cmd([[
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]])
-
--- go to last loc when opening a buffer
-cmd([[
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
-]])
-
--- Highlight on yank
-cmd("au TextYankPost * lua vim.highlight.on_yank {}")
-
--- windows to close with "q"
-vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
-vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
-
+-- -- Check if we need to reload the file when it changed
+-- cmd("au FocusGained * :checktime")
+-- 
+-- -- show cursor line only in active window
+-- cmd([[
+--   autocmd InsertLeave,WinEnter * set cursorline
+--   autocmd InsertEnter,WinLeave * set nocursorline
+-- ]])
+-- 
+-- -- go to last loc when opening a buffer
+-- cmd([[
+--   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
+-- ]])
+-- 
+-- -- Highlight on yank
+-- cmd("au TextYankPost * lua vim.highlight.on_yank {}")
+-- 
+-- -- windows to close with "q"
+-- vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
+-- vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+-- 

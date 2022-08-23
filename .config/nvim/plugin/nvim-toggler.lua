@@ -6,7 +6,10 @@ local t = vim.tbl_add_reverse_lookup({
     ['on'] = 'off',
     ['left'] = 'right',
     ['up'] = 'down',
-    ['if'] = 'else if'
+    -- JavaScript
+    ['if'] = 'else if',
+    ['else'] = '',
+    ['const'] = 'let'
 })
 
 local setup = function(u_tbl)

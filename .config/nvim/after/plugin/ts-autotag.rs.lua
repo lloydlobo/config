@@ -7,17 +7,17 @@ end
 -- https://github.com/windwp/nvim-ts-autotag#override-default-values
 autotag.setup({
   enable = true,
-  filetypes = {
-      'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript', 'rust',
-      'xml',
-      'php',
-      'markdown',
-      'glimmer','handlebars','hbs'
-  },
-  skip_tags = {
-    'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'slot',
-    'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr','menuitem'
-  },
+ --  filetypes = {
+ --      'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript', 'rust',
+ --      'xml',
+ --      'php',
+ --      'markdown',
+ --      'glimmer','handlebars','hbs'
+ --  },
+ --  skip_tags = {
+ --    'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'slot',
+ --    'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr','menuitem'
+ --  },
 })
 
 -- USAGE
