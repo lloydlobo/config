@@ -5,14 +5,13 @@ if impatient_ok then impatient.enable_profile() end
 require('base')
 require('highlights')
 require('mappings')
--- require('plugins')
 -- no need to load this immediately, since we have packer_compiled
 vim.defer_fn(function()
-  require("plugins")
+    require("plugins")
 end, 0)
 
 local has = function(x)
-	return vim.fn.has(x) == 1
+    return vim.fn.has(x) == 1
 end
 
 local is_linux = has "linux"
@@ -20,13 +19,13 @@ local is_mac = has "macunix"
 local is_win = has "win32"
 
 if is_linux then
-	require('linux')
+    require('linux')
 end
 if is_mac then
-	require('macos')
+    require('macos')
 end
 if is_win then
-	require('windows')
+    require('windows')
 end
 
 -- [[ASTRONVIM]]
