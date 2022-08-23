@@ -4,6 +4,8 @@
 set fish_greeting ""
 #set -gx TERM xterm-256color
 
+# Install Starship
+starship init fish | source
 if status is-interactive
     # neofetch replacement --> display system info
     macchina
@@ -105,8 +107,6 @@ set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
 set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
 
-# Install Starship
-starship init fish | source
 
 # ##################################################
 #                   EOF
