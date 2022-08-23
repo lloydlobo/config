@@ -23,73 +23,81 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
+-- https://github.com/AstroNvim/AstroNvim/blob/main/lua/core/plugins.lua
 -- stylua: ignore start
 packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'williamboman/mason.nvim'              -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
-  use 'williamboman/mason-lspconfig.nvim'    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+    -- Plugin manager
+    use 'wbthomason/packer.nvim'
+
+    -- Optimiser
+    use 'lewis6991/impatient.nvim'           --  Improve startup time for Neovim 
+
+    -- Lua Functions
+    use 'nvim-lua/plenary.nvim'                -- Common utilities
+
+    use 'williamboman/mason.nvim'              -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+    use 'williamboman/mason-lspconfig.nvim'    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
 
 
-  -- Telescope
-  use 'nvim-lua/plenary.nvim'                -- Common utilities
-  use 'nvim-telescope/telescope.nvim'        -- Find, Filter, Preview, Pick. All lua, all the time.
-  use "nvim-telescope/telescope-file-browser.nvim"  -- File Browser extension for telescope.nvim
-  use 'BurntSushi/ripgrep'                   -- telescope dep required for live_grep and grep_string
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make'
-  }                                          -- FZF sorter for telescope written in c
+    -- Telescope
+    use 'nvim-telescope/telescope.nvim'        -- Find, Filter, Preview, Pick. All lua, all the time.
+    use "nvim-telescope/telescope-file-browser.nvim"  -- File Browser extension for telescope.nvim
+    use 'BurntSushi/ripgrep'                   -- telescope dep required for live_grep and grep_string
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make'
+    }                                          -- FZF sorter for telescope written in c
 
-  -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',      -- Treesitter configurations and abstraction layer for Neovim
-     run = ':TSUpdate',
-  }
-  use 'sharkdp/fd'                            -- nvim-treesitter dependency find replacement
-  use 'windwp/nvim-autopairs'                 -- Autopairs
-  use 'windwp/nvim-ts-autotag'                -- Use treesitter to auto close and auto rename html tag
+    -- Treesitter
+    use {
+      'nvim-treesitter/nvim-treesitter',      -- Treesitter configurations and abstraction layer for Neovim
+       run = ':TSUpdate',
+    }
+    use 'sharkdp/fd'                            -- nvim-treesitter dependency find replacement
+    use 'windwp/nvim-autopairs'                 -- Autopairs
+    use 'windwp/nvim-ts-autotag'                -- Use treesitter to auto close and auto rename html tag
 
-  -- LSP
-  use 'neovim/nvim-lspconfig'                -- LSP
-  use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-  use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
-  use 'onsails/lspkind-nvim'                 --  vscode-like pictograms for neovim lsp completion items
-  use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp'                     -- Completion
-  use 'glepnir/lspsaga.nvim'                 -- A light-weight lsp plugin based on neovim's built-in lsp with a highly performant UI
-  use 'glepnir/dashboard-nvim'                 -- Vim Dashboard - async start screen
-  use 'MunifTanjim/prettier.nvim'            -- Prettier plugin for Neovim's built-in LSP client
+    -- LSP
+    use 'neovim/nvim-lspconfig'                -- LSP
+    use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+    use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
+    use 'onsails/lspkind-nvim'                 --  vscode-like pictograms for neovim lsp completion items
+    use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source for buffer words
+    use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
+    use 'hrsh7th/nvim-cmp'                     -- Completion
+    use 'glepnir/lspsaga.nvim'                 -- A light-weight lsp plugin based on neovim's built-in lsp with a highly performant UI
+    use 'glepnir/dashboard-nvim'                 -- Vim Dashboard - async start screen
+    use 'MunifTanjim/prettier.nvim'            -- Prettier plugin for Neovim's built-in LSP client
 
-  -- Git
-  use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers
-  use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
+    -- Git
+    use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers
+    use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
 
-  -- THEME
-  use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
-  }
-  -- use 'tjdevries/colorbuddy.nvim'
-  use {
-    'nvim-lualine/lualine.nvim',              -- Statusline
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-      opt = true
-    }                                         -- lua `fork` of vim-web-devicons for neovim
-  }
-  use 'kyazdani42/nvim-web-devicons'
-  use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
-  use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
-  use "Pocco81/true-zen.nvim"                 -- Clean and elegant distraction-free writing for NeoVim
-  use 'folke/zen-mode.nvim'                   -- Distraction-free mode
-  use 'folke/twilight.nvim'                   -- Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're editing.
-  use 'folke/lsp-colors.nvim'                 -- Plugin that creates missing LSP diagnostics highlight groups for color schemes that don't yet support the Neovim 0.5 builtin LSP client.
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-  })                                          -- Markdown live preview
-  use {'kevinhwang91/nvim-hclipboard'}
+    -- THEME
+    use {
+      'svrana/neosolarized.nvim',
+      requires = { 'tjdevries/colorbuddy.nvim' }
+    }
+    -- use 'tjdevries/colorbuddy.nvim'
+    use {
+      'nvim-lualine/lualine.nvim',              -- Statusline
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+        opt = true
+      }                                         -- lua `fork` of vim-web-devicons for neovim
+    }
+    use 'kyazdani42/nvim-web-devicons'
+    use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
+    use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
+    use "Pocco81/true-zen.nvim"                 -- Clean and elegant distraction-free writing for NeoVim
+    use 'folke/zen-mode.nvim'                   -- Distraction-free mode
+    use 'folke/twilight.nvim'                   -- Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're editing.
+    use 'folke/lsp-colors.nvim'                 -- Plugin that creates missing LSP diagnostics highlight groups for color schemes that don't yet support the Neovim 0.5 builtin LSP client.
+    use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+    })                                          -- Markdown live preview
+    use {'kevinhwang91/nvim-hclipboard'}
 
 
 -- Automatically set up your configuration after cloning packer.nvim
