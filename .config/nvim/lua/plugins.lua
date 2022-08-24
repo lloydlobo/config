@@ -36,14 +36,64 @@ packer.startup(function(use)
     -- Lua Functions
     use 'nvim-lua/plenary.nvim'                -- Common utilities
 
+    -- Popup API
+    use 'nvim-lua/popup.nvim'
+
+    -- Package Manager
     use 'williamboman/mason.nvim'              -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+
+    use({
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+         after = "mason.nvim",
+         -- TODO
+         -- config = function() require "mason-tool-installer" end,
+    })
+
+    -- TODO Delete this?
     use 'williamboman/mason-lspconfig.nvim'    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+
+    -- Built-in LSP
+    use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
+
+    use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
+
+    use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+    -- LSP symbols
+
+    use({
+        "stevearc/aerial.nvim",
+        -- module = "aerial",
+        cmd = { "AerialToggle", "AerialOpen", "AerialInfo" },
+        -- config = function() require "configs.aerial" end,
+    })
 
     -- Keymaps popup
     use "folke/which-key.nvim"
 
+    -- Indent detection
+    use({
+        "Darazaki/indent-o-matic",
+        event = "BufReadPost",
+        config = function() require "indent-o-matic" end,
+    })
+
+    -- Notification Enhancer
+    use({
+        "rcarriga/nvim-notify",
+        event = "VimEnter",
+        -- TODO
+        -- config = function() require "nvim-notify" end,
+    })
+
     -- Neovim UI Enhancer
-    use 'stevearc/dressing.nvim'
+    use({
+        'stevearc/dressing.nvim',
+        event = 'VimEnter',
+        config = function ()
+            require('dressing')
+        end
+
+    })
 
     -- Smarter Splits
     -- use({
@@ -61,22 +111,23 @@ packer.startup(function(use)
     })                                          -- Markdown live preview
 
     -- Terminal
-    -- use 'akinsho/toggleterm.nvim'
     use({
         'akinsho/toggleterm.nvim',
+        cmd = "ToggleTerm",
         -- TODO
+        -- module = { "toggleterm", "toggleterm.terminal" },
         config = function () require('toggleterm').setup() end,
     })
-    -- ["akinsho/toggleterm.nvim"] = {
-    --   cmd = "ToggleTerm",
-    --   module = { "toggleterm", "toggleterm.terminal" },
-    --   config = function() require "configs.toggleterm" end,
-    -- },
-    --
 
     -- Smooth scrolling
     use { 'declancm/cinnamon.nvim', event = { 'BufRead', 'BufNewFile' }, }
 
+    -- Smooth escaping
+    use({
+        "max397574/better-escape.nvim",
+        event = "InsertCharPre",
+        config = function() require "better_escape" end,
+    })
     -- Comment ==> "gc" to comment visual regions/lines
     use({
         'numToStr/Comment.nvim',
@@ -101,6 +152,7 @@ packer.startup(function(use)
         config = function() require("neo-tree") end,
     })
     use 'BurntSushi/ripgrep'                   -- telescope dep required for live_grep and grep_string
+
     use {
       'nvim-telescope/telescope-fzf-native.nvim',
       run = 'make'
@@ -108,22 +160,70 @@ packer.startup(function(use)
 
     -- Treesitter
     use {
-      'nvim-treesitter/nvim-treesitter',      -- Treesitter configurations and abstraction layer for Neovim
-       run = ':TSUpdate',
+        'nvim-treesitter/nvim-treesitter',      -- Treesitter configurations and abstraction layer for Neovim
+         run = ':TSUpdate',
+         event = { "BufRead", "BufNewFile" },
+         cmd = {
+           "TSInstall",
+           "TSInstallInfo",
+           "TSInstallSync",
+           "TSUninstall",
+           "TSUpdate",
+           "TSUpdateSync",
+           "TSDisableAll",
+           "TSEnableAll",
+         },
+         -- config = function() require "nvim-treesitter" end,
     }
+
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
     use 'sharkdp/fd'                           -- nvim-treesitter dependency find replacement
     use 'windwp/nvim-autopairs'                -- Autopairs
 
-    -- LSP
-    use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
-    -- use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
-    use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-    use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
+    -- Snippet collection
+    use({ "rafamadriz/friendly-snippets", opt = true , })
+
+    -- Snippet engine
+    use({
+        "L3MON4D3/LuaSnip",
+        -- module = "luasnip",
+        wants = "friendly-snippets",
+        -- TODO
+        -- config = function() require("luasnip") end,
+    })                                         -- LSP Engine for cmp - snippet
+    -- Snippet completion source
+    use({
+        "saadparwaiz1/cmp_luasnip",
+        after = "nvim-cmp",
+        -- TODO
+        -- config = function() vim.add_user_cmp_source "luasnip" end,
+    })
     use 'onsails/lspkind.nvim'                 -- vscode-like pictograms for neovim lsp completion items
-    use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source for buffer words
-    use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
+
     use 'hrsh7th/nvim-cmp'                     -- Completion
+
+    -- Buffer completion source
+    use({
+        -- use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source for buffer words
+        "hrsh7th/cmp-buffer",
+        after = "nvim-cmp",
+        -- TODO
+        -- config = function() astronvim.add_user_cmp_source "buffer" end,
+    })
+
+    -- Path completion source
+    use({ "hrsh7th/cmp-path", after = "nvim-cmp",
+        -- TODO
+        -- config = function() astronvim.add_user_cmp_source "path" end,
+    })
+
+    -- LSP completion source
+    -- use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
+    use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp",
+        -- TODO
+        -- config = function() astronvim.add_user_cmp_source "nvim_lsp" end,
+    })
+
     use 'glepnir/lspsaga.nvim'                 -- A light-weight lsp plugin based on neovim's built-in lsp with a highly performant UI
     use 'glepnir/dashboard-nvim'               -- Vim Dashboard - async start screen
 
@@ -168,11 +268,13 @@ packer.startup(function(use)
         "p00f/nvim-ts-rainbow",
         after = "nvim-treesitter",
     })
+
     -- Autoclose tags
     use({
         "windwp/nvim-ts-autotag",
         after = "nvim-treesitter",
     })                                           -- Use treesitter to auto close and auto rename html tag
+
     -- Context based commenting
     use({
         "JoosepAlviste/nvim-ts-context-commentstring",
