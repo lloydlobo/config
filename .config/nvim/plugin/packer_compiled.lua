@@ -70,12 +70,8 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["Comment.nvim"] = {
-    config = { "\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 after.plugin.comment.rc.lua\frequire\0" },
-    keys = { { "", "gc" }, { "", "gcc" }, { "", "gbc" } },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/i/.local/share/nvim/site/pack/packer/opt/Comment.nvim",
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
   LuaSnip = {
@@ -271,13 +267,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Keymap lazy-loads
-time([[Defining lazy-load keymaps]], true)
-vim.cmd [[noremap <silent> gcc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gcc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gbc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gbc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gc", prefix = "" }, _G.packer_plugins)<cr>]]
-time([[Defining lazy-load keymaps]], false)
-
 if should_profile then save_profiles() end
 
 end)

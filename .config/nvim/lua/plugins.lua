@@ -41,15 +41,13 @@ packer.startup(function(use)
 
     -- Which key 
     use "folke/which-key.nvim"
-    -- Comment
-      use({
-    "numToStr/Comment.nvim",
-    keys = { "gc", "gcc", "gbc" },
-    config = function()
-      require("after.plugin.comment.rc.lua")
-    end,
-  })
 
+    -- Comment
+    use 'numToStr/Comment.nvim'                                                     -- "gc" to comment visual regions/lines
+    -- use({ "numToStr/Comment.nvim",
+    --    keys = { "gc", "gcc", "gbc" },
+    --    config = function() require("comment.rc.lua") end,
+    -- })
 
     -- Telescope
     use 'nvim-telescope/telescope.nvim'        -- Find, Filter, Preview, Pick. All lua, all the time.
@@ -84,6 +82,10 @@ packer.startup(function(use)
     -- Git
     use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers
     use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
+
+    -- tpope plugins
+    -- use 'tpope/vim-fugitive'                 -- same as dinhhuy258/git.nvim
+    -- use 'tpope/vim-rhubarb'                     -- rhubarb.vim: GitHub extension for fugitive.vim
 
     -- THEME
     use {
@@ -120,6 +122,9 @@ packer.startup(function(use)
 end)
 -- stylua: ignore end
 
+
+-- Enable Comment.nvim
+require('Comment').setup()
 -- You can configure Packer to use a floating window for command outputs by passing a utility function to packer's config:
 -- packer.startup({function()
 --   -- Your plugins here
