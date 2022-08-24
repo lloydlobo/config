@@ -30,6 +30,14 @@ packer.startup(function(use)
     -- Plugin manager
     use 'wbthomason/packer.nvim'
 
+    -- Better buffer closing
+    use 'famiu/bufdelete.nvim'
+    use 's1n7ax/nvim-window-picker'
+    -- use { 'famiu/bufdelete.nvim' , { cmd = { "Bdelete", "Bwipeout" }, }, }
+    -- use { 's1n7ax/nvim-window-picker',
+    --      tag = 'v1.*', module = 'window-picker', config = function () require 'configs.window-picker' end
+    -- }
+
     -- Optimiser
     use 'lewis6991/impatient.nvim'           --  Improve startup time for Neovim 
 
@@ -39,15 +47,45 @@ packer.startup(function(use)
     use 'williamboman/mason.nvim'              -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
     use 'williamboman/mason-lspconfig.nvim'    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
 
-    -- Which key 
+    -- Keymaps popup
     use "folke/which-key.nvim"
 
-    -- Comment
-    use 'numToStr/Comment.nvim'                                                     -- "gc" to comment visual regions/lines
-    -- use({ "numToStr/Comment.nvim",
-    --    keys = { "gc", "gcc", "gbc" },
-    --    config = function() require("comment.rc.lua") end,
-    -- })
+    -- Neovim UI Enhancer
+    use 'stevearc/dressing.nvim'
+
+    -- Cursorhold fix
+    use({
+        'antoinemadec/FixCursorHold.nvim',
+        config = function()
+            vim.g.cursorhold_updatetime = 100
+        end,
+    })                                          -- Markdown live preview
+
+    -- Terminal
+    -- use 'akinsho/toggleterm.nvim'
+    use({
+        'akinsho/toggleterm.nvim',
+        -- TODO
+        config = function () require('toggleterm').setup() end,
+    })
+    -- ["akinsho/toggleterm.nvim"] = {
+    --   cmd = "ToggleTerm",
+    --   module = { "toggleterm", "toggleterm.terminal" },
+    --   config = function() require "configs.toggleterm" end,
+    -- },
+    --
+
+    -- Smooth scrolling
+    use { 'declancm/cinnamon.nvim', event = { 'BufRead', 'BufNewFile' }, }
+
+    -- Comment ==> "gc" to comment visual regions/lines
+    use({
+        'numToStr/Comment.nvim',
+        config = function () require('Comment').setup() end,
+        keys = { "gc", "gb", "g<", "g>" },
+        -- TODO
+        -- config = function() require "toggleterm" end,
+    })
 
     -- Telescope
     use 'nvim-telescope/telescope.nvim'        -- Find, Filter, Preview, Pick. All lua, all the time.
@@ -87,6 +125,7 @@ packer.startup(function(use)
     -- Git
     use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers
     use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
+    use 'kdheepak/lazygit.nvim'
 
     -- tpope plugins
     -- use 'tpope/vim-fugitive'                 -- same as dinhhuy258/git.nvim
@@ -127,9 +166,6 @@ packer.startup(function(use)
 end)
 -- stylua: ignore end
 
-
--- Enable Comment.nvim
-require('Comment').setup()
 -- You can configure Packer to use a floating window for command outputs by passing a utility function to packer's config:
 -- packer.startup({function()
 --   -- Your plugins here

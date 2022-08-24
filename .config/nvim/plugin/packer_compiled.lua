@@ -70,14 +70,36 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["Comment.nvim"] = {
-    loaded = true,
-    path = "/home/i/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0" },
+    keys = { { "", "gc" }, { "", "gb" }, { "", "g<" }, { "", "g>" } },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/i/.local/share/nvim/site/pack/packer/opt/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
+  },
+  ["FixCursorHold.nvim"] = {
+    config = { "\27LJ\2\n7\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1d\0=\1\2\0K\0\1\0\26cursorhold_updatetime\6g\bvim\0" },
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
   },
   LuaSnip = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["bufdelete.nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/bufdelete.nvim",
+    url = "https://github.com/famiu/bufdelete.nvim"
+  },
+  ["cinnamon.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/i/.local/share/nvim/site/pack/packer/opt/cinnamon.nvim",
+    url = "https://github.com/declancm/cinnamon.nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -98,6 +120,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/dashboard-nvim",
     url = "https://github.com/glepnir/dashboard-nvim"
+  },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
   },
   fd = {
     loaded = true,
@@ -123,6 +150,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lazygit.nvim"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
+    url = "https://github.com/kdheepak/lazygit.nvim"
   },
   ["lsp-colors.nvim"] = {
     loaded = true,
@@ -219,6 +251,11 @@ _G.packer_plugins = {
     path = "/home/i/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
+  ["nvim-window-picker"] = {
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/nvim-window-picker",
+    url = "https://github.com/s1n7ax/nvim-window-picker"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -254,6 +291,12 @@ _G.packer_plugins = {
     path = "/home/i/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggleterm.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0" },
+    loaded = true,
+    path = "/home/i/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
   ["true-zen.nvim"] = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/true-zen.nvim",
@@ -277,6 +320,30 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
+-- Config for: FixCursorHold.nvim
+time([[Config for FixCursorHold.nvim]], true)
+try_loadstring("\27LJ\2\n7\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1d\0=\1\2\0K\0\1\0\26cursorhold_updatetime\6g\bvim\0", "config", "FixCursorHold.nvim")
+time([[Config for FixCursorHold.nvim]], false)
+-- Keymap lazy-loads
+time([[Defining lazy-load keymaps]], true)
+vim.cmd [[noremap <silent> g> <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "g>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> g< <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "g<lt>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> gc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gc", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> gb <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gb", prefix = "" }, _G.packer_plugins)<cr>]]
+time([[Defining lazy-load keymaps]], false)
+
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufNewFile * ++once lua require("packer.load")({'cinnamon.nvim'}, { event = "BufNewFile *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'cinnamon.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)
