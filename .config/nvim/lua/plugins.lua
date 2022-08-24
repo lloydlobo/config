@@ -46,10 +46,10 @@ packer.startup(function(use)
     use 'stevearc/dressing.nvim'
 
     -- Smarter Splits
-    use({
-        'mrjones2014/smart-splits.nvim',
-        config = function () require('smart-splits').setup() end,
-    })
+    -- use({
+    --     'mrjones2014/smart-splits.nvim',
+    --     config = function () require('smart-splits').setup() end,
+    -- })
 
     -- Cursorhold fix
     use({
@@ -114,7 +114,6 @@ packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
     use 'sharkdp/fd'                           -- nvim-treesitter dependency find replacement
     use 'windwp/nvim-autopairs'                -- Autopairs
-    use 'windwp/nvim-ts-autotag'               -- Use treesitter to auto close and auto rename html tag
 
     -- LSP
     use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
@@ -146,7 +145,14 @@ packer.startup(function(use)
       'svrana/neosolarized.nvim',
       requires = { 'tjdevries/colorbuddy.nvim' }
     }
+
+    -- Statusline
     -- use 'tjdevries/colorbuddy.nvim'
+    --   ["feline-nvim/feline.nvim"] = {
+    --   after = "nvim-web-devicons",
+    --   config = function() require "configs.feline" end,
+    -- },
+
     use {
       'nvim-lualine/lualine.nvim',              -- Statusline
       requires = {
@@ -157,6 +163,22 @@ packer.startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
 
+    -- Parenthesis highlighting
+    use({
+        "p00f/nvim-ts-rainbow",
+        after = "nvim-treesitter",
+    })
+    -- Autoclose tags
+    use({
+        "windwp/nvim-ts-autotag",
+        after = "nvim-treesitter",
+    })                                           -- Use treesitter to auto close and auto rename html tag
+    -- Context based commenting
+    use({
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        after = "nvim-treesitter",
+    })
+
     -- Better buffer closing
 
     use({
@@ -164,12 +186,10 @@ packer.startup(function(use)
         cmd = { 'Bdelete', 'Bwipeout' },
     })
 
-    use ({
-        's1n7ax/nvim-window-picker',
-        config = function () require('nvim-window-picker').setup() end,
-        -- tag = 'v1.*',
-        -- module = 'window-picker',
-    })
+    --  use ({ 's1n7ax/nvim-window-picker',
+    --      config = function () require('nvim-window-picker').setup() end,
+    --      -- tag = 'v1.*', module = 'window-picker',
+    --  })
 
     use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
     use "Pocco81/true-zen.nvim"                 -- Clean and elegant distraction-free writing for NeoVim
