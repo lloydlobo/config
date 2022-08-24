@@ -30,14 +30,6 @@ packer.startup(function(use)
     -- Plugin manager
     use 'wbthomason/packer.nvim'
 
-    -- Better buffer closing
-    use 'famiu/bufdelete.nvim'
-    use 's1n7ax/nvim-window-picker'
-    -- use { 'famiu/bufdelete.nvim' , { cmd = { "Bdelete", "Bwipeout" }, }, }
-    -- use { 's1n7ax/nvim-window-picker',
-    --      tag = 'v1.*', module = 'window-picker', config = function () require 'configs.window-picker' end
-    -- }
-
     -- Optimiser
     use 'lewis6991/impatient.nvim'           --  Improve startup time for Neovim 
 
@@ -53,12 +45,19 @@ packer.startup(function(use)
     -- Neovim UI Enhancer
     use 'stevearc/dressing.nvim'
 
+    -- Smarter Splits
+    use({
+        'mrjones2014/smart-splits.nvim',
+        config = function () require('smart-splits').setup() end,
+    })
+
     -- Cursorhold fix
     use({
         'antoinemadec/FixCursorHold.nvim',
         config = function()
             vim.g.cursorhold_updatetime = 100
         end,
+        event = { 'BufRead', 'BufNewFile' },
     })                                          -- Markdown live preview
 
     -- Terminal
@@ -90,6 +89,17 @@ packer.startup(function(use)
     -- Telescope
     use 'nvim-telescope/telescope.nvim'        -- Find, Filter, Preview, Pick. All lua, all the time.
     use "nvim-telescope/telescope-file-browser.nvim"  -- File Browser extension for telescope.nvim
+
+    -- File explorer
+    use({
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        -- module = "neo-tree",
+        cmd = "Neotree",
+        requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
+        setup = function() vim.g.neo_tree_remove_legacy_commands = true end,
+        config = function() require("neo-tree") end,
+    })
     use 'BurntSushi/ripgrep'                   -- telescope dep required for live_grep and grep_string
     use {
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -111,7 +121,7 @@ packer.startup(function(use)
     -- use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
     use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
-    use 'onsails/lspkind-nvim'                 --  vscode-like pictograms for neovim lsp completion items
+    use 'onsails/lspkind.nvim'                 -- vscode-like pictograms for neovim lsp completion items
     use 'hrsh7th/cmp-buffer'                   -- nvim-cmp source for buffer words
     use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
     use 'hrsh7th/nvim-cmp'                     -- Completion
@@ -146,6 +156,21 @@ packer.startup(function(use)
     }
     use 'kyazdani42/nvim-web-devicons'
     use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
+
+    -- Better buffer closing
+
+    use({
+        'famiu/bufdelete.nvim',
+        cmd = { 'Bdelete', 'Bwipeout' },
+    })
+
+    use ({
+        's1n7ax/nvim-window-picker',
+        config = function () require('nvim-window-picker').setup() end,
+        -- tag = 'v1.*',
+        -- module = 'window-picker',
+    })
+
     use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
     use "Pocco81/true-zen.nvim"                 -- Clean and elegant distraction-free writing for NeoVim
     use 'folke/zen-mode.nvim'                   -- Distraction-free mode
