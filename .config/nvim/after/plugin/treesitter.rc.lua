@@ -1,11 +1,25 @@
 -- nvim-treesitter enables syntax highlight
-local status, ts = pcall(require, 'nvim-treesitter.configs')
+local status_ok, ts = pcall(require, 'nvim-treesitter.configs')
+local status_ok_2, ts_parsers = pcall(require, 'nvim-treesitter.parsers')
 
-if (not status) then
+if (not status_ok) then
     return
 end
 
 ts.setup {
+    ensure_installed = {
+        'tsx',
+        'toml',
+        'fish',
+        'bash',
+        'rust',
+        'json',
+        'svelte',
+        'yaml',
+        'css',
+        'html',
+        'lua'
+    },
     highlight = {
         enable = true,
         disable = {},
@@ -27,7 +41,7 @@ ts.setup {
     textobjects = {
         select = {
             enable = true,
-            lookahead = true,               -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,                    -- Automatically jump forward to textobj, similar to targets.vim
             keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
                 ['af'] = '@function.outer',
@@ -37,19 +51,8 @@ ts.setup {
             },
         },
     },
-    ensure_installed = {
-        'tsx',
-        'toml',
-        'fish',
-        'bash',
-        'rust',
-        'json',
-        'svelte',
-        'yaml',
-        'swift',
-        'css',
-        'html',
-        'lua'
+    context_commentstring = {
+        enable = true,
     },
     move = {
         enable = true,
@@ -91,5 +94,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
-local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
-parser_config.tsx.filetype_to_parsername = { 'javascript', 'typescript.tsx' }
+if (not status_ok_2) then 
+    return 
+end
+
+ts_parsers.get_parser_configs().tsx.filetype_to_parsername = { 'javascript', 'typescript.tsx' }
+
+-- local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+-- parser_config.tsx.filetype_to_parsername = { 'javascript', 'typescript.tsx' }

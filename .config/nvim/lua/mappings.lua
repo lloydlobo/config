@@ -54,7 +54,7 @@ keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Move window
-keymap.set('n', '<Space>', '<C-w>w')
+-- keymap.set('n', '<Space>', '<C-w>w')
 keymap.set('', 'sh', '<C-w>h')
 keymap.set('', 'sk', '<C-w>k')
 keymap.set('', 'sj', '<C-w>j')

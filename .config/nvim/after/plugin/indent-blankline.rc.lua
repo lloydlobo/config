@@ -6,11 +6,12 @@ if (not status_ok) then
     return
 end
 
-vim.opt.list = true
 -- vim.opt.listchars:append "space:⋅"
 -- vim.opt.listchars:append "eol:↴"
+vim.opt.list = true
 vim.opt.termguicolors = true
 vim.g.indentLine_enabled = 1 -- slows down cpu?
+-- vim.g.indent_blankline_char_highlight
 
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#002b36 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent2 guifg=#073642 gui=nocombine]]
@@ -19,10 +20,9 @@ vim.cmd [[highlight IndentBlanklineIndent4 guifg=#52676d gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#708183 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#e9e2cb gui=nocombine]]
 
---vim.cmd [[highlight IndentBlanklineContextChar guifg=#738a05  gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineContextChar guifg=#52676d  gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar guifg=#465a61  gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineContextStart guisp=#d01b24 gui=bold]]
-vim.cmd([[highlight NvimTreeIndentMarker guifg=#c61c6f gui=nocombine]])
+vim.cmd [[highlight NvimTreeIndentMarker guifg=#c61c6f gui=nocombine]]
 
 -- vim.cmd [[highlight IndentBlanklineIndent1 guibg=#002831 gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent2 guibg=#073642 gui=nocombine]]
