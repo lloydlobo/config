@@ -64,12 +64,13 @@ packer.startup(function(use)
        run = ':TSUpdate',
     }
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
-    use 'sharkdp/fd'                            -- nvim-treesitter dependency find replacement
-    use 'windwp/nvim-autopairs'                 -- Autopairs
-    use 'windwp/nvim-ts-autotag'                -- Use treesitter to auto close and auto rename html tag
+    use 'sharkdp/fd'                           -- nvim-treesitter dependency find replacement
+    use 'windwp/nvim-autopairs'                -- Autopairs
+    use 'windwp/nvim-ts-autotag'               -- Use treesitter to auto close and auto rename html tag
 
     -- LSP
-    use 'neovim/nvim-lspconfig'                -- LSP
+    use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
+    use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
     use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
     use 'onsails/lspkind-nvim'                 --  vscode-like pictograms for neovim lsp completion items
@@ -77,8 +78,11 @@ packer.startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp'                 -- nvim-cmp source for neovim's built-in LSP
     use 'hrsh7th/nvim-cmp'                     -- Completion
     use 'glepnir/lspsaga.nvim'                 -- A light-weight lsp plugin based on neovim's built-in lsp with a highly performant UI
-    use 'glepnir/dashboard-nvim'                 -- Vim Dashboard - async start screen
+    use 'glepnir/dashboard-nvim'               -- Vim Dashboard - async start screen
+
+    -- indent | formatting
     use 'MunifTanjim/prettier.nvim'            -- Prettier plugin for Neovim's built-in LSP client
+    use 'lukas-reineke/indent-blankline.nvim'                                       -- Add indentation guides even on blank lines
 
     -- Git
     use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers

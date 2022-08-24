@@ -2,9 +2,11 @@
 -- https://github.com/hrsh7th/nvim-cmp
 --
 
- local status, cmp = pcall(require, 'cmp')
+-- nvim-cmp setup
+local status_ok, cmp = pcall(require, 'cmp')
+local status_ok_2, luasnip = pcall(require, 'luasnip')
 
- if (not status) then
+ if (not status_ok) then
    return
  end
 
@@ -13,7 +15,7 @@
  cmp.setup({
     snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
     },                                      -- https://blog.inkdrop.app/my-neovim-setup-for-react-typescript-tailwind-css-etc-in-2022-a7405862c9a4
     mapping = cmp.mapping.preset.insert({
@@ -30,6 +32,27 @@
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
         }),                                  -- <CR> Alt + M or Enter (Return key) Carriage Return maybe..?
+
+        -- Tab cmp dialog popup
+        ['<Tab>'] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+              else
+                fallback()
+              end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                    cmp.select_prev_item()
+                 elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                 else
+                    fallback()
+                 end
+        end, { 'i', 's' }),
+
     }),
     formatting = {
         format = lspkind.cmp_format({
