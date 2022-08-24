@@ -63,6 +63,7 @@ packer.startup(function(use)
       'nvim-treesitter/nvim-treesitter',      -- Treesitter configurations and abstraction layer for Neovim
        run = ':TSUpdate',
     }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
     use 'sharkdp/fd'                            -- nvim-treesitter dependency find replacement
     use 'windwp/nvim-autopairs'                 -- Autopairs
     use 'windwp/nvim-ts-autotag'                -- Use treesitter to auto close and auto rename html tag

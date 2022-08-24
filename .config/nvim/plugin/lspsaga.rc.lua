@@ -13,6 +13,7 @@ saga.init_lsp_saga {
 local opts = { noremap = true, silent = true }
 
 -- <CR> Ctrl + M -- See `:help key-notation` -- Carriage Return
+-- TODO is this conflicitng with cmp? <C-j> <C-k>
 vim.keymap.set('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
 vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
 vim.keymap.set('n', 'gd', '<Cmd>Lspsaga lsp_finder<CR>', opts)
