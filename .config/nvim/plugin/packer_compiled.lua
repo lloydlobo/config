@@ -194,11 +194,6 @@ _G.packer_plugins = {
     path = "/home/i/.local/share/nvim/site/pack/packer/start/nvim-hclipboard",
     url = "https://github.com/kevinhwang91/nvim-hclipboard"
   },
-  ["nvim-lsp-installer"] = {
-    loaded = true,
-    path = "/home/i/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/i/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",

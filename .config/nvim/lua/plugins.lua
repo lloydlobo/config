@@ -70,7 +70,7 @@ packer.startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
-    use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
+    -- use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
     use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     use 'L3MON4D3/LuaSnip'                     -- LSP Engine for cmp - snippet
     use 'onsails/lspkind-nvim'                 --  vscode-like pictograms for neovim lsp completion items
