@@ -15,34 +15,25 @@ PS1='[\u@\h \W]\$ '
 # $HOME is the work-tree # https://wiki.archlinux.org/title/Dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-# bash-complete-alias
-# complete -F _complete_alias config
-
-# Emacs
-# export PATH="$HOME/.emacs.d/bin:$PATH"
-
 # Command prompt
+#set-option -g default-terminal "screen-256color"
 eval "$(starship init bash)"
 # eval "$(navi widget bash)"
 eval "$(zoxide init bash)"
 eval "$(fnm env --use-on-cd)"
+macchina
+
+# #############################################################################
+# bash-complete-alias
+# complete -F _complete_alias config
 
 # Import colorscheme from 'wal' asynchronously & Run the process in the background.  
 # ( ) # Hide shell job control messages. # Not supported in the "fish" shell.
 # (cat ~/.cache/wal/sequences &)
 # Alternative (blocks terminal for 0-3ms)
 # cat ~/.cache/wal/sequences
-
 # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
-
-# NEOFETCH MACCHINA SYS INFO
-# neofetch
-macchina
-
-#
-# FIN
-#
 
 # CLI tool to redo spelling errors in commands
 #eval "$(thefuck --alias)"
