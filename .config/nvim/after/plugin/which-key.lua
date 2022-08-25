@@ -89,7 +89,8 @@ require("which-key").register({
   },
   h = "Errors Dashboard",
   lg = "LazyGit",
-  n = "Explorer",
+  ex = "Explorer",
+  n = "NeoTree",
 }, {
   prefix = "<leader>",
 })

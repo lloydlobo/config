@@ -33,3 +33,11 @@ local is_win = has "win32"
 if is_linux then require('linux') end
 if is_mac then require('macos') end
 if is_win then require('windows') end
+
+-- To determine if neovim is running in vscode (for init.vim)
+--[[ if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary neovim
+endif ]]
+

@@ -1,4 +1,6 @@
 local status, zenMode = pcall(require, 'zen-mode')
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
 
 if (not status) then
   return
@@ -11,6 +13,7 @@ zenMode.setup {
     -- * an absolute number of cells when > 1
     -- * a percentage of the width / height of the editor when <= 1
     -- * a function that returns the width or the height
+    -- width = 0.70, -- width of the Zen window
     width = 120, -- width of the Zen window
     height = 1, -- height of the Zen window
     -- by default, no options are changed for the Zen window
@@ -55,5 +58,14 @@ zenMode.setup {
   end,
 
 }
+
+map("n", "<leader>z", ":ZenMode<CR>", opts)
+
+map("n", "<s-l>", ":bnext<CR>", opts)
+map("n", "<s-h>", ":bprev<CR>", opts)
+
+map("v", "J", ":m '>+1<CR>gv=gv", opts)
+map("v", "K", ":m '<-2<CR>gv=gv", opts)
+map("n", "Y", "y$", opts)
 
 vim.keymap.set('n', '<C-w>o', '<cmd>ZenMode<cr>', { silent = true })

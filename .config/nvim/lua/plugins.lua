@@ -1,5 +1,3 @@
--- https://blog.inkdrop.app/my-neovim-setup-for-react-typescript-tailwind-css-etc-in-2022-a7405862c9a4
--- https://github.com/folke/dot/blob/master/config/nvim/lua/plugins.lua
 local status, packer = pcall(require, 'packer')
 
 -- You can also use the following command (with packer bootstrapped) to have packer setup your configuration (or simply run updates) and close once all operations are completed:
@@ -24,23 +22,19 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
--- https://github.com/AstroNvim/AstroNvim/blob/main/lua/core/plugins.lua
--- stylua: ignore start
+-- -- stylua: ignore start
 packer.startup(function(use)
     -- Plugin manager
     use 'wbthomason/packer.nvim'
 
     -- Optimiser
-    use 'lewis6991/impatient.nvim'           --  Improve startup time for Neovim 
+    use 'lewis6991/impatient.nvim'          --  Improve startup time for Neovim 
 
     -- Lua Functions
-    use 'nvim-lua/plenary.nvim'                -- Common utilities
-
-    -- Popup API
-    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'             -- Common utilities
 
     -- Package Manager
-    use 'williamboman/mason.nvim'              -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+    use 'williamboman/mason.nvim'           -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
 
     use({
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -49,26 +43,20 @@ packer.startup(function(use)
          -- config = function() require "mason-tool-installer" end,
     })
 
-    -- TODO Delete this?
-    use 'williamboman/mason-lspconfig.nvim'    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
-
     -- Built-in LSP
     use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
+    use 'williamboman/nvim-lsp-installer'   -- Automatically install language servers to stdpath
+    use 'jose-elias-alvarez/null-ls.nvim'   -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+    -- TODO Delete this?
+    use 'williamboman/mason-lspconfig.nvim' -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
 
-    use 'williamboman/nvim-lsp-installer'      -- Automatically install language servers to stdpath
-
-    use 'jose-elias-alvarez/null-ls.nvim'      -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     -- LSP symbols
-
     use({
         "stevearc/aerial.nvim",
         -- module = "aerial",
         cmd = { "AerialToggle", "AerialOpen", "AerialInfo" },
         -- config = function() require "configs.aerial" end,
     })
-
-    -- Keymaps popup
-    use "folke/which-key.nvim"
 
     -- Indent detection
     use({
@@ -77,30 +65,6 @@ packer.startup(function(use)
         config = function() require "indent-o-matic" end,
     })
 
-    -- Notification Enhancer
-    use({
-        "rcarriga/nvim-notify",
-        event = "VimEnter",
-        -- TODO
-        -- config = function() require "nvim-notify" end,
-    })
-
-    -- Neovim UI Enhancer
-    use({
-        'stevearc/dressing.nvim',
-        event = 'VimEnter',
-        config = function ()
-            require('dressing')
-        end
-
-    })
-
-    -- Smarter Splits
-    -- use({
-    --     'mrjones2014/smart-splits.nvim',
-    --     config = function () require('smart-splits').setup() end,
-    -- })
-
     -- Cursorhold fix
     use({
         'antoinemadec/FixCursorHold.nvim',
@@ -108,7 +72,7 @@ packer.startup(function(use)
             vim.g.cursorhold_updatetime = 100
         end,
         event = { 'BufRead', 'BufNewFile' },
-    })                                          -- Markdown live preview
+      })
 
     -- Terminal
     use({
@@ -128,6 +92,7 @@ packer.startup(function(use)
         event = "InsertCharPre",
         config = function() require "better_escape" end,
     })
+
     -- Comment ==> "gc" to comment visual regions/lines
     use({
         'numToStr/Comment.nvim',
@@ -138,7 +103,13 @@ packer.startup(function(use)
     })
 
     -- Telescope
-    use 'nvim-telescope/telescope.nvim'        -- Find, Filter, Preview, Pick. All lua, all the time.
+    use({
+        'nvim-telescope/telescope.nvim',        -- Find, Filter, Preview, Pick. All lua, all the time.
+        requires = {
+          'nvim-lua/plenary.nvim',
+          'nvim-lua/popup.nvim',
+        },
+    })
     use "nvim-telescope/telescope-file-browser.nvim"  -- File Browser extension for telescope.nvim
 
     -- File explorer
@@ -151,12 +122,33 @@ packer.startup(function(use)
         setup = function() vim.g.neo_tree_remove_legacy_commands = true end,
         config = function() require("neo-tree") end,
     })
-    use 'BurntSushi/ripgrep'                   -- telescope dep required for live_grep and grep_string
 
+    use({
+        "feline-nvim/feline.nvim",
+        requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    })
+
+    -- use("sidebar-nvim/sidebar.nvim")
+    use({
+        "romgrk/barbar.nvim",
+        requires = { "kyazdani42/nvim-web-devicons" },
+        config = function() end,
+    })                                        -- tabline plugin with re-orderable, auto-sizing, clickable tabs, icons, nice highlighting, sort-by commands and a magic jump-to-buffer mode.
+    use({
+        "goolord/alpha-nvim",
+        requires = { "kyazdani42/nvim-web-devicons" },
+    })
+    use({
+        "VonHeikemen/fine-cmdline.nvim",
+        requires = {
+          { "MunifTanjim/nui.nvim" },
+        },
+    })
     use {
       'nvim-telescope/telescope-fzf-native.nvim',
       run = 'make'
     }                                          -- FZF sorter for telescope written in c
+    use 'BurntSushi/ripgrep'                   -- telescope dep required for live_grep and grep_string
 
     -- Treesitter
     use {
@@ -178,7 +170,6 @@ packer.startup(function(use)
 
     use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
     use 'sharkdp/fd'                           -- nvim-treesitter dependency find replacement
-    use 'windwp/nvim-autopairs'                -- Autopairs
 
     -- Snippet collection
     use({ "rafamadriz/friendly-snippets", opt = true , })
@@ -231,14 +222,11 @@ packer.startup(function(use)
     use 'MunifTanjim/prettier.nvim'            -- Prettier plugin for Neovim's built-in LSP client
     use 'lukas-reineke/indent-blankline.nvim'                                       -- Add indentation guides even on blank lines
 
-    -- Git
+    -- Git related plugins
     use 'lewis6991/gitsigns.nvim'               -- Git integration for buffers
     use 'dinhhuy258/git.nvim'                   -- A simple clone of the plugin vim-fugitive
     use 'kdheepak/lazygit.nvim'
-
-    -- tpope plugins
-    -- use 'tpope/vim-fugitive'                 -- same as dinhhuy258/git.nvim
-    -- use 'tpope/vim-rhubarb'                     -- rhubarb.vim: GitHub extension for fugitive.vim
+    use("APZelos/blamer.nvim")
 
     -- THEME
     use {
@@ -246,12 +234,7 @@ packer.startup(function(use)
       requires = { 'tjdevries/colorbuddy.nvim' }
     }
 
-    -- Statusline
-    -- use 'tjdevries/colorbuddy.nvim'
-    --   ["feline-nvim/feline.nvim"] = {
-    --   after = "nvim-web-devicons",
-    --   config = function() require "configs.feline" end,
-    -- },
+    use 'kyazdani42/nvim-web-devicons'
 
     use {
       'nvim-lualine/lualine.nvim',              -- Statusline
@@ -260,21 +243,16 @@ packer.startup(function(use)
         opt = true
       }                                         -- lua `fork` of vim-web-devicons for neovim
     }
-    use 'kyazdani42/nvim-web-devicons'
-    use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
-
     -- Parenthesis highlighting
     use({
         "p00f/nvim-ts-rainbow",
         after = "nvim-treesitter",
     })
-
     -- Autoclose tags
     use({
         "windwp/nvim-ts-autotag",
         after = "nvim-treesitter",
     })                                           -- Use treesitter to auto close and auto rename html tag
-
     -- Context based commenting
     use({
         "JoosepAlviste/nvim-ts-context-commentstring",
@@ -282,17 +260,16 @@ packer.startup(function(use)
     })
 
     -- Better buffer closing
-
     use({
         'famiu/bufdelete.nvim',
         cmd = { 'Bdelete', 'Bwipeout' },
     })
-
     --  use ({ 's1n7ax/nvim-window-picker',
     --      config = function () require('nvim-window-picker').setup() end,
     --      -- tag = 'v1.*', module = 'window-picker',
     --  })
 
+    use 'akinsho/nvim-bufferline.lua'           -- A snazzy bufferline
     use 'norcalli/nvim-colorizer.lua'           -- A high-performance color highlighter
     use "Pocco81/true-zen.nvim"                 -- Clean and elegant distraction-free writing for NeoVim
     use 'folke/zen-mode.nvim'                   -- Distraction-free mode
@@ -304,6 +281,53 @@ packer.startup(function(use)
     })                                          -- Markdown live preview
     use {'kevinhwang91/nvim-hclipboard'}
 
+    -- Notification Enhancer
+    use 'nvim-lua/popup.nvim'                   -- Popup API
+    use({
+        "rcarriga/nvim-notify",
+        event = "VimEnter",
+        -- TODO
+        -- config = function() require "nvim-notify" end,
+    })
+     -- Productivity
+    use("vimwiki/vimwiki")
+
+    -- Extras(but imporant)
+    use 'windwp/nvim-autopairs'                -- Autopairs
+    use({
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+    })
+    use("andweeb/presence.nvim")
+    use("NvChad/nvim-base16.lua")
+    use "folke/which-key.nvim"              -- Keymaps popup
+
+    -- Neovim UI Enhancer
+    use({
+        'stevearc/dressing.nvim',
+        event = 'VimEnter',
+        config = function ()
+            require('dressing')
+        end
+
+    })
+
+    -- tpope plugins
+    -- use 'tpope/vim-fugitive'                 -- same as dinhhuy258/git.nvim
+    -- use 'tpope/vim-rhubarb'                     -- rhubarb.vim: GitHub extension for fugitive.vim
+
+    -- Smarter Splits
+    -- use({
+    --     'mrjones2014/smart-splits.nvim',
+    --     config = function () require('smart-splits').setup() end,
+    -- })
+
+    -- Colorschemes
+    -- use("folke/tokyonight.nvim")
+    -- use("ful1e5/onedark.nvim")
+    -- use("rmehri01/onenord.nvim")
+    -- use({ "eddyekofo94/gruvbox-flat.nvim", branch = "local" })
+
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
@@ -311,7 +335,7 @@ packer.startup(function(use)
     packer.sync()
   end
 end)
--- stylua: ignore end
+-- -- stylua: ignore end
 
 -- You can configure Packer to use a floating window for command outputs by passing a utility function to packer's config:
 -- packer.startup({function()
@@ -350,3 +374,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 --   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 -- augroup end
   -- Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+-- https://blog.inkdrop.app/my-neovim-setup-for-react-typescript-tailwind-css-etc-in-2022-a7405862c9a4
+-- https://github.com/folke/dot/blob/master/config/nvim/lua/plugins.lua
+-- TODO https://github.com/0xsamrath/.dotfiles/tree/main/nvim/lua/plugins
+-- https://github.com/AstroNvim/AstroNvim/blob/main/lua/core/plugins.lua
