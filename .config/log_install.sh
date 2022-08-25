@@ -16,13 +16,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
 
 #
-# RUSTUP | CARGO 
-#
-# Setup rustup cargo & update it
-rustup default stable
-rustup update
-
-#
 # YAY
 #
 # Install yay 
@@ -45,6 +38,14 @@ echo "complete -F _complete_alias config" >> .bashrc
 
 # GHQ git local repo management
 yay ghq
+
+#
+# RUSTUP | CARGO 
+#
+# Setup rustup cargo & update it
+rustup default stable
+rustup update
+yay rust-analyzer                                   # Conflicts with rust-analyzer-nightly-bin
 
 #
 # i3 - PLUGINS
