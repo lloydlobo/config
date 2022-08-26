@@ -23,6 +23,11 @@ eval "$(zoxide init bash)"
 eval "$(fnm env --use-on-cd)"
 macchina
 
+# https://unix.stackexchange.com/questions/63098/mkdir-p-for-files
+# mktouch your/path/file.txt
+function mktouch() {
+	mkdir -p "$(dirname "$1")" && touch "$1"
+}
 # #############################################################################
 # bash-complete-alias
 # complete -F _complete_alias config
