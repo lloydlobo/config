@@ -1,8 +1,5 @@
-local status, prettier = pcall(require, "prettier")
-
-if (not status) then
-  return
-end
+local status_ok, prettier = pcall(require, "prettier")
+if (not status_ok) then return end
 
 prettier.setup {
   bin = 'prettierd',
@@ -14,7 +11,6 @@ prettier.setup {
     "typescriptreact",
     "json",
     "scss",
-    "svelte",
     "less"
   }
 }
