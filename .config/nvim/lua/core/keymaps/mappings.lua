@@ -1,11 +1,21 @@
 -- Extra mappings
+-- [[ Leader Keymap ]]
+vim.g.mapleader = ","
+-- vim.g.localmapleader = "</>"
+--
 -- LEADER KEY (2 Scopes)
 -- 1. Space for  plugin related keybindings
 -- 2. , for text manipulation, debugging, and lsp related bindings
 --
 -- TODO Clever F-repeat (clever-f plugin) fF instead of ,;
+
 -- See `:help key-notation`
 local keymap = vim.keymap
+
+-- Keymaps for better default experience -- ',' is the leader key
+-- See `:help vim.keymap.set()`
+keymap.set({ 'n', 'v' }, ',', '<Nop>', { silent = true })
+
 -- [[ --------------------- ]]
 -- [[ Interactive shortcuts ]]
 -- [[ --------------------- ]]
@@ -21,12 +31,12 @@ keymap.set(
 )
 
 --  https://github.com/0xsamrath/.dotfiles/blob/main/nvim/lua/keymaps/init.lua
--- surrounding with parantheses -- TODO INSERT MODE!!!
--- keymap.set("v", "<leader>'", "<esc>`>a'<esc>`<i'<esc>")
--- keymap.set("v", '<leader>"', '<esc>`>a"<esc>`<i"<esc>')
--- keymap.set("v", "<leader>(", "<esc>`>a)<esc>`<i(<esc>")
--- keymap.set("v", "<leader>[", "<esc>`>a]<esc>`<i[<esc>")
--- keymap.set("v", "<leader>{", "<esc>`>a}<esc>`<i{<esc>")
+-- surrounding with parantheses -- Highlight in VISUAL MODE!!! wrap
+keymap.set("v", "<leader>'", "<esc>`>a'<esc>`<i'<esc>")
+keymap.set("v", '<leader>"', '<esc>`>a"<esc>`<i"<esc>')
+keymap.set("v", "<leader>(", "<esc>`>a)<esc>`<i(<esc>")
+keymap.set("v", "<leader>[", "<esc>`>a]<esc>`<i[<esc>")
+keymap.set("v", "<leader>{", "<esc>`>a}<esc>`<i{<esc>")
 
 -- [[ -------END----------- ]]
 -- [[ Interactive shortcuts ]]
@@ -39,10 +49,6 @@ keymap.set(
 -- [[ -------------------- ]]
 -- [[       SETUP          ]]
 -- [[ -------------------- ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
--- keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

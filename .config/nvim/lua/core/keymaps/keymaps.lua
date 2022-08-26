@@ -1,7 +1,4 @@
 local keymap = vim.keymap
--- [[ Leader Keymap ]]
-vim.g.mapleader = ","
--- vim.g.localmapleader = "</>"
 
 -- Legendary keymap
 keymap.set("n", "<Space>", "ciw")
