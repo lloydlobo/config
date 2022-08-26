@@ -1,6 +1,12 @@
 local status_ok, lualine = pcall(require, "lualine")
 if (not status_ok) then return end
 
+-- https://github.com/max397574/better-escape.nvim#api
+local function escape_status()
+    local ok, m = pcall(require, "better_escape")
+    return ok and m.waiting and '✺' or ""
+end
+
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -10,8 +16,8 @@ lualine.setup {
     disabled_filetypes = {}
   },
   sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch' },
+    lualine_a = { 'mode'  },
+    lualine_b = { 'branch', escape_status, },
     lualine_c = { {
       'filename',
       file_status = true, -- displays file status (readonly status, modified status)

@@ -64,13 +64,16 @@ packer.startup(function(use)
     })
     use 'akinsho/nvim-bufferline.lua'
     use 'dinhhuy258/git.nvim' -- For git blame & browse
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Add git related info in the signs columns and popups
     use 'tpope/vim-fugitive' -- Git commands in nvim
     use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     -- Add indentation guides even on blank lines
     use 'lukas-reineke/indent-blankline.nvim'
-    -- Add git related info in the signs columns and popups
+    use {
+        "max397574/better-escape.nvim",
+        config = function() require("better_escape").setup() end,
+    }                       --  Escape from insert mode without delay when typing
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
