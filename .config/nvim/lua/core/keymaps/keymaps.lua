@@ -1,5 +1,12 @@
 local keymap = vim.keymap
+-- [[ Leader Keymap ]]
+vim.g.mapleader = ","
+-- vim.g.localmapleader = "</>"
 
+-- Legendary keymap
+keymap.set("n", "<Space>", "ciw")
+
+-- [[ Basic Keymaps ]]
 keymap.set('n', 'x', '"_x')
 
 -- Increment/decrement
@@ -17,11 +24,12 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 
 -- New tab
 keymap.set('n', 'te', ':tabedit')
+
 -- Split window
 keymap.set('n', 'ss', ':split<Return><C-w>w')
 keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
+
 -- Move window
-keymap.set('n', '<Space>', '<C-w>w')
 keymap.set('', 'sh', '<C-w>h')
 keymap.set('', 'sk', '<C-w>k')
 keymap.set('', 'sj', '<C-w>j')
