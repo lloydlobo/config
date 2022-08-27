@@ -99,6 +99,11 @@ packer.startup(function(use)
     use 'JoosepAlviste/nvim-ts-context-commentstring' --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
     use {
+        "Darazaki/indent-o-matic",
+        event = "BufReadPost",
+        config = function () require "indent-o-matic" end
+    } -- Dumb automatic fast indentation detection for Neovim written in Lua 
+    use {
         "max397574/better-escape.nvim",
         config = function() require("better_escape").setup() end,
     }                       --  Escape from insert mode without delay when typing

@@ -28,6 +28,8 @@ cmp.setup({
   }),
   formatting = {
     format = lspkind.cmp_format({ with_text = false, maxwidth = 50 })
+        -- https://github.com/wesleimp/stylua.nvim
+        -- :lua require("stylua").format()
   }
 })
 
