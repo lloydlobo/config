@@ -73,6 +73,7 @@ npm install -g typescript-language-server typescript
 yay tree-sitter               #  An incremental parsing system for programming tools 
 yay prettierd                 #  prettier, as a daemon, for ludicrous formatting speed. 
 yay eslint_d                  # Makes eslint the fastest linter on the planet.
+yay stylua                    # Integrates with weleimp/stylua.nvim
 yay lazygit
 # disk analyzer with ncurses interface
 yay ncdu
