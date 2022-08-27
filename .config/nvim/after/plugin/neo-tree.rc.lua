@@ -1,11 +1,10 @@
 local status_ok, neotree = pcall(require, "neo-tree")
 if not status_ok then return end
-
 -- https://github.com/AstroNvim/AstroNvim/blob/main/lua/configs/neo-tree.lua
 neotree.setup({
     close_if_last_window = true,
     popup_border_style = "rounded",
-    enable_diagnostics = false,
+    enable_diagnostics = true,
     default_component_configs = {
         indent = {
             padding = 0,
@@ -32,6 +31,7 @@ neotree.setup({
         },
     },
     window = {
+        position = "right",
         width = 25,
         mappings = {
             ["o"] = "open",
@@ -49,9 +49,9 @@ neotree.setup({
                 "__pycache__",
             },
         },
-      follow_current_file = true,
-      hijack_netrw_behavior = "open_current",
-      use_libuv_file_watcher = true,
+        follow_current_file = true,
+        hijack_netrw_behavior = "open_current",
+        use_libuv_file_watcher = true,
     },
     git_status = {
         window = {
@@ -59,6 +59,9 @@ neotree.setup({
         },
     },
     event_handlers = {
-        { event = "neo_tree_buffer_enter", handler = function(_) vim.opt_local.signcolumn = "auto" end },
+        {
+            event = "neo_tree_buffer_enter",
+            handler = function(_) vim.opt_local.signcolumn = "auto" end
+        },
     },
 })
