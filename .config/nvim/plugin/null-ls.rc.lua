@@ -3,7 +3,7 @@ if (not status_ok) then return end
 
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
 
-null_ls.setup ({
+null_ls.setup {
   sources = {
     null_ls.builtins.diagnostics.eslint_d.with({
       diagnostics_format = '[eslint] #{m}\n(#{c})'
@@ -20,7 +20,7 @@ null_ls.setup ({
       })
     end
   end,
-})
+}
 
 --[[NEOFORMAT]]
 -- augroup fmt
