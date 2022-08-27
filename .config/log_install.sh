@@ -55,9 +55,11 @@ yay -S i3-resurrect
 yay xorg-xbacklight
 yay light
 
+
 ##
-# MUSIC | MPD | MPV
+# MUSIC | MPD | MPV | Media | Codec & Plugins
 #
+yay vlc
 # Prerequisite mpc mpd ncmpcpp
 sudo pacman -S timidity
 yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
@@ -83,6 +85,8 @@ yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
 yay exa # 10 - ls replacement
+# Simple X Hot Key Daemon.
+yay sxhkd                     # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
 
 
 # BROWSER
