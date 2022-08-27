@@ -11,6 +11,8 @@ picom --config ~/.config/picom/picom.conf --experimental-backends --vsync &
 # Remaps the menu button (Alt_R and Control_R to Super)
 # xmodmap ~/.Xmodmap &
 xrdb ~/.Xresources &
+# Map hjkl to arrow keys
+sxhkdrc &
 
 # set Background
 ~/.fehbg &
@@ -23,8 +25,7 @@ xrdb ~/.Xresources &
 
 # clipmenud &
 # dunst &
-# i3 autotiling enable
-autotiling &
+autotiling &                # i3 autotiling enable
 
 # pcloud &
 

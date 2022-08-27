@@ -13,6 +13,7 @@ Xft*hinting:      full
 *.cursorColor: #708183
 *.selection_background: #002731
 *.selection_foreground: #001e26
+*.black: #121212
 
 ! black
 *.color0: #001e26
