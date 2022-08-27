@@ -32,6 +32,7 @@ packer.startup(function(use)
     use "hrsh7th/cmp-buffer" -- nvim-cmp source for buffer words
     use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+    use("tzachar/cmp-tabnine", { run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
     use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
     use 'saadparwaiz1/cmp_luasnip'
     use 'williamboman/mason.nvim'
@@ -48,12 +49,19 @@ packer.startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
+    use "sbdchd/neoformat"
     use 'ludovicchabant/vim-gutentags' -- Automatic tags management
     use "windwp/nvim-ts-autotag"        -- Close tags for React apps
     use "windwp/nvim-autopairs"        -- Close brackets
     use "norcalli/nvim-colorizer.lua"
     -- UI to select things (files, grep results, open buffers...)
-    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    use({
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'}, { "kdheepak/lazygit.nvim" } },
+        config = function()
+            require("telescope").load_extension("lazygit")
+        end,
+    })
     use 'nvim-telescope/telescope-file-browser.nvim'
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use 'kyazdani42/nvim-web-devicons' -- File icons
@@ -68,12 +76,18 @@ packer.startup(function(use)
     use 'tpope/vim-fugitive' -- Git commands in nvim
     use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-    -- Add indentation guides even on blank lines
-    use 'lukas-reineke/indent-blankline.nvim'
+    use 'JoosepAlviste/nvim-ts-context-commentstring' --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
+    use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
     use {
         "max397574/better-escape.nvim",
         config = function() require("better_escape").setup() end,
     }                       --  Escape from insert mode without delay when typing
+    use {
+        "folke/which-key.nvim",
+        -- module = "which-key",
+        -- config = function() require "configs.which-key" end,
+    } -- Keymaps popup
+
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins

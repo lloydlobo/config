@@ -1,7 +1,7 @@
 --vim.lsp.set_log_level("debug")
 
-local status, nvim_lsp = pcall(require, "lspconfig")
-if (not status) then return end
+local status_ok_1, nvim_lsp = pcall(require, "lspconfig")
+if (not status_ok_1) then return end
 
 local protocol = require('vim.lsp.protocol')
 
