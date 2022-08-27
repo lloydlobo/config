@@ -8,7 +8,8 @@ key_color       = "Yellow"
 separator_color = "Yellow"
 
 [palette]
-type            = "Light"
+# type            = "Light"
+type            = "Full"
 glyph           = " ● "
 visible         = true
 

@@ -15,14 +15,14 @@ current_shell = true
 
 # Toggle between displaying the number of physical or logical cores of your
 # processor.
-physical_cores = true 
+physical_cores = true
 
 # Themes need to be placed in "$XDG_CONFIG_DIR/macchina/themes" beforehand.
 # e.g.:
 #  if theme path is /home/foo/.config/macchina/themes/Sodium.toml
 #  theme should be uncommented and set to "Sodium"
 #
-theme = "Beryllium"
+theme = "Lithium"
 
 # Displays only the specified readouts.
 # Accepted values (case-sensitive):
