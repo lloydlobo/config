@@ -69,6 +69,19 @@ packer.startup(function(use)
         config = function() require("toggleterm").setup() end,
     }
     use 'kyazdani42/nvim-web-devicons' -- File icons
+    -- NEOTREE
+    -- Unless you are still migrating, remove the deprecated commands from v1.x
+    -- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    -- Press ? in the Neo-tree window to view the list of mappings.
+    use {
+      "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        }
+    }
     use 'folke/zen-mode.nvim'
     use({
         "iamcco/markdown-preview.nvim",
