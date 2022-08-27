@@ -22,59 +22,14 @@ error_symbol = "[✗](bold red) "
 [cmd_duration]
 min_time = 60_0000
 
-
-format = """
- [](#9A348E)\
- $username\
- [](fg:#9A348E)\
- $directory\
- [](fg:#DA627D30)\
- $git_branch\
- $git_status\
- [](fg:#FCA17D)\
- $c\
- $elixir\
- $elm\
- $golang\
- $haskell\
- $java\
- $julia\
- $nodejs\
- $nim\
- $rust\
- [](fg:#86BBD8)\
- $docker_context\
- [](fg:#06969A)\
- $time\
- [ ](fg:#33658A)\
-  """
-
-#
-# # Disable the blank line at the start of the prompt
-# # add_newline = false
-#
-# # You can also replace your username with a neat symbol like  to save some space
-# [username]
-# show_always = true
-# style_user = "bg:#9A348E"
-# style_root = "bg:#9A348E"
-# format = '[$user ]($style)'
-#
-# [directory]
-# style = "bg:#DA627D"
-# format = "[ $path ]($style)"
-# truncation_length = 3
-# truncation_symbol = "…/"
-
-
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
 "Documents" = " "
 "Downloads" = " "
-"Media" = " "
-"Music" = " "
-"Pictures" = " "
+"Media" = "    "
+"Music" = "   "
+"Pictures" = "   "
 # Keep in mind that the order matters. For example:
 # "Important Documents" = "  "
 # will not be replaced, because "Documents" was already substituted before.
