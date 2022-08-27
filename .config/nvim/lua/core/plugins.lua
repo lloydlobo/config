@@ -64,6 +64,10 @@ packer.startup(function(use)
     })
     use 'nvim-telescope/telescope-file-browser.nvim'
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { "akinsho/toggleterm.nvim",
+        tag = 'v2.*',
+        config = function() require("toggleterm").setup() end,
+    }
     use 'kyazdani42/nvim-web-devicons' -- File icons
     use 'folke/zen-mode.nvim'
     use({

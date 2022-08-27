@@ -5,6 +5,7 @@ if impatient_ok then
     print("impatient_ok")
 end
 
+-- Load core modules
 for _, source in ipairs {
     'core',
 } do
@@ -13,4 +14,5 @@ for _, source in ipairs {
         vim.api.nvim_err_writeln('Failed to load ' .. source .. '\n\n' .. fault)
     end
 end
--- require("core")
+
+-- astronvim.conditional_func(astronvim.user_plugin_opts("polish", nil, false))
