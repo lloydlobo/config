@@ -26,16 +26,21 @@ packer.startup(function(use)
     use 'wbthomason/packer.nvim' -- Package manager
     -- Is using a standard Neovim install, i.e. built from source or using a provided appimage.
     use "lewis6991/impatient.nvim" -- Optimiser
+    use 'wakatime/vim-wakatime'
     use { "svrana/neosolarized.nvim", requires = { "tjdevries/colorbuddy.nvim" } }
     -- use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-    use "nvim-lua/plenary.nvim" -- Common utilities
     use "onsails/lspkind-nvim" -- vscode-like pictograms
     use "hrsh7th/cmp-buffer" -- nvim-cmp source for buffer words
     use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
     use("tzachar/cmp-tabnine", { run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
     use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+    use 'simrat39/rust-tools.nvim' -- https://github.com/simrat39/rust-tools.nvim
+    -- Debugging
+    use "nvim-lua/plenary.nvim" -- Common utilities
+    use 'mfussenegger/nvim-dap'
+
     use 'saadparwaiz1/cmp_luasnip'
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
