@@ -1,10 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
-- /home/i/.ghq/github.com/lloydlobo/rustspace
-- /home/i/.ghq/github.com/lloydlobo/dashboard-admin
-- /home/i/.ghq/github.com/lloydlobo/mononom-alkhwarizmi
-- /home/i/src/bashingthrudashell
-- /home/i/yay
+- /home/whatami/.ghq/github.com/lloydlobo/bashingthrudashell
+- /home/whatami/.ghq/github.com/lloydlobo/mononom-alkhwarizmi
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false

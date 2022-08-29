@@ -45,7 +45,7 @@ yay ghq
 # Setup rustup cargo & update it
 rustup default stable
 rustup update
-yay rust-analyzer                                   # Conflicts with rust-analyzer-nightly-bin
+yay rust-analyzer               # Conflicts with rust-analyzer-nightly-bin
 
 #
 # i3 - PLUGINS
@@ -70,25 +70,35 @@ yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
 #
 yay lua-language-server
 npm install -g typescript-language-server typescript
-yay tree-sitter               #  An incremental parsing system for programming tools 
-yay prettierd                 #  prettier, as a daemon, for ludicrous formatting speed. 
-yay eslint_d                  # Makes eslint the fastest linter on the planet.
-yay stylua                    # Integrates with weleimp/stylua.nvim
+yay tree-sitter                 #  An incremental parsing system for programming tools 
+yay prettierd                   #  prettier, as a daemon, for ludicrous formatting speed. 
+yay eslint_d                    # Makes eslint the fastest linter on the planet.
+yay stylua                      # Integrates with weleimp/stylua.nvim
+sudo dnf install gcc-c++        # C++ support for GCC
 yay lazygit
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
 # disk analyzer with ncurses interface
 yay ncdu
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 yay lf
 yay ripgrep
-yay zoxide                    # A smarter cd command
+yay zoxide                      # A smarter cd command
 yay bat
 yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
+sudo dnf install fd-find
 yay exa # 10 - ls replacement
 # Simple X Hot Key Daemon.
-yay sxhkd                     # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
+yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
 
+
+# VSCODE -- https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+dnf check-update
+sudo dnf install code
 
 # BROWSER
 # Qutebrowser & dependency
@@ -123,8 +133,8 @@ yay skim
 yay evcxr                       # a RUST based repl based on evcxr
 # fast Node Version Manager
 yay fnm-bin
-eval "$(fnm env)"     			 # source the shell instead of restarting terminal
-fnm install --lts      			 # Install latest node version -- $ node $ .exit
+eval "$(fnm env)"               # source the shell instead of restarting terminal
+fnm install --lts               # Install latest node version -- $ node $ .exit
 
 # terminal 
 yay wezterm kitty alacritty
@@ -158,7 +168,8 @@ paru -S nordic-wallpapers
 # FONTS
 sudo pacman -S ttf-dejavu ttf-liberation ttf-droid ttf-ubuntu-font-family noto-fonts 
 yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-fonts
-yay noto-fonts-emoji noto-fonts-extra                             # Essential for starship glyphs emoji etc
+# Essential for starship glyphs emoji etc
+yay noto-fonts-emoji noto-fonts-extra
 # sudo pacman -S ttf-font-awesome-4
 
 # ASCII 
@@ -175,5 +186,3 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
    ~/.emacs.d/bin/doom install
 # source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
 doom sync 
-
-
