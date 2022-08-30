@@ -1,6 +1,7 @@
 # Load all saved ssh keys
 # /usr/bin/ssh-add -A ^/dev/null
 
+cat ~/Documents/principles.md
 set fish_greeting ""
 #set -gx TERM xterm-256color
 
