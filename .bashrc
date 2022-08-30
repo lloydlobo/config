@@ -7,7 +7,7 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-cat ~/Documents/principles.md
+# cat ~/Documents/principles.md
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

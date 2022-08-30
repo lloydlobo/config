@@ -1,7 +1,7 @@
 
 # The following lines were added by compinstall
 
-cat ~/Documents/principles.md
+# cat ~/Documents/principles.md
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=** l:|=*'
