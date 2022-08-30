@@ -28,7 +28,7 @@ packer.startup(function(use)
     use "lewis6991/impatient.nvim" -- Optimiser
     use 'wakatime/vim-wakatime'
     use { "svrana/neosolarized.nvim", requires = { "tjdevries/colorbuddy.nvim" } }
-    -- use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
+    use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
     use "onsails/lspkind-nvim" -- vscode-like pictograms
     use "hrsh7th/cmp-buffer" -- nvim-cmp source for buffer words

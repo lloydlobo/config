@@ -21,7 +21,7 @@ vim.cmd [[highlight IndentBlanklineIndent5 guifg=#708183 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#e9e2cb gui=nocombine]]
 
 vim.cmd [[highlight IndentBlanklineContextChar guifg=#465a61  gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineContextStart guisp=#d01b24 gui=bold]]
+vim.cmd [[highlight IndentBlanklineContextStart guisp=#d01b24 guifg=#b58900 gui=bold]]
 vim.cmd [[highlight NvimTreeIndentMarker guifg=#c61c6f gui=nocombine]]
 
 -- vim.cmd [[highlight IndentBlanklineIndent1 guibg=#002831 gui=nocombine]]
