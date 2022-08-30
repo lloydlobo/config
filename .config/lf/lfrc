@@ -45,7 +45,7 @@ cmd open ${{
 
 # define a custom 'rename' command without prompt for overwrite
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-# map r push :rename<space>
+map r push :rename<space>
 
 # make sure trash folder exists
 # %mkdir -p ~/.trash
@@ -55,17 +55,17 @@ cmd open ${{
 cmd trash %set -f; mv $fx ~/.trash
 
 # define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ "$ans" = "y" ] && rm -rf $fx
-# }}
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
 
 # use '<delete>' key for either 'trash' or 'delete' command
-# map <delete> trash
-# map <delete> delete
+map <delete> trash
+map <delete> delete
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -99,3 +99,105 @@ cmd zip ${{
     rm -rf $1
 }}
 
+#
+# https://github.com/gokcehan/lf/wiki/Integrations
+#
+
+# Zoxide
+#
+# zoxide is a smarter cd command that helps you jump to any directory in just a few keystrokes. Integrating zoxide with lf is simple:
+
+cmd z %{{
+    result="$(zoxide query --exclude "${PWD}" -- "$@")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i -- "$@")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+# Git
+#
+# A couple of useful Git commands that can be run directly from LF if you're in a git project.
+cmd git_branch ${{
+    git branch | fzf | xargs git checkout
+    pwd_shell=$(pwd)
+    lf -remote "send $id updir"
+    lf -remote "send $id cd \"$pwd_shell\""
+}}
+map gb :git_branch
+map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
+map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
+map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
+
+# fzf
+#
+# You can bind keys in lf to your usual fzf commands:
+map f $vi $(fzf)
+
+# It is also possible to define commands with arguments to use with fzf:
+cmd fzf $vi $(find . -name "$1" | fzf)
+map f push :fzf<space>
+
+# If you want to jump to a file or directory in lf using fuzzy matching, you can utilize fzf for this purpose:
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+map <c-f> :fzf_jump
+
+# ripgrep
+#
+# Combining fzf with ripgrep, you can interactively search in the contents of files under the current directory and select a file from the results:
+cmd fzf_search ${{
+    res="$( \
+        RG_PREFIX="rg --column --line-number --no-heading --color=always \
+            --smart-case "
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+map gfrg :fzf_search
+
+# cp-p
+#
+# Yet another way to copy and move showing progress but using only cp, mv, and cp-p magic. This also shows the speed and the ETA.
+cmd paste $cp-p --lf-paste $id
+
+# trash-cli
+#
+# trash-cli can be used as command line interface for FreeDesktop.org Trash specification. trash-cli already provides separate commands for trash operations (i.e. trash-put, trash-empty, trash-list, trash-restore, trash-rm) so you can simply map these commands to a key:
+cmd trash %trash-put $fx
+# Note that trash-cli uses the same trashcan used by KDE, GNOME, and XFCE.
+
+# autojump
+#
+# autojump can be used to jump to a directory in lf that contains a given string:
+cmd aj %lf -remote "send $id cd '$(autojump $1)'"
+map a push :aj<space>
+# Note that autojump relies on shell prompts to build and update its database, so it will only be updated when you run commands outside of lf or exit from lfcd function.
+
+# fasd
+#
+# fasd can be used to navigate directories:
+cmd fasd_dir ${{
+    res="$(fasd -dl | grep -iv cache | fzf 2>/dev/tty | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ]; then
+        cmd="cd"
+    else
+        cmd="select"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+map go :fasd_dir
