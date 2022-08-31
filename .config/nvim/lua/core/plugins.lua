@@ -165,6 +165,18 @@ packer.startup(function(use)
 	use("rcarriga/nvim-dap-ui")
 	use("theHamsta/nvim-dap-virtual-text")
 
+	-- Startup screen
+	use({
+		"goolord/alpha-nvim",
+		--[[ config = function()
+			require("alpha-nvim").setup()
+		end, ]]
+	})
+
+	-- Doc
+	use({ "nanotee/luv-vimdocs", event = "BufReadPre" })
+	use({ "milisims/nvim-luaref", event = "BufReadPre" })
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if packer_bootstrap then
@@ -184,7 +196,7 @@ if is_bootstrap then
 end
 
 -- FIXME temp fix, config file isn't importing it seems
-require('neoscroll').setup()
+require("neoscroll").setup()
 
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })

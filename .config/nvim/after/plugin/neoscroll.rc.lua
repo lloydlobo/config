@@ -43,7 +43,7 @@ t["zt"] = { "zt", { "300" } }
 t["zz"] = { "zz", { "300" } }
 t["zb"] = { "zb", { "300" } }
 
-neoscroll.config.set_mappings(t)
+-- neoscroll.config.set_mappings(t)
 
 -- Use the "sine" easing function
 -- t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "350", [['sine']] } }
