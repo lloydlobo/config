@@ -79,6 +79,17 @@ packer.startup(function(use)
 		end,
 	})
 	use("kyazdani42/nvim-web-devicons") -- File icons
+
+	use({
+		"karb94/neoscroll.nvim",
+		event = "BufReadPre",
+		--[[ config = function()
+			require("after.plugin.neoscroll.rc.lua").setup()
+		end, ]]
+		-- disable = false,
+	}) -- Smooth scrolling neovim plugin written in lua -- other option cinnamon
+	use({ "google/vim-searchindex", event = "BufReadPre" })
+
 	-- NEOTREE
 	-- Unless you are still migrating, remove the deprecated commands from v1.x
 	-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
