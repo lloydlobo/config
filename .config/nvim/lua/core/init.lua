@@ -3,7 +3,6 @@ for _, source in ipairs({
 	"core.autocmds",
 	"core.keymaps",
 	"core.highlights",
-	-- 'core.autocmds',
 }) do
 	local status_ok, fault = pcall(require, source)
 	if not status_ok then
@@ -15,6 +14,10 @@ end
 vim.defer_fn(function()
 	require("core.plugins")
 end, 1000)
+
+-- Source .vim file in lua/core/keymaps/ directory
+vim.cmd("source ~/.config/nvim/lua/core/functions.vim")
+vim.cmd("source ~/.config/nvim/lua/core/LargeFile.vim")
 
 --[[ local augroup = vim.api.nvim_create_augroup
 ThePrimeagenGroup = augroup("ThePrimeagen", {})

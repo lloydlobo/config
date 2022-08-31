@@ -10,4 +10,4 @@ for _, source in ipairs({
 end
 
 -- Source .vim file in lua/core/keymaps/ directory
--- vim.cmd("source ~/.config/nvim/lua/core/keymaps/mappings.lua")
+-- vim.cmd("source ~/.config/nvim/lua/core/keymaps/functions.vim")

@@ -1,3 +1,6 @@
+-- TODO
+-- https://github.com/alpha2phi/neovim-for-beginner/blob/25-refactoring/lua/plugins.lua
+
 -- Install packer
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local is_bootstrap = false

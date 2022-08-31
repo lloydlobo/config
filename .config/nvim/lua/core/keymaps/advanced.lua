@@ -1,3 +1,4 @@
+-- [[ https://github.com/alpha2phi/neovim-for-beginner/blob/25-refactoring/after/plugin/keymaps.lua ]]
 local keymap = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, expr = true, silent = true }
