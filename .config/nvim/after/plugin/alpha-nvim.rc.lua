@@ -1,7 +1,3 @@
--- https://github.com/alpha2phi/neovim-for-beginner/blob/25-refactoring/lua/config/alpha.lua
--- https://github.com/glepnir/dashboard-nvim/wiki/Header-Preview
--- https://github.com/xflea/nv-dashboard-header-maker
--- https://xflea.github.io/nv-dashboard-header-maker/
 local status_ok, alpha = pcall(require, "alpha")
 if not status_ok then
 	return
@@ -9,9 +5,6 @@ end
 
 local dashboard = require("alpha.themes.dashboard")
 local function header()
-	--[[ let g:startify_custom_header =
-       \ startify#pad(split(system('figlet -w 100 VIM2020'), '\n')) ]]
-	-- https://gist.github.com/shaggyrogers/2c928108d1fa87ab4462fad9be99ebec
 	return {
 		"                                        ▟▙            ",
 		"                                        ▝▘            ",
@@ -65,6 +58,11 @@ dashboard.opts.opts.noautocmd = true
 
 alpha.setup(dashboard.opts)
 
+-- https://github.com/alpha2phi/neovim-for-beginner/blob/25-refactoring/lua/config/alpha.lua
+-- https://github.com/glepnir/dashboard-nvim/wiki/Header-Preview
+-- https://github.com/xflea/nv-dashboard-header-maker
+-- https://xflea.github.io/nv-dashboard-header-maker/
+
 -- return {
 -- 	[[                                           bbbbbbbb            ]],
 -- 	[[                                           b::::::b            ]],
@@ -84,3 +82,7 @@ alpha.setup(dashboard.opts)
 -- 	[[  n::::n    n::::n          v:::v           b:::::::::::::::b  ]],
 -- 	[[  nnnnnn    nnnnnn           vvv            bbbbbbbbbbbbbbbb   ]],
 -- }
+
+--[[ let g:startify_custom_header =
+       \ startify#pad(split(system('figlet -w 100 VIM2020'), '\n')) ]]
+-- https://gist.github.com/shaggyrogers/2c928108d1fa87ab4462fad9be99ebec

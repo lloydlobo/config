@@ -15,4 +15,6 @@ for _, source in ipairs {
     end
 end
 
+-- Quick reload config
+-- `:so` or `:so %` or `:so!` or `:Source!` or `:source load-vim-script`
 -- astronvim.conditional_func(astronvim.user_plugin_opts("polish", nil, false))

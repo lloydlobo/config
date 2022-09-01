@@ -57,6 +57,23 @@ packer.startup(function(use)
 	use("MunifTanjim/prettier.nvim") -- Prettier plugin for Neovim's built-in LSP client
 	use("sbdchd/neoformat")
 	use("wesleimp/stylua.nvim")
+	-- LSP based folding (instead of treesitter)
+	--[[ use({
+		"kevinhwang91/nvim-ufo",
+		opt = true,
+		event = { "BufReadPre" },
+		wants = { "promise-async" },
+		requires = "kevinhwang91/promise-async",
+		config = function()
+			require("ufo").setup({
+				provider_selector = function(bufnr, filetype)
+					return { "lsp", "treesitter", "indent" }
+				end,
+			})
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+		end,
+	}) -- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea ]]
 	use("ludovicchabant/vim-gutentags") -- Automatic tags management
 	use("windwp/nvim-ts-autotag") -- Close tags for React apps
 	use("windwp/nvim-autopairs") -- Close brackets
@@ -102,17 +119,18 @@ packer.startup(function(use)
 			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			-- Unless you are still migrating, remove the deprecated commands from v1.x
-			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-			-- If you want icons for diagnostic errors, you'll need to define them somewhere:
-			vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-			vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-			vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-			vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
-			-- NOTE: this is changed from v1.x, which used the old style of highlight groups
-			-- in the form "LspDiagnosticsSignWarning"
-		end,
+		-- TODO refactor the config to after/
+		-- config = function()
+		-- 	-- Unless you are still migrating, remove the deprecated commands from v1.x
+		-- 	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+		-- 	-- If you want icons for diagnostic errors, you'll need to define them somewhere:
+		-- 	vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+		-- 	vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+		-- 	vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+		-- 	vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+		-- 	-- NOTE: this is changed from v1.x, which used the old style of highlight groups
+		-- 	-- in the form "LspDiagnosticsSignWarning"
+		-- end,
 	})
 
 	use("folke/zen-mode.nvim")

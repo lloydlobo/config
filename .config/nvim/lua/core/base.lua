@@ -1,7 +1,7 @@
 -- local api = vim.api
 -- local g = vim.g
 local opt = vim.opt
-local cmd = vim.cmd
+-- local cmd = vim.cmd
 
 vim.cmd("autocmd!")
 
@@ -85,13 +85,6 @@ vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 -- vim.cmd [[set path=.,,,$PWD/**]] -- Set the path directly
 
 -- https://github.com/alpha2phi/neovim-for-beginner/blob/25-refactoring/after/plugin/defaults.lua
-
--- Treesitter based folding
-cmd([[
-  set foldlevel=20
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-]])
 
 -- Copilot
 -- cmd [[

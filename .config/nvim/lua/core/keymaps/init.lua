@@ -2,6 +2,7 @@ for _, source in ipairs({
 	"core.keymaps.keymaps",
 	"core.keymaps.mappings",
 	"core.keymaps.advanced",
+	"core.keymaps.folds",
 }) do
 	local status_ok, fault = pcall(require, source)
 	if not status_ok then

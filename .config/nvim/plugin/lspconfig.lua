@@ -66,6 +66,14 @@ protocol.CompletionItemKind = {
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Context LSP based folding -- see fold.lua
+-- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
+
 nvim_lsp.flow.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
