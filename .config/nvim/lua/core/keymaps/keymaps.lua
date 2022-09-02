@@ -1,8 +1,4 @@
 local keymap = vim.keymap
-
--- Legendary keymap
-keymap.set("n", "<Space>", "ciw")
-
 -- [[ Basic Keymaps ]]
 keymap.set("n", "x", '"_x')
 

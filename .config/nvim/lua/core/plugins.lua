@@ -27,17 +27,59 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
 	use("nvim-lua/plenary.nvim") -- Common utilities
 	use("nvim-lua/popup.nvim")
+	use("rcarriga/nvim-notify")
+	require("notify").setup({
+		background_color = "#002b33",
+	})
 	-- Is using a standard Neovim install, i.e. built from source or using a provided appimage.
 	use("lewis6991/impatient.nvim") -- Optimiser
 	use("wakatime/vim-wakatime")
 	use("nvim-lualine/lualine.nvim") -- Fancier statusline
 	use("onsails/lspkind-nvim") -- vscode-like pictograms
-	use("hrsh7th/cmp-buffer") -- nvim-cmp source for buffer words
-	use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp source for neovim's built-in LSP
-	use("nvim-lua/lsp_extensions.nvim")
+
+	use("mattn/emmet-vim")
+
 	use("hrsh7th/nvim-cmp") -- Autocompletion plugin
+	use("hrsh7th/cmp-buffer") -- nvim-cmp source for buffer words
+	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp source for neovim's built-in LSP
+	use("hrsh7th/cmp-nvim-lsp-document-symbol")
+
+	-- Comparators
+	use("lukas-reineke/cmp-under-comparator")
+
+	-- Completion stuff
+	-- use("rofl.nvim")
+
+	-- Cool tags based viewer
+	--   :Vista  <-- Opens up a really cool sidebar with info about file.
+	use({ "liuchengxu/vista.vim", cmd = "Vista" })
+
+	-- Find and replace
+	use("windwp/nvim-spectre")
+
+	-- Debug adapter protocol | DAP
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
+	use("theHamsta/nvim-dap-virtual-text")
+	use("nvim-telescope/telescope-dap.nvim")
+
+	use("mfussenegger/nvim-dap-python")
+	use("jbyuki/one-small-step-for-vimkind")
+
+	use("nvim-lua/lsp_extensions.nvim")
 	use("tzachar/cmp-tabnine", { run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
-	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
+	use({
+		"neovim/nvim-lspconfig",
+		-- opt = true, -- installs nvim-lspconfig in opt/ dir
+		-- event = { "BufReadPre" },
+		-- wants = { "inlay-hints.nvim" },
+		--[[ config = function() require("nvim-lspconfig").setup() end, ]]
+		--[[ requires = { { "simrat39/inlay-hints.nvim", config = function() require("inlay-hints").setup() end,
+			}, -- https://alpha2phi.medium.com/neovim-for-beginners-lsp-inlay-hints-bf4a8afa6f27
+		}, ]]
+	}) -- Collection of configurations for built-in LSP client
+	use("simrat39/inlay-hints.nvim")
 	use("simrat39/rust-tools.nvim") -- https://github.com/simrat39/rust-tools.nvim
 
 	use("saadparwaiz1/cmp_luasnip")
@@ -51,37 +93,28 @@ packer.startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use("nvim-treesitter/playground")
+	-- FIXME ? clashes with use("JoosepAlviste/nvim-ts-context-commentstring") --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
+	use("romgrk/nvim-treesitter-context")
+
 	-- Additional textobjects for treesitter
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 	use("jose-elias-alvarez/null-ls.nvim") -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
 	use("MunifTanjim/prettier.nvim") -- Prettier plugin for Neovim's built-in LSP client
 	use("sbdchd/neoformat")
 	use("wesleimp/stylua.nvim")
-	-- LSP based folding (instead of treesitter)
-	--[[ use({
-		"kevinhwang91/nvim-ufo",
-		opt = true,
-		event = { "BufReadPre" },
-		wants = { "promise-async" },
-		requires = "kevinhwang91/promise-async",
-		config = function()
-			require("ufo").setup({
-				provider_selector = function(bufnr, filetype)
-					return { "lsp", "treesitter", "indent" }
-				end,
-			})
-			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-		end,
-	}) -- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea ]]
 	use("ludovicchabant/vim-gutentags") -- Automatic tags management
 	use("windwp/nvim-ts-autotag") -- Close tags for React apps
 	use("windwp/nvim-autopairs") -- Close brackets
-	use("norcalli/nvim-colorizer.lua")
+
+	-- [[ TELESCOPE ]]
 	-- UI to select things (files, grep results, open buffers...)
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" }, { "kdheepak/lazygit.nvim" } },
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kdheepak/lazygit.nvim",
+		},
 		config = function()
 			require("telescope").load_extension("lazygit")
 		end,
@@ -107,7 +140,17 @@ packer.startup(function(use)
 	}) -- Smooth scrolling neovim plugin written in lua -- other option cinnamon
 	use({ "google/vim-searchindex", event = "BufReadPre" })
 
-	-- NEOTREE
+	-- [[ SIDEBAR ]]
+	use({
+		"stevearc/aerial.nvim",
+		config = function()
+			require("aerial").setup()
+		end,
+		module = { "aerial" },
+		cmd = { "AerialToggle" },
+	})
+
+	-- neotree
 	-- Unless you are still migrating, remove the deprecated commands from v1.x
 	-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 	-- Press ? in the Neo-tree window to view the list of mappings.
@@ -133,20 +176,69 @@ packer.startup(function(use)
 		-- end,
 	})
 
-	use("folke/zen-mode.nvim")
+	-- Better increment/decrement
+	use("monaqa/dial.nvim")
+
+	--   FOCUSING:
+	local use_folke = true
+	if use_folke then
+		use("folke/zen-mode.nvim")
+		use("folke/twilight.nvim")
+	else
+		use({
+			"junegunn/goyo.vim",
+			cmd = "Goyo",
+			disable = use_folke,
+		})
+
+		use({
+			"junegunn/limelight.vim",
+			after = "goyo.vim",
+			disable = use_folke,
+		})
+	end
+
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = function()
 			vim.fn["mkdp#util#install"]()
 		end,
 	})
+	use({
+		"AckslD/nvim-neoclip.lua",
+		config = function()
+			require("neoclip").setup()
+		end,
+	}) --  Clipboard manager neovim plugin with telescope integration
 	use("akinsho/nvim-bufferline.lua")
 	use("dinhhuy258/git.nvim") -- For git blame & browse
 	use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }) -- Add git related info in the signs columns and popups
+
+	-- Pretty colors
+	use("norcalli/nvim-colorizer.lua")
+	use({
+		"norcalli/nvim-terminal.lua",
+		config = function()
+			require("terminal").setup()
+		end,
+	})
+
+	-- Make comments appear IN YO FACE
+	use({
+		"tjdevries/vim-inyoface",
+		config = function()
+			vim.api.nvim_set_keymap("n", "<leader>cc", "<Plug>(InYoFace_Toggle)", {})
+		end,
+	})
 	use("tpope/vim-fugitive") -- Git commands in nvim
 	use("tpope/vim-rhubarb") -- Fugitive-companion to interact with github
-	use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
-	use("JoosepAlviste/nvim-ts-context-commentstring") --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
+	use({
+		"mfussenegger/nvim-ts-hint-textobject",
+		config = function()
+			vim.cmd([[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]])
+			vim.cmd([[vnoremap <silent> m :lua require('tsht').nodes()<CR>]])
+		end,
+	})
 	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
 	use({
 		"Darazaki/indent-o-matic",
@@ -175,14 +267,6 @@ packer.startup(function(use)
 	use("gruvbox-community/gruvbox")
 	use("folke/tokyonight.nvim")
 
-	use("nvim-treesitter/playground")
-	use("romgrk/nvim-treesitter-context")
-
-	-- Debugging
-	use("mfussenegger/nvim-dap")
-	use("rcarriga/nvim-dap-ui")
-	use("theHamsta/nvim-dap-virtual-text")
-
 	-- Startup screen
 	use({
 		"goolord/alpha-nvim",
@@ -194,6 +278,90 @@ packer.startup(function(use)
 	-- Doc
 	use({ "nanotee/luv-vimdocs", event = "BufReadPre" })
 	use({ "milisims/nvim-luaref", event = "BufReadPre" })
+
+	-- Legendary
+	use({
+		"mrjones2014/legendary.nvim",
+		-- opt = true,
+		keys = { [[<C-p>]] },
+		wants = { "dressing.nvim" },
+		module = { "legendary" },
+		-- cmd = { "Legendary" },
+		--[[ config = function()
+			require("config.legendary").setup()
+		end, ]]
+		-- requires = { "stevearc/dressing.nvim" },
+	})
+
+	-- Harpoon
+	use({
+		"ThePrimeagen/harpoon",
+		-- keys = { [[<leader>j]] },
+		-- module = { "harpoon", "harpoon.cmd-ui", "harpoon.mark", "harpoon.ui", "harpoon.term" },
+		-- wants = { "telescope.nvim" },
+		-- config = function()
+		-- 	require("config.harpoon").setup()
+		-- end,
+	})
+
+	-- Refactoring
+	use({
+		"ThePrimeagen/refactoring.nvim",
+		-- module = { "refactoring", "telescope" },
+		-- keys = { [[<leader>r]] },
+		-- wants = { "telescope.nvim" },
+		-- config = function()
+		-- 	require("config.refactoring").setup()
+		-- end,
+	})
+
+	-- TEXT MANIUPLATION
+	use("godlygeek/tabular") -- Quickly align text by pattern
+	use("tpope/vim-repeat") -- Repeat actions better
+	use("tpope/vim-abolish") -- Cool things with words!
+	use("tpope/vim-characterize")
+	use({ "tpope/vim-dispatch", cmd = { "Dispatch", "Make" } })
+
+	use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
+	use("JoosepAlviste/nvim-ts-context-commentstring") --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
+
+	use({
+		"AndrewRadev/splitjoin.vim",
+		keys = { "gJ", "gS" },
+	})
+
+	-- TODO: Check out macvhakann/vim-sandwich at some point
+	use("tpope/vim-surround") -- Surround text objects easily
+
+	--
+	-- GIT:
+	use("TimUntersberger/neogit")
+
+	-- Github integration
+	if vim.fn.executable("gh") == 1 then
+		use("pwntester/octo.nvim")
+	end
+	use("ruifm/gitlinker.nvim")
+
+	-- Sweet message committer
+	use("rhysd/committia.vim")
+	use("sindrets/diffview.nvim")
+
+	-- Floating windows are awesome :)
+	use({
+		"rhysd/git-messenger.vim",
+		keys = "<Plug>(git-messenger)",
+	})
+	-- use({ "Vhyrro/neorg" }) -- branch = "unstable",
+	use({
+		"nvim-neorg/neorg",
+		config = function()
+			require("neorg").setup({
+				--        ... -- check out setup part...
+			})
+		end,
+		requires = "nvim-lua/plenary.nvim",
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

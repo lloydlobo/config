@@ -10,19 +10,6 @@ end
 
 -- [[ DEFAULT CONFIG ]]
 comment.setup({
-	---Add a space b/w comment and the line
-	padding = true,
-	---Whether the cursor should stay at its position
-	sticky = true,
-	---Lines to be ignored while (un)comment
-	ignore = nil,
-	---LHS of toggle mappings in NORMAL mode
-	toggler = {
-		---Line-comment toggle keymap
-		line = "gcc",
-		---Block-comment toggle keymap
-		block = "gbc",
-	},
 	---LHS of operator-pending mappings in NORMAL and VISUAL mode
 	opleader = {
 		---Line-comment keymap
@@ -30,6 +17,35 @@ comment.setup({
 		---Block-comment keymap
 		block = "gb",
 	},
+
+	---Enable keybindings
+	---NOTE: If given `false` then the plugin won't create any mappings
+	--[[ mappings = {
+		---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+		basic = true,
+		---Extra mapping; `gco`, `gcO`, `gcA`
+		extra = true,
+		---Extended mapping; `g>` `g<` `g>[count]{motion}` `g<[count]{motion}`
+		extended = true,
+	}, ]]
+
+	---LHS of toggle mappings in NORMAL mode
+	toggler = {
+		---Line-comment toggle keymap
+		line = "gcc",
+		---Block-comment toggle keymap
+		block = "gbc",
+	},
+
+	---Add a space b/w comment and the line
+	padding = true,
+	---Whether the cursor should stay at its position
+	sticky = true,
+	---Lines to be ignored while (un)comment
+	--    Can be string (lua regex)
+	--    Or function (that returns lua regex)
+	ignore = nil,
+
 	---LHS of extra mappings
 	extra = {
 		---Add comment on the line above
@@ -39,17 +55,6 @@ comment.setup({
 		---Add comment at the end of line
 		eol = "gcA",
 	},
-	---Enable keybindings
-	---NOTE: If given `false` then the plugin won't create any mappings
-	mappings = {
-		---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
-		basic = true,
-		---Extra mapping; `gco`, `gcO`, `gcA`
-		extra = true,
-		---Extended mapping; `g>` `g<` `g>[count]{motion}` `g<[count]{motion}`
-		extended = false,
-	},
-
 	---Function to call before (un)comment
 	-- pre_hook = nil,
 	-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim
@@ -59,6 +64,10 @@ comment.setup({
 	---Function to call after (un)comment
 	post_hook = nil,
 })
+
+-- https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/after/plugin/comments.lua
+local comment_ft = require("Comment.ft")
+comment_ft.set("lua", { "--%s", "--[[%s]]" })
 
 -- [[ FILETYPES + LANGUAGES ]]
 -- 1. Using set function

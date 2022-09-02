@@ -1,7 +1,20 @@
+vim.g.mapleader = ","
 -- [[ https://github.com/alpha2phi/neovim-for-beginner/blob/25-refactoring/after/plugin/keymaps.lua ]]
 local keymap = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, expr = true, silent = true }
+
+-- Legendary keymap
+keymap("n", "<space>", "ciw", default_opts) -- delte word and insert
+keymap("n", "<space>", "diw", default_opts) -- delte word and normal mode
+keymap("n", "<Space>p", "cip", default_opts) -- delete inside entire paragraph & insert mode
+-- IMPORTANT 2k ci\("{[ -- Delete words between these characters
+
+-- Refactoring
+keymap("n", "<leader>vp", "<S-v>%", default_opts) -- Select para (VISUAL)
+--[[ keymap("n", "<leader>vpd", "<S-v>%d", default_opts) -- Select para & delete it
+keymap("n", "<leader>vp<Space>", "<S-v>%di", default_opts) -- Select para, delete, & go into insert mode
+keymap("n", "<leader>vpy", "<S-v>%y", default_opts) -- Select para & yank it (copy) ]]
 
 -- Better escape using jk in insert and terminal mode
 keymap("i", "jk", "<ESC>", default_opts)
@@ -51,4 +64,3 @@ keymap("n", "<Down>", ":resize +1<CR>", default_opts)
 -- Insert blank line
 keymap("n", "]<Space>", "o<Esc>", default_opts)
 keymap("n", "[<Space>", "O<Esc>", default_opts)
-

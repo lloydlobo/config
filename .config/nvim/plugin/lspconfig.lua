@@ -1,5 +1,4 @@
 --vim.lsp.set_log_level("debug")
-
 local status_ok_1, nvim_lsp = pcall(require, "lspconfig")
 if not status_ok_1 then
 	return
@@ -26,14 +25,42 @@ local on_attach = function(client, bufnr)
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	--buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	--buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
-	-- https://rust-analyzer.github.io/manual.html#nvim-lsp
-	-- require'completion'.on_attach(client)
-	-- require('cmp_nvim_lsp').on_attach(client)
+	-- aerial.nvim
+	require("aerial").on_attach(client, bufnr)
+
+	-- inlay-hints
+	-- require("inlay-hints").on_attach(client, bufnr)
 end
+
+-- TODO
+--[[ https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/after/plugin/lsp.lua ]]
+--[[
+	local function config(_config)
+		return vim.tbl_deep_extend("force", {
+			capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+			on_attach = function()
+				nnoremap("gd", function() vim.lsp.buf.definition() end)
+				nnoremap("K", function() vim.lsp.buf.hover() end)
+				nnoremap("<leader>vws", function() vim.lsp.buf.workspace_symbol() end)
+				nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
+				nnoremap("[d", function() vim.diagnostic.goto_next() end)
+				nnoremap("]d", function() vim.diagnostic.goto_prev() end)
+				nnoremap("<leader>vca", function() vim.lsp.buf.code_action() end)
+				nnoremap("<leader>vrr", function() vim.lsp.buf.references() end)
+				nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end)
+				inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
+			end,
+		}, _config or {})
+	end
+	
+	require("lspconfig").svelte.setup(config())
+	require("lspconfig").tsserver.setup(config())
+	require("lspconfig").cssls.setup(config())
+]]
 
 protocol.CompletionItemKind = {
 	"", -- Text
@@ -64,15 +91,23 @@ protocol.CompletionItemKind = {
 }
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Context LSP based folding -- see fold.lua
--- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.foldingRange = {
+-- https://github.com/alpha2phi/neovim-for-beginner/blob/58-lsp-inlay-hints/lua/config/lsp/init.lua
+local capable_configs = vim.lsp.protocol.make_client_capabilities()
+capable_configs.textDocument.completion.completionItem.snippetSupport = true
+capable_configs.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
+capable_configs.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		"documentation",
+		"detail",
+		"additionalTextEdits",
+	},
+}
+local capabilities = require("cmp_nvim_lsp").update_capabilities(capable_configs) -- for nvim-cmp
 
 nvim_lsp.flow.setup({
 	on_attach = on_attach,
@@ -84,6 +119,32 @@ nvim_lsp.tsserver.setup({
 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 	cmd = { "typescript-language-server", "--stdio" },
 	capabilities = capabilities,
+	-- FIXME https://alpha2phi.medium.com/neovim-for-beginners-lsp-inlay-hints-bf4a8afa6f27
+	-- disable_formatting = true,
+	settings = {
+		javascript = {
+			inlayHints = {
+				includeInlayEnumMemberValueHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayVariableTypeHints = true,
+			},
+		},
+		typescript = {
+			inlayHints = {
+				includeInlayEnumMemberValueHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayVariableTypeHints = true,
+			},
+		},
+	},
 })
 
 nvim_lsp.sourcekit.setup({
@@ -96,13 +157,44 @@ nvim_lsp.sumneko_lua.setup({
 		Lua = {
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
+				-- globals = { "vim" },
+				globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins" },
+				-- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
 			},
-
+			hint = {
+				enable = true,
+			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
 				library = vim.api.nvim_get_runtime_file("", true),
 				checkThirdParty = false,
+			},
+			-- FIXME new version
+			runtime = {
+				-- Tell language setver the Lua version being used
+				version = "LuaJit",
+				-- Setup your lua path
+				path = vim.split(package.path, ";"),
+			},
+			completion = { callSnippet = "Both" },
+			telemetry = { enable = false },
+		},
+	},
+})
+
+--[[ https://github.com/alpha2phi/neovim-for-beginner/blob/58-lsp-inlay-hints/lua/config/lsp/init.lua ]]
+nvim_lsp.gopls.setup({
+	on_attach = on_attach,
+	settings = {
+		gopls = {
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
 			},
 		},
 	},
@@ -124,9 +216,14 @@ nvim_lsp.rust_analyzer.setup({
 				buildScripts = {
 					enable = true,
 				},
+				allFeatures = true,
 			},
 			procMacro = {
 				enable = true,
+			},
+			checkOnSave = {
+				command = "clippy",
+				extraArgs = { "--no-deps" },
 			},
 		},
 	},

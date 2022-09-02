@@ -25,6 +25,7 @@ vim.opt.tabstop = 4
 vim.opt.cmdheight = 1
 
 vim.opt.scrolloff = 10
+opt.scrollback = 100000 -- cheat.sh -- terminal buffer scrollback size
 vim.opt.showcmd = true
 vim.opt.signcolumn = "yes" -- Always show sign column
 vim.opt.title = true

@@ -30,10 +30,28 @@ if vim.fn.has("nvim-0.7") then
 	api.nvim_create_autocmd("FocusGained", { command = [[:checktime]] })
 
 	-- windows to close with "q"
-	api.nvim_create_autocmd(
-		"FileType",
-		{ pattern = { "help", "startuptime", "qf", "lspinfo" }, command = [[nnoremap <buffer><silent> q :close<CR>]] }
-	)
+	api.nvim_create_autocmd("FileType", {
+		pattern = {
+			"help",
+			"startuptime",
+			"qf",
+			"lspinfo",
+			"vim",
+			"OverseerList",
+			"OverseerForm",
+			"fugitive",
+			"toggleterm",
+			"floggraph",
+			"git",
+			"cheat", -- cheat.sh | https://github.com/chubin/cheat.sh | lua/utils/cht.lua
+		},
+		command = [[nnoremap <buffer><silent> q :bdelete!<CR>]],
+	})
+	--[[ Legacy ]]
+	-- api.nvim_create_autocmd(
+	-- 	"FileType",
+	-- 	{ pattern = { "help", "startuptime", "qf", "lspinfo" }, command = [[nnoremap <buffer><silent> q :close<CR>]] }
+	-- )
 	api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 
 	-- don't auto comment new line
@@ -43,28 +61,28 @@ else
 
 	-- Highlight on yank
 	cmd([[
-    augroup YankHighlight
-      autocmd!
-      autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-    augroup end
-  ]])
+		augroup YankHighlight
+		  autocmd!
+		  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+		augroup end
+	]])
 
 	-- show cursor line only in active window
 	cmd([[
-    autocmd InsertLeave,WinEnter * set cursorline
-    autocmd InsertEnter,WinLeave * set nocursorline
-  ]])
+		autocmd InsertLeave,WinEnter * set cursorline
+		autocmd InsertEnter,WinLeave * set nocursorline
+  	]])
 
 	-- go to last loc when opening a buffer
 	cmd([[
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
-  ]])
+		autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
+	]])
 
 	-- Check if we need to reload the file when it changed
 	cmd("au FocusGained * :checktime")
 
 	-- windows to close with "q"
-	cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
+	-- cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
 	cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 
 	-- don't auto comment new line
