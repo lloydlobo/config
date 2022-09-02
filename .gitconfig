@@ -5,25 +5,24 @@
 [alias]
 	ad = add .
 	br = branch
-  ba = branch -a
-  bm = branch --merged
-  bn = branch --no-merged
+	ba = branch -a
+	bm = branch --merged
+	bn = branch --no-merged
 	ci = commit
 	co = checkout
-  d = diff
-  dump = cat-file -p
-  hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
+	d = diff
+	dump = cat-file -p
+	hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
 	lo = log --oneline -n 15
-  llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
+	llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
 	st = status
-  type = cat-file -t
+	type = cat-file -t
 	up = pull --rebase
 	re = restore
-
-  # edit conflicted file on merge
-  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
-  # add conflicted file on merge
-  add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+	# edit conflicted file on merge
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+	# add conflicted file on merge
+	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
 [push]
 	default = current
@@ -33,11 +32,11 @@
 	defaultBranch = main
 [color]
 	ui = auto
-  status = auto
-  diff = auto
-  branch = auto
-  interactive = auto
-  grep = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
 
 # git-delta
 [core]
