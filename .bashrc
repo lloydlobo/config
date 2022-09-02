@@ -28,7 +28,6 @@ eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 eval "$(fnm env --use-on-cd)"
 
-
 # https://unix.stackexchange.com/questions/63098/mkdir-p-for-files
 # mktouch your/path/file.txt
 function mktouch() {
