@@ -267,6 +267,10 @@ packer.startup(function(use)
 	use("gruvbox-community/gruvbox")
 	use("folke/tokyonight.nvim")
 
+	-- cheat.sh integration for neovim in elegant way
+	use("RishabhRD/nvim-cheat.sh")
+	use("RishabhRD/popfix") --  Neovim lua API for highly extensible popup window
+
 	-- Startup screen
 	use({
 		"goolord/alpha-nvim",

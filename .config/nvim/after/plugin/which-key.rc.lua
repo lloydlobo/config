@@ -3,8 +3,12 @@ if not status_ok then
 	return
 end
 
+-- TODO Alpha dashboard
+-- TODO IFix space behavior
+-- TODO lsp acrtions
+
 -- https://github.com/folke/dot/blob/master/config/nvim/lua/config/keys.lua
-local util = require("utils")
+local util = require("util")
 
 vim.o.timeoutlen = 300
 
@@ -176,6 +180,22 @@ local leader = {
 			s = { "<cmd>PackerStatus<cr>", "Status" },
 			i = { "<cmd>PackerInstall<cr>", "Install" },
 			c = { "<cmd>PackerCompile<cr>", "Compile" },
+		},
+		w = {
+			name = "cheat.sh", -- https://github.com/RishabhRD/nvim-cheat.sh
+			a = { "<cmd>Cheat<cr>", "Cheat" },
+			s = { "<cmd>CheatWithoutComments<cr>", "CheatWithoutComments" },
+			d = { "<cmd>CheatList<cr>", "CheatList" },
+			f = { "<cmd>CheatListWithoutComments<cr>", "CheatListWithoutComments" },
+			--[[ Example:
+			:Cheat
+			:Cheat cpp reverse number
+			:CheatWithoutComments
+			:CheatWithoutComments cpp reverse number]]
+			-- Cheat
+			-- CheatWithoutComments
+			-- CheatList
+			-- CheatListWithoutComments
 		},
 	},
 	u = { "<cmd>UndotreeToggle<CR>", "Undo Tree" },

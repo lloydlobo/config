@@ -12,6 +12,8 @@ vim.opt.termguicolors = true
 local Color, colors, Group, groups, styles = require("colorbuddy").setup()
 
 Color.new("background", "#002b36")
+-- FIXME hack to fix notify transparent highlight color error alert. WIP
+vim.cmd [[highlight Normal guibg=background]]
 Color.new("background_color", "#002b36")
 --[[devaslife]]
 Color.new("black", "#002b36")

@@ -25,6 +25,8 @@ local notify = require("notify").async ]]
 	-- require("notify").history() ]]
 end
 
+
+vim.cmd [[highlight Normal guibg=NONE]]
 -- https://github.com/rcarriga/nvim-notify/issues/16 -- [[ NotifyLOGIcon NotifyLOGTitle NotifyLOGBorder NotifyLOGBody ]] [[NotifyLOGIcon16 xxx links to NotifyLOGIcon NotifyLOGTitle16 xxx links to NotifyLOGTitle NotifyLOGBorder16 xxx links to NotifyLOGBorder NotifyLOGBody16 xxx links to NotifyLOGBody]]
 -- --[[ TODO]] Add background_color
 -- require("notify").setup({ background_color = "#002b33" })

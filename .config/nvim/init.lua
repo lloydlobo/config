@@ -7,7 +7,7 @@ end
 
 -- Load core modules
 for _, source in ipairs({
-	"utils",
+	"util",
 	"core",
 }) do
 	local status_ok, fault = pcall(require, source)
