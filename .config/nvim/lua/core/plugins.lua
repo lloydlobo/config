@@ -27,6 +27,7 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
 	use("nvim-lua/plenary.nvim") -- Common utilities
 	use("nvim-lua/popup.nvim")
+	use({ "stevearc/dressing.nvim" })
 	use("rcarriga/nvim-notify")
 	require("notify").setup({
 		background_color = "#002b33",

@@ -237,8 +237,12 @@ local leader = {
 	},
 	t = {
 		name = "toggle",
-		-- TODO
+		d = {
+			"<cmd>Alpha<cr>",
+			"Alpha Dashboard",
+		},
 		f = {
+			-- TODO
 			-- require("config.lsp.formatting").toggle,
 			-- require("neoformat").toggle,
 			"<cmd>Neoformat<cr>",

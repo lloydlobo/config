@@ -6,8 +6,8 @@ local expr_opts = { noremap = true, expr = true, silent = true }
 
 -- Legendary keymap
 keymap("n", "<space>", "ciw", default_opts) -- delte word and insert
-keymap("n", "<space>", "diw", default_opts) -- delte word and normal mode
-keymap("n", "<Space>p", "cip", default_opts) -- delete inside entire paragraph & insert mode
+keymap("n", "<space>d", "diw", default_opts) -- delte word and normal mode
+keymap("n", "<space>p", "cip", default_opts) -- delete inside entire paragraph & insert mode
 -- IMPORTANT 2k ci\("{[ -- Delete words between these characters
 
 -- Refactoring
