@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 aerial.setup({
+	-- https://github.com/AstroNvim/AstroNvim/blob/main/lua/configs/aerial.lua
 	close_behavior = "global",
 	backends = { "lsp", "treesitter", "markdown" },
 	min_width = 28,

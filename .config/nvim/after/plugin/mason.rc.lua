@@ -8,7 +8,15 @@ if not status2 then
 	return
 end
 
-mason.setup({})
+mason.setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_uninstalled = "✗",
+			package_pending = "⟳",
+		},
+	},
+})
 
 lspconfig.setup({
 	ensure_installed = { "sumneko_lua", "tailwindcss", "sytlua" },
