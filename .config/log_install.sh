@@ -89,6 +89,7 @@ yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
 sudo dnf install fd-find
+sudo dnf install entr           # Run arbitrary commands when files change
 yay exa # 10 - ls replacement
 # Simple X Hot Key Daemon.
 yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
