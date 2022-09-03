@@ -1,4 +1,5 @@
 -- https://alpha2phi.medium.com/neovim-for-beginners-cheatsheet-and-coding-assistant-137d5a15c934
+-- TODO It's not implemented yet. Using a packer plugin
 local M = {}
 
 local lang = ""

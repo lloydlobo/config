@@ -267,6 +267,15 @@ local leader = {
 			end,
 			"Line Numbers",
 		},
+		o = {
+			"nvim-toggler",
+		},
+		--[[ o = {
+			name = "nvim-toggler",
+			function()
+				vim.keymap.set({ "n", "v" }, "<leader>to", toggle, opts)
+			end,
+		}, ]]
 	},
 	["<tab>"] = {
 		name = "workspace",

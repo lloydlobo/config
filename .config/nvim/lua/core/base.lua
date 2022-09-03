@@ -79,9 +79,6 @@ opt.whichwrap:append("<>[]hl")
 -- disable nvim intro
 opt.shortmess:append("sI")
 
--- Set cheat.sh layout
-vim.g.cheat_default_window_layout = "vertical_split" -- Possible values are: split vertical_split tab float
-
 -- Better search
 opt.path:remove("/usr/include")
 vim.opt.backspace = { "start", "eol", "indent" }

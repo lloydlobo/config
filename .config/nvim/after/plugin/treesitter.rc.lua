@@ -7,6 +7,7 @@ ts.setup({
 	highlight = {
 		enable = true,
 		disable = {},
+		additional_vim_regex_highlighting = { "org" }, -- Required for spellcheck, some LaTex highlights and code block highlights that do not have ts grammar
 	},
 	indent = {
 		enable = true,
@@ -23,7 +24,8 @@ ts.setup({
 		"css",
 		"html",
 		"lua",
-		"norg",
+		"org",
+		-- "norg",
 	},
 	autotag = {
 		enable = true,

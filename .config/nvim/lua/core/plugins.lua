@@ -96,7 +96,8 @@ packer.startup(function(use)
 	})
 	use("nvim-treesitter/playground")
 	-- FIXME ? clashes with use("JoosepAlviste/nvim-ts-context-commentstring") --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
-	use("romgrk/nvim-treesitter-context")
+	use("nvim-treesitter/nvim-treesitter-context") --  Show code context -- Lightweight alternative to context.vim implemented with nvim-treesitter.
+	-- use("romgrk/nvim-treesitter-context")
 
 	-- Additional textobjects for treesitter
 	use("nvim-treesitter/nvim-treesitter-textobjects")
@@ -268,8 +269,8 @@ packer.startup(function(use)
 	use("gruvbox-community/gruvbox")
 	use("folke/tokyonight.nvim")
 
-	-- cheat.sh integration for neovim in elegant way
-	use("RishabhRD/nvim-cheat.sh")
+	-- Cheat.sh
+	use("RishabhRD/nvim-cheat.sh") -- cheat.sh integration for neovim in elegant way
 	use("RishabhRD/popfix") --  Neovim lua API for highly extensible popup window
 
 	-- Startup screen
@@ -359,14 +360,13 @@ packer.startup(function(use)
 	})
 	-- use({ "Vhyrro/neorg" }) -- branch = "unstable",
 	use({
-		"nvim-neorg/neorg",
+		"nvim-orgmode/orgmode",
 		config = function()
-			require("neorg").setup({
-				--        ... -- check out setup part...
-			})
+			-- Load custom tree-sitter grammar for org filetype
+			require("orgmode").setup_ts_grammar()
 		end,
-		requires = "nvim-lua/plenary.nvim",
 	})
+	use 'akinsho/org-bullets.nvim'
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

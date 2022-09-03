@@ -1,5 +1,4 @@
 -- https://github.com/nguyenvukhang/nvim-toggler/blob/main/lua/nvim-toggler.lua
-
 local t = vim.tbl_add_reverse_lookup({
     ['true'] = 'false',
     ['yes'] = 'no',
@@ -32,6 +31,6 @@ end
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set({ 'n', 'v' }, '<leader>t', toggle, opts)
+vim.keymap.set({ 'n', 'v' }, '<leader>to', toggle, opts)
 
 return { setup = setup, toggle = toggle }

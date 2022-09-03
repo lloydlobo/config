@@ -11,4 +11,4 @@ vim.opt.background = "dark"
 
 -- https://github.com/RishabhRD/rdconfig/blob/master/.config/nvim/lua/rd/ts_config.lua
 -- vim.cmd [[highlight IncludedC guibg=#373b41]]
-vim.cmd [[highlight Normal guibg=default]]
+-- vim.cmd [[highlight Normal guibg=default]]
