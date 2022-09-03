@@ -362,11 +362,15 @@ packer.startup(function(use)
 	use({
 		"nvim-orgmode/orgmode",
 		config = function()
-			-- Load custom tree-sitter grammar for org filetype
-			require("orgmode").setup_ts_grammar()
+			require("orgmode").setup_ts_grammar() -- Load custom tree-sitter grammar for org filetype
 		end,
 	})
-	use 'akinsho/org-bullets.nvim'
+	use({
+		"akinsho/org-bullets.nvim",
+		config = function()
+			require("org-bullets").setup()
+		end,
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
