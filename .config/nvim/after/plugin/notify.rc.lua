@@ -25,8 +25,34 @@ local notify = require("notify").async ]]
 	-- require("notify").history() ]]
 end
 
+-- vim.cmd([[highlight Normal guibg=NONE]])
 
-vim.cmd [[highlight Normal guibg=NONE]]
+-- https://github.com/AstroNvim/AstroNvim/blob/main/lua/default_theme/plugins/notify.lua
+--[[ return {
+  NotifyERRORBorder = { fg = C.red },
+  NotifyWARNBorder = { fg = C.orange_1 },
+  NotifyINFOBorder = { fg = C.green },
+  NotifyDEBUGBorder = { fg = C.cyan },
+  NotifyTRACERBorder = { fg = C.purple },
+  NotifyERRORIcon = { fg = C.red },
+  NotifyWARNIcon = { fg = C.orange_1 },
+  NotifyINFOIcon = { fg = C.green },
+  NotifyDEBUGIcon = { fg = C.cyan },
+  NotifyTRACEIcon = { fg = C.purple },
+  NotifyERRORTitle = { fg = C.red },
+  NotifyWARNTitle = { fg = C.orange_1 },
+  NotifyINFOTitle = { fg = C.green },
+  NotifyDEBUGTitle = { fg = C.cyan },
+  NotifyTRACETitle = { fg = C.purple },
+  NotifyERRORBody = { fg = C.fg },
+  NotifyWARNBody = { fg = C.fg },
+  NotifyINFOBody = { fg = C.fg },
+  NotifyDEBUGBody = { fg = C.fg },
+  NotifyTRACEBody = { fg = C.fg },
+  NotifyLogTime = { fg = C.grey_2 },
+  NotifyLogTitle = { fg = C.blue },
+} ]]
+
 -- https://github.com/rcarriga/nvim-notify/issues/16 -- [[ NotifyLOGIcon NotifyLOGTitle NotifyLOGBorder NotifyLOGBody ]] [[NotifyLOGIcon16 xxx links to NotifyLOGIcon NotifyLOGTitle16 xxx links to NotifyLOGTitle NotifyLOGBorder16 xxx links to NotifyLOGBorder NotifyLOGBody16 xxx links to NotifyLOGBody]]
 -- --[[ TODO]] Add background_color
 -- require("notify").setup({ background_color = "#002b33" })
