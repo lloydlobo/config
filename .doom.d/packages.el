@@ -5,6 +5,16 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; https://github.com/yilkalargaw/org-auto-tangle
+;; ;; TODO ;; tangle transfers the code in the org file to each configs (something like a symlink)
+;; ;; WHY: Integrate ode and documents in the same org file. NO need to write readmes. Great for keeping config files together
+;; (use-package org-auto-tangle                                                                                                    ;;
+;;   :load-path "site-lisp/org-auto-tangle/"    ;; this line is necessary only if you cloned the repo in your site-lisp directory  ;;
+;;   :defer t                                                                                                                      ;;
+;;   :hook (org-mode . org-auto-tangle-mode))                                                                                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; (use-package org-roam
 ;;   :ensure t)
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
