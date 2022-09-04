@@ -11,9 +11,7 @@ vim.opt.termguicolors = true
 
 local Color, colors, Group, groups, styles = require("colorbuddy").setup()
 
-Color.new("background", "#002b36")
--- FIXME hack to fix notify transparent highlight color error alert. WIP
--- vim.cmd [[highlight Normal guibg=background]]
+Color.new("bg", "#002b36")
 Color.new("background_color", "#002b36")
 --[[devaslife]]
 Color.new("black", "#002b36")
@@ -26,6 +24,12 @@ local cError = groups.Error.fg
 local cInfo = groups.Information.fg
 local cWarn = groups.Warning.fg
 local cHint = groups.Hint.fg
+
+-- https://www.reddit.com/r/neovim/comments/s694zk/how_to_remove_this_line_under_nvimtree/
+-- vim.cmd([[
+--   hi StatusLine gui=NONE guibg=NonText guisp=NonText
+--   hi StatusLineNc gui=NONE guibg=NonText guisp=NonText
+-- ]])
 
 Group.new("DiagnosticVirtualTextError", cError, cError:dark():dark():dark():dark(), styles.NONE)
 Group.new("DiagnosticVirtualTextInfo", cInfo, cInfo:dark():dark():dark(), styles.NONE)

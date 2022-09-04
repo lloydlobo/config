@@ -79,6 +79,10 @@ opt.whichwrap:append("<>[]hl")
 -- disable nvim intro
 opt.shortmess:append("sI")
 
+-- https://github.com/nikbrunner/vin/blob/b6704fb384159b1dade13f6723fce346625d0f58/lua/user/options.lua#L51
+-- hide vertical borders
+vim.cmd([[set fillchars+=vert:\ ]])
+
 -- Better search
 opt.path:remove("/usr/include")
 vim.opt.backspace = { "start", "eol", "indent" }
