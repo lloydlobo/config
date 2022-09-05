@@ -21,6 +21,15 @@ macchina
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias emacs="emacsclient -c -a 'emacs'"
 
+### "bat" as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+### SET VI MODE 
+### # Comment this line out to enable default emacs-like bindings 
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+
 # Command prompt
 #set-option -g default-terminal "screen-256color"
 eval "$(starship init bash)"
