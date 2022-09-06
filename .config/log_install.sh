@@ -64,7 +64,6 @@ yay vlc
 sudo pacman -S timidity
 yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
 
-
 #
 # NeoVim
 #
@@ -78,6 +77,8 @@ sudo dnf install gcc-c++        # C++ support for GCC
 yay lazygit
 sudo dnf copr enable atim/lazygit -y
 sudo dnf install lazygit
+# Distrubution - https://github.com/NTBBloodbath/doom-nvim
+bash <(curl -s https://raw.githubusercontent.com/NTBBloodbath/doom-nvim/main/tools/install.sh)
 # disk analyzer with ncurses interface
 yay ncdu
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
@@ -90,6 +91,11 @@ sudo pacman -S ack
 sudo pacman -S fd
 sudo dnf install fd-find
 sudo dnf install entr           # Run arbitrary commands when files change
+sudo dnf install cronie         # Run arbitrary commands when files change
+cronie                          # Cron daemon for executing programs at set times
+cronie-anacron                  #   Utility for running regular jobs
+crontabs                        # Root crontab files used to schedule the execution of programs
+
 yay exa # 10 - ls replacement
 # Simple X Hot Key Daemon.
 yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
@@ -186,4 +192,5 @@ yay emacs
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
    ~/.emacs.d/bin/doom install
 # source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
-doom sync 
+doom sync
+sudo dnf install rust_ledger
