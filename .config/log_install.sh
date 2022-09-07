@@ -73,6 +73,7 @@ yay tree-sitter                 #  An incremental parsing system for programming
 yay prettierd                   #  prettier, as a daemon, for ludicrous formatting speed. 
 yay eslint_d                    # Makes eslint the fastest linter on the planet.
 yay stylua                      # Integrates with weleimp/stylua.nvim
+sudo dnf install ShellCheck     # Provides shellcheck command for shell script anlaysis tool
 sudo dnf install gcc-c++        # C++ support for GCC
 yay lazygit
 sudo dnf copr enable atim/lazygit -y
@@ -81,6 +82,7 @@ sudo dnf install lazygit
 bash <(curl -s https://raw.githubusercontent.com/NTBBloodbath/doom-nvim/main/tools/install.sh)
 # disk analyzer with ncurses interface
 yay ncdu
+cargo install --locked code-minimap
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 yay lf
 yay ripgrep
