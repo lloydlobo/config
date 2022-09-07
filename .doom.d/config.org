@@ -1,0 +1,202 @@
+#+TITLE: DOOM EMACS CONFIGURATION
+#+AUTHOR: I
+#+DESCRIPTION: EMACS CONFIGURATION
+
+* TABLE OF CONTENTS :toc:
+- [[#delete-selection-mode][DELETE SELECTION MODE]]
+- [[#fonts][FONTS]]
+  - [[#setting-the-font-face][Setting The Font Face]]
+  - [[#zooming-in-and-out][Zooming In and Out]]
+- [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
+  - [[#disable-menubar-toolbars-and-scrollbars][Disable Menubar, Toolbars and Scrollbars]]
+  - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
+- [[#org-mode][ORG MODE]]
+  - [[#defining-a-few-things][Defining A Few Things]]
+  - [[#enabling-org-bullets][Enabling Org Bullets]]
+  - [[#org-link-abbreviations][Org Link Abbreviations]]
+  - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
+  - [[#source-code-block-syntax-highlighting][Source Code Block Syntax Highlighting]]
+  - [[#automatically-create-table-of-contents][Automatically Create Table of Contents]]
+  - [[#make-m-ret-not-add-blank-lines][Make M-RET Not Add Blank Lines]]
+  - [[#org-export-to-manpage-format][Org Export To Manpage Format]]
+- [[#scrolling][SCROLLING]]
+- [[#theme][THEME]]
+- [[#writeroom-mode][WRITEROOM MODE]]
+
+* DELETE SELECTION MODE
+By default in Emacs, we don't have ability to select text, and then start typing and our new text replaces the selection.  Let's fix that!
+
+#+begin_src emacs-lisp
+(delete-selection-mode t)
+#+end_src
+
+* FONTS
+Defining our fonts.  Right now I'm using Source Code Pro (SauceCodePro) from the nerd-fonts repository.  Installed from the AUR, it does =NOT= include all variations of the font (such as italics).  You can download the italics Source Code Pro font from the nerd-fonts GitHub though.
+
+** Setting The Font Face
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil
+  :font "Source Code Pro"
+  :height 110
+  :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+  :font "JetBrainsMono Nerd Font"
+  :height 120
+  :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+  :font "Source Code Pro"
+  :height 110
+  :weight 'medium)
+;; Makes commented text and keywords italics.
+;; This is working in emacsclient but not emacs.
+;; Your font must have an italic face available.
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+  :slant 'italic)
+
+;; Uncomment the following line if line spacing needs adjusting.
+(setq-default line-spacing 0.12)
+
+;; Needed if using emacsclient. Otherwise, your fonts will be smaller than expected.
+(add-to-list 'default-frame-alist '(font . "Source Code Pro-11"))
+;; changes certain keywords to symbols, such as lamda!
+(setq global-prettify-symbols-mode t)
+#+end_src
+
+** Zooming In and Out
+You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTRL plus the mouse wheel for zooming in/out.
+
+#+begin_src emacs-lisp
+;; zoom in/out like we do everywhere else.
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+#+end_src
+
+* GRAPHICAL USER INTERFACE TWEAKS
+Let's make GNU Emacs look a little better.
+This determines the style of line numbers in effect. If set to `nil', line numbers are disabled. For relative line numbers, set this to `relative'.
+
+** Disable Menubar, Toolbars and Scrollbars
+#+begin_src emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+#+end_src
+
+** Display Line Numbers and Truncated Lines
+#+begin_src emacs-lisp
+;; (global-display-line-numbers-mode 1)
+;; (global-visual-line-mode t)
+(setq display-line-numbers-type t)
+#+end_src
+
+* ORG MODE
+Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
+
+If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
+
+** Defining A Few Things
+#+begin_src emacs-lisp
+(setq org-directory "~/org/")
+#+end_src
+** TODO Enabling Org Bullets
+Org-bullets gives us attractive bullets rather than asterisks.
+
+#+begin_src emacs-lisp
+;; (use-package org-bullets)
+#+end_src
+** Org Link Abbreviations
+This allows for the use of abbreviations that will get expanded out into a lengthy URL.
+
+#+begin_src emacs-lisp
+;; An example of how this works.
+;; [[arch-wiki:Name_of_Page][Description]]
+(setq org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
+        '(("google" . "http://www.google.com/search?q=")
+          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
+          ("ddg" . "https://duckduckgo.com/?q=")
+          ("wiki" . "https://en.wikipedia.org/wiki/")))
+#+end_src
+** Source Code Block Tag Expansion
+Org-tempo is a package that allows for '<s' followed by TAB to expand to a begin_src tag.  Other expansions available include:
+
+| Typing the below + TAB | Expands to ...                          |
+|------------------------+-----------------------------------------|
+| <a                     | '#+BEGIN_EXPORT ascii' … '#+END_EXPORT  |
+| <c                     | '#+BEGIN_CENTER' … '#+END_CENTER'       |
+| <C                     | '#+BEGIN_COMMENT' … '#+END_COMMENT'     |
+| <e                     | '#+BEGIN_EXAMPLE' … '#+END_EXAMPLE'     |
+| <E                     | '#+BEGIN_EXPORT' … '#+END_EXPORT'       |
+| <h                     | '#+BEGIN_EXPORT html' … '#+END_EXPORT'  |
+| <l                     | '#+BEGIN_EXPORT latex' … '#+END_EXPORT' |
+| <q                     | '#+BEGIN_QUOTE' … '#+END_QUOTE'         |
+| <s                     | '#+BEGIN_SRC' … '#+END_SRC'             |
+| <v                     | '#+BEGIN_VERSE' … '#+END_VERSE'         |
+
+#+begin_src emacs-lisp
+(use-package org-tempo
+  :ensure nil) ;; tell use-package not to try to install org-tempo since it's already there.
+#+end_src
+
+** Source Code Block Syntax Highlighting
+We want the same syntax highlighting in source blocks as in the native language files.
+
+#+begin_src emacs-lisp
+(setq org-src-fontify-natively t
+    org-src-tab-acts-natively t
+    org-confirm-babel-evaluate nil
+    org-edit-src-content-indentation 0)
+#+end_src
+
+** Automatically Create Table of Contents
+Toc-org helps you to have an up-to-date table of contents in org files without exporting (useful useful for README files on GitHub).  Use :TOC: to create the table.
+
+#+begin_src emacs-lisp
+  (use-package toc-org
+    :commands toc-org-enable
+    :init (add-hook 'org-mode-hook 'toc-org-enable))
+#+end_src
+
+** Make M-RET Not Add Blank Lines
+#+begin_src emacs-lisp
+(setq org-blank-before-new-entry (quote ((heading . nil)
+                                         (plain-list-item . nil))))
+#+end_src
+
+** Org Export To Manpage Format
+#+begin_src emacs-lisp
+(use-package ox-man
+  :ensure nil)
+#+end_src
+
+* SCROLLING
+Emacs' default scrolling is annoying because of the sudden half-page jumps.  Also, I wanted to adjust the scrolling speed.
+
+#+begin_src emacs-lisp
+(setq scroll-conservatively 101) ;; value greater than 100 gets rid of half page jumping
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 3))) ;; how many lines at a time
+(setq mouse-wheel-progressive-speed t) ;; accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+#+end_src
+
+* THEME
+We need a nice colorscheme.  The Doom Emacs guys have a nice collection of themes, so let's install them!
+
+#+begin_src emacs-lisp
+(use-package doom-themes)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;; (load-theme 'doom-one t)
+(setq doom-theme 'doom-solarized-dark)
+
+#+end_src
+
+* TODO WRITEROOM MODE
+A minor mode for Emacs that implements a distraction-free writing mode similar to the famous Writeroom editor for OS X.
+
+# #+begin_src emacs-lisp
+# (use-package writeroom-mode)
+# #+end_src
