@@ -1,1 +1,0 @@
--- return { FocussedSymbol = { fg = C.yellow, bg = C.none }}
