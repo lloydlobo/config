@@ -11,7 +11,25 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "tokyonight-night"
+lvim.colorscheme = "NeoSolarized"
+vim.g.NeoSolarized_italics = 1 -- 0 or 1
+vim.g.NeoSolarized_visibility = 'normal' -- low, normal, high
+vim.g.NeoSolarized_diffmode = 'normal' -- low, normal, high
+vim.g.NeoSolarized_termtrans = 1 -- 0(default) or 1 -> Transparency
+vim.g.NeoSolarized_lineNr = 0 -- 0 or 1 (default) -> To Show backgroung in LineNr
+vim.cmd [[
+    try
+        colorscheme NeoSolarized
+    catch /^Vim\%((\a\+)\)\=:E18/
+        colorscheme default
+        set background=dark
+    endtry
+        highlight FloatBorder guibg=NONE ctermbg=NONE  " Removes the border of float menu (LSP and Autocompletion uses it)
+        highlight link NormalFloat Normal 
+        highlight NormalFloat ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE 
+        highlight Pmenu ctermbg=NONE guibg=NONE 
+]]
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -167,6 +185,7 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
+  { "Tsuzat/NeoSolarized.nvim" }, --  NeoSolarized colorscheme for NeoVim with full transparency
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
