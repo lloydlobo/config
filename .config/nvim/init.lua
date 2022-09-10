@@ -24,7 +24,7 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy Finder (files, lsp, etc)
-  use {"akinsho/toggleterm.nvim", tag = '*',}
+  use { "akinsho/toggleterm.nvim", tag = '*', }
   use("Tsuzat/NeoSolarized.nvim") --  NeoSolarized colorscheme for NeoVim with full transparency
   use 'mjlbach/onedark.nvim' -- Theme inspired by Atom
   use 'folke/tokyonight.nvim' -- A clean, dark Neovim theme for lsp, treesitter and lots of plugins.
@@ -67,6 +67,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
