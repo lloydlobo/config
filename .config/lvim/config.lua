@@ -11,24 +11,8 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "NeoSolarized"
-vim.g.NeoSolarized_italics = 1 -- 0 or 1
-vim.g.NeoSolarized_visibility = 'normal' -- low, normal, high
-vim.g.NeoSolarized_diffmode = 'normal' -- low, normal, high
-vim.g.NeoSolarized_termtrans = 1 -- 0(default) or 1 -> Transparency
-vim.g.NeoSolarized_lineNr = 0 -- 0 or 1 (default) -> To Show backgroung in LineNr
-vim.cmd [[
-    try
-        colorscheme NeoSolarized
-    catch /^Vim\%((\a\+)\)\=:E18/
-        colorscheme default
-        set background=dark
-    endtry
-        highlight FloatBorder guibg=NONE ctermbg=NONE  " Removes the border of float menu (LSP and Autocompletion uses it)
-        highlight link NormalFloat Normal 
-        highlight NormalFloat ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE 
-        highlight Pmenu ctermbg=NONE guibg=NONE 
-]]
+lvim.colorscheme = "tokyonight-night"
+-- lvim.colorscheme = "NeoSolarized"
 
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -37,12 +21,53 @@ vim.cmd [[
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
+
+-- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
+vim.opt.foldlevel = 20
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- Increment/decrement
+lvim.keys.normal_mode["+"] = "<C-a>"
+lvim.keys.normal_mode["-"] = "<C-x>"
+
+-- Default delete word backwards
+lvim.keys.normal_mode["dw"] = 'vb"_d'
+
+-- Select all
+lvim.keys.normal_mode["<C-a>"] = "gg<S-v>G"
+
+-- Vim tweaks
+-- goto start/end of line in insert mode
+lvim.keys.insert_mode["<C-d>"] = "<C-o>0" -- Ctrl-d go start (down)
+lvim.keys.insert_mode["<C-f>"] = "<C-o>$" -- Ctrl-f go end (front)
+
+
+--  https://github.com/0xsamrath/.dotfiles/blob/main/nvim/lua/keymaps/init.lua
+-- surrounding with parantheses -- Highlight in VISUAL MODE!!! wrap
+lvim.keys.visual_mode["<leader>'"] = "<esc>`>a'<esc>`<i'<esc>"
+lvim.keys.visual_mode['<leader>"'] = '<esc>`>a"<esc>`<i"<esc>'
+lvim.keys.visual_mode["<leader>("] = "<esc>`>a)<esc>`<i(<esc>"
+lvim.keys.visual_mode["<leader>["] = "<esc>`>a]<esc>`<i[<esc>"
+lvim.keys.visual_mode["<leader>{"] = "<esc>`>a}<esc>`<i{<esc>"
+
+-- [[       SETUP          ]]
+-- Remap for dealing with word wrap
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- lvim.keys.visual_mode["k"] = "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true }
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- lvim.keys.visual_mode["j"] = "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true }
+lvim.keys.visual_mode["x"] = '"_x' -- deletes forward chars
+
+-- remove the L and Q commands
+lvim.keys.visual_mode["L"] = "<Nop>"
+lvim.keys.visual_mode["Q"] = "<Nop>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -79,9 +104,11 @@ lvim.builtin.which_key.mappings["t"] = {
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.terminal.active = true -- NOTE Use <C-\>>C-n> to get in normal_mode in terminal (neovim feature)
+lvim.builtin.nvimtree.setup.view.width = 20
+lvim.builtin.nvimtree.setup.view.side = "right"
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
+lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -189,15 +216,15 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "zsh",
---   callback = function()
---     -- let treesitter use bash highlight for zsh files as well
---     require("nvim-treesitter.highlight").attach(0, "bash")
---   end,
--- })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.json", "*.jsonc" },
+  -- enable wrap mode for json files only
+  command = "setlocal wrap",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
