@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # GUIDE for instal.sh dotfiles =>> https://github.com/bobwhitelock/dotfiles
 # put `&` later when creating the final script
@@ -28,6 +28,16 @@ makepkg -si
 yay -Y --gendb
 yay -Syu devel
 yay -Y --devel --save
+
+#
+# snap
+#
+#First ensure snapd (package providing support for snap) is installed:
+sudo dnf install snapd
+#Then create a symbolic link to /var/lib/snapd/snap for /snap:
+sudo ln -s /var/lib/snapd/snap /snap
+#Then install Postman:
+sudo snap install postman
 
 # https://wiki.archlinux.org/title/Dotfiles
 # Dotfiles bare config alias
@@ -75,11 +85,28 @@ yay eslint_d                    # Makes eslint the fastest linter on the planet.
 yay stylua                      # Integrates with weleimp/stylua.nvim
 sudo dnf install ShellCheck     # Provides shellcheck command for shell script anlaysis tool
 sudo dnf install gcc-c++        # C++ support for GCC
+sudo dnf install shc             # Shell script compiler
 yay lazygit
 sudo dnf copr enable atim/lazygit -y
 sudo dnf install lazygit
+#
 # Distrubution - https://github.com/NTBBloodbath/doom-nvim
+#
 bash <(curl -s https://raw.githubusercontent.com/NTBBloodbath/doom-nvim/main/tools/install.sh)
+#
+# LunarVim
+#
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+#
+# NvChad
+#
+docker run -w /root -it --rm alpine:edge sh -uelic '
+  apk add git nodejs neovim ripgrep alpine-sdk --update
+  git clone https://github.com/NvChad/NvChad ~/.config/nvim
+  nvim
+'
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+#------------------------------------------------------------------------------------------------------#
 # disk analyzer with ncurses interface
 yay ncdu
 cargo install --locked code-minimap
@@ -92,6 +119,7 @@ yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
 sudo dnf install fd-find
+sudo dnf install xclip # X11 clipboard manipulation tool, similar to `xsel`. Handles the X primary and secondary selections, plus the system clipboard (`Ctrl + C`/`Ctrl + V`).
 sudo dnf install entr           # Run arbitrary commands when files change
 sudo dnf install cronie         # Run arbitrary commands when files change
 cronie                          # Cron daemon for executing programs at set times
@@ -114,6 +142,7 @@ sudo dnf install code
 yay qutebrowser
 yay python-adblock
 yay asciidoc
+sudo dnf install qt5-qtwebengine-freeworld   # RPM Fusion - codecs to play videos
 # yay python-pygments # for :view-source syntax highlighting
 
 # OTHER YAY
@@ -140,10 +169,14 @@ yay skim
 
 # REPL 
 yay evcxr                       # a RUST based repl based on evcxr
+
 # fast Node Version Manager
 yay fnm-bin
 eval "$(fnm env)"               # source the shell instead of restarting terminal
 fnm install --lts               # Install latest node version -- $ node $ .exit
+# YARN
+sudo dnf install yarnpkg        # Fast, reliable, and secure dependency management.
+sudo yarn global add create-vite # then use create-vite my-app
 
 # terminal 
 yay wezterm kitty alacritty
@@ -196,3 +229,4 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
 # source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
 doom sync
 sudo dnf install rust_ledger
+sudo dnf install sqlite
