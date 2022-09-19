@@ -21,6 +21,7 @@ set -gx PATH node_modules/.bin $PATH
 # Go
 set -g GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
+set -gx PATH /usr/local/go/bin $PATH
 
 # NVM
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'

@@ -1,5 +1,7 @@
 # apps.. but better
 alias g git
+alias lg lazygit
+alias yolo="git push origin master --force --no-verify"
 alias repl evcxr # A Rust REPL based on evcxr
 alias ls=lsd
 command -qv nvim && alias vim nvim
@@ -53,6 +55,9 @@ abbr -a dp config push
 abbr -a dl config l
 abbr -a dd config diff
 abbr -a dds config diff --staged
+# config lazygit abbr alias for ./cfg (bare git repo)
+# https://github.com/jesseduffield/lazygit/discussions/1201
+abbr -a dlg lazygit --git-dir=$HOME/.cfg --work-tree=$HOME
 
 #
 # misc
@@ -63,3 +68,19 @@ alias reload="exec fish"
 
 # Display all fonts
 alias fcl="fc-list : family spacing outline scalable | grep -e spacing=100 -e spacing=90 | grep -e outline=True | grep -e scalable=True"
+# ip address
+alias my_ip="ip address | grep -o \"inet 192.*/\" | awk '{ print \$2 }' | tr / ' ' | xargs"
+
+# clipboard
+alias cclip="xclip -selection clipboard"
+alias pclip="xclip -selection clipboard"
+alias xsc="xclip -selection clipboard"
+
+# screenkey -- show keystrokes on screen
+# https://github.com/ThePrimeagen/.dotfiles/blob/master/uwuntu/.config/personal/alias
+alias livestream_screenkey="screenkey -s large --scr 2 -p bottom --geometry 1210x300+712+810"
+alias yt_screenkey="screenkey -s large --scr 1 -p bottom --geometry 510x300+1412+850"
+
+# procs: processes
+alias pmem="procs --sortd mem"
+alias pcpu="procs --sortd cpu"
