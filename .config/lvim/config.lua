@@ -11,8 +11,8 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
--- lvim.colorscheme = "tokyonight-night"
-lvim.colorscheme = "one_monokai"
+lvim.colorscheme = "tokyonight-night"
+-- lvim.colorscheme = "one_monokai"
 -- lvim.colorscheme = "NeoSolarized" -- enable the theme_NeoSolarized_cmd() at end of file too
 
 -- to disable icons and use a minimalist setup, uncomment the following
@@ -241,9 +241,36 @@ lvim.plugins = {
         config = function()
             require("orgmode").setup {}
         end
-    }
+    },
+    {
+        'RishabhRD/popfix',
+        'RishabhRD/nvim-cheat.sh'
+    } -- https://github.com/RishabhRD/nvim-cheat.sh
 
 }
+--[[ nvim-cheat.sh 
+-- :Cheat
+-- :Cheat cpp reverse number
+-- :CheatWithoutComments
+-- :CheatWithoutComments cpp reverse number
+
+Keymaps for prompt are:
+    -- In insert mode:
+    <CR> : Open result in default layout.      <C-x> : Open result in horizontal split.
+    <C-t> : Open result in a new tab.          <C-v> : Open result in a vertical split.
+    <C-y> : Open result in floating window.    <C-f> : Open result in floating window.
+    <C-c> : Close window without any action.   <C-p> : Previous in history
+    <C-n> : Next in history
+
+    -- In normal mode:
+    <CR> : Open result in default layout.      <C-x> : Open result in horizontal split.
+    <C-t> : Open result in a new tab.          <C-v> : Open result in a vertical split.
+    <C-y> : Open result in floating window.    <C-f> : Open result in floating window.
+    <C-c> : Close window without any action.   <Esc> : Close window without any action.
+    q : Close window without any action.        
+    k : Previous in history j : Next in history 
+]]
+
 -- -------------------------------------------------------------
 -- ORG-MODE
 -- -------------------------------------------------------------
