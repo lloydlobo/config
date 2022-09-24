@@ -2,10 +2,12 @@
 # ~/.bashrc
 #
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+### EXPORT
+export TERM="xterm-256color"                      # getting proper colors
+export HISTCONTROL=ignoredups:erasedups           # no duplicate entries
+# export ALTERNATE_EDITOR=""                        # setting for emacsclient
+# export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
+# export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 
 # cat ~/Documents/principles.md
 
@@ -17,6 +19,7 @@ export PATH="HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 
 macchina
+okejoke random
 
 # Dotfiles in ~/.cfg at github.com/username/config --> bare repository
 # $HOME is the work-tree # https://wiki.archlinux.org/title/Dotfiles
@@ -84,6 +87,8 @@ function mktouch() {
 	mkdir -p "$(dirname "$1")" && touch "$1"
 }
 
+# Set sampler binary config.
+alias sampler="sampler --config ~/.config/sampler/example.yml"
 ### CHANGE TITLE OF TERMINALS
 # case ${TERM} in
 #   xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
@@ -272,3 +277,7 @@ eval "$(fnm env --use-on-cd)"
 
 # CLI tool to redo spelling errors in commands
 #eval "$(thefuck --alias)"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

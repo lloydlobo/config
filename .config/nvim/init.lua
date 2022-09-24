@@ -137,16 +137,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Treesitter based folding
+-- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
+vim.opt.foldlevel = 20
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 -- Set lualine as statusline
 -- See `:help lualine.txt`
-require('lualine').setup {
+---@diagnostic disable-next-line: redundant-parameter
+require('lualine').setup({
   options = {
     icons_enabled = false,
     theme = 'NeoSolarized',
     component_separators = '|',
     section_separators = '',
   },
-}
+})
 
 -- [[ Configure toggleterm floating terminal ]]
 require("toggleterm").setup({
@@ -377,6 +384,7 @@ require('lspconfig').sumneko_lua.setup {
     },
   },
 }
+
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

@@ -1,4 +1,3 @@
-# https://github.com/folke/dot/blob/master/config/lazygit/config.yml
 gui:
   scrollHeight: 2
   scrollPastBottom: true
@@ -24,6 +23,7 @@ gui:
   commitLength:
     show: true
   skipNoStagedFilesWarning: false
+
 git:
   paging:
     colorArg: always
@@ -43,6 +43,7 @@ git:
   overrideGpg: false
   disableForcePushing: false
   commitPrefixes: {}
+
 update:
   method: prompt
   days: 14
@@ -53,6 +54,7 @@ reporting: undetermined
 splashUpdatesIndex: 0
 confirmOnQuit: false
 quitOnTopLevelReturn: true
+
 keybinding:
   universal:
     quit: q
@@ -171,10 +173,7 @@ keybinding:
     init: i
     update: u
     bulkMenu: b
-os:
-  openCommand: open {{filename}}
-  openLinkCommand: open {{link}}
-disableStartupPopups: false
+
 customCommands:
   - key: 'b'
     command: 'hub browse'
@@ -182,5 +181,10 @@ customCommands:
   - key: 'b'
     command: 'hub browse -- "commit/{{.SelectedLocalCommit.Sha}}"'
     context: 'commits'
+
+os:
+  openCommand: open {{filename}}
+  openLinkCommand: open {{link}}
+disableStartupPopups: false
 services: {}
 notARepository: prompt

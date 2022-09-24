@@ -8,7 +8,17 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
-
+;
+;;https://github.com/yilkalargaw/org-auto-tangle
+;
+;; This package (i.e org-auto-tangle) is a very simple emacs package that allows you to automatically tangle org files on save.
+;; This is done by adding the option `#+auto_tangle: t` in your org file.
+;; The tangling process happens asynchronously so it will not block your emacs session.
+(use-package org-auto-tangle
+  ;; :load-path "site-lisp/org-auto-tangle/"    ;; this line is necessary only if you cloned the repo in your site-lisp directory
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+;;
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/radian-software/straight.el#the-recipe-format

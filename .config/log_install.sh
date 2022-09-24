@@ -111,6 +111,7 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 yay ncdu
 cargo install --locked code-minimap
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
+sudo dnf install btop htop
 yay lf
 yay ripgrep
 yay zoxide                      # A smarter cd command
@@ -125,6 +126,14 @@ sudo dnf install cronie         # Run arbitrary commands when files change
 cronie                          # Cron daemon for executing programs at set times
 cronie-anacron                  #   Utility for running regular jobs
 crontabs                        # Root crontab files used to schedule the execution of programs
+
+# Go lang
+## Sampler:  Tool for shell commands execution, visualization and alerting.
+sudo wget https://github.com/sqshq/sampler/releases/download/v1.1.0/sampler-1.1.0-linux-amd64 -O /usr/local/bin/sampler
+sudo chmod +x /usr/local/bin/sampler # Please specify config file using --config flag. Example: sampler --config example.yml
+### OR (FEDORA)
+sudo dnf install golang-github-sqshq-sampler
+
 
 yay exa # 10 - ls replacement
 # Simple X Hot Key Daemon.

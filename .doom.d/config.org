@@ -1,33 +1,108 @@
-#+TITLE: DOOM EMACS CONFIGURATION
+#+TITLE: LITERATE DOOM EMACS CONFIGURATION
+#+STARTUP: overview
 #+AUTHOR: I
 #+DESCRIPTION: EMACS CONFIGURATION
+#+PROPERTY: header-args :tangle yes :results none
+#+OPTIONS: num:nil ^:{}
+# #+STARTUP: nofold overview showeverything
 
-* TABLE OF CONTENTS :toc:
+#+begin_quote
+The documentation is designed to be viewed within Doom Emacs. Access it by
+pressing =SPC h d h= (or =C-h d h= for non-evil users), or search it with =SPC h
+d s= (or =C-h d s=).
+#+end_quote
+
+* TABLE OF CONTENTS :TOC:
+- [[#about][ABOUT]]
+- [[#-----][-----]]
+- [[#personal-information][PERSONAL INFORMATION]]
 - [[#delete-selection-mode][DELETE SELECTION MODE]]
+- [[#files][FILES]]
+  - [[#useful-file-functions][Useful File Functions]]
 - [[#fonts][FONTS]]
   - [[#setting-the-font-face][Setting The Font Face]]
   - [[#zooming-in-and-out][Zooming In and Out]]
 - [[#graphical-user-interface-tweaks][GRAPHICAL USER INTERFACE TWEAKS]]
   - [[#disable-menubar-toolbars-and-scrollbars][Disable Menubar, Toolbars and Scrollbars]]
   - [[#display-line-numbers-and-truncated-lines][Display Line Numbers and Truncated Lines]]
+  - [[#toggle-fullscreen-by-default][Toggle Fullscreen by default]]
+- [[#lsp][LSP]]
+  - [[#go][Go]]
+- [[#magit][MAGIT]]
+  - [[#enable-gravatars][Enable Gravatars]]
+  - [[#config][CONFIG]]
 - [[#org-mode][ORG MODE]]
   - [[#defining-a-few-things][Defining A Few Things]]
-  - [[#enabling-org-bullets][Enabling Org Bullets]]
+  - [[#set-org-bullets-for-superstar-mode][Set Org Bullets for superstar mode]]
+  - [[#set-org-ellipsis-for-collapsed-headings][Set Org Ellipsis for collapsed headings]]
   - [[#org-link-abbreviations][Org Link Abbreviations]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
   - [[#source-code-block-syntax-highlighting][Source Code Block Syntax Highlighting]]
   - [[#automatically-create-table-of-contents][Automatically Create Table of Contents]]
   - [[#make-m-ret-not-add-blank-lines][Make M-RET Not Add Blank Lines]]
   - [[#org-export-to-manpage-format][Org Export To Manpage Format]]
+  - [[#counsel-org-mode-goto][Counsel Org Mode goto]]
+  - [[#custom-templates-or-functions][Custom Templates OR Functions]]
+  - [[#super-agenda-mode][Super Agenda Mode]]
 - [[#scrolling][SCROLLING]]
 - [[#theme][THEME]]
-- [[#writeroom-mode][WRITEROOM MODE]]
+  - [[#color-theme][Color Theme]]
+  - [[#frame-opacity-transparency][Frame Opacity (Transparency)]]
+- [[#vim][VIM]]
+  - [[#vim-vinegar][vim-vinegar]]
+  - [[#vim-unimpaired][vim-unimpaired]]
+  - [[#sort-a-region-with-gs][Sort a region with gS]]
+  - [[#easy-window-navigation][Easy window navigation]]
+- [[#------1][-----]]
+- [[#customize][customize]]
+  - [[#url-httpsgithubcomniklaseklunddoom-privateblobmasterconfigel][URL: https://github.com/niklaseklund/doom-private/blob/master/config.el]]
+- [[#dired][Dired]]
+- [[#buffers][Buffers]]
+  - [[#treemacs][Treemacs]]
+- [[#keybindings][Keybindings]]
+  - [[#show-keybind-help-with-less-of-a-delay][Show keybind help with less of a delay]]
+- [[#------2][-----]]
+- [[#docs][DOCS]]
+  - [[#shortcuts][Shortcuts]]
 
+* ABOUT
+This is Doom Emacs, which is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. The idea is to look at these configurations as "documentation".
+
+* -----
+
+* PERSONAL INFORMATION
+Let's set some variables with basic user information.
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "lloydlobo"
+      user-mail-address "76430758+lloydlobo@users.noreply.github.com ")
+#+END_SRC
 * DELETE SELECTION MODE
 By default in Emacs, we don't have ability to select text, and then start typing and our new text replaces the selection.  Let's fix that!
 
 #+begin_src emacs-lisp
 (delete-selection-mode t)
+#+end_src
+
+* FILES
+** Useful File Functions
+#+begin_src emacs-lisp
+(defun dt/show-and-copy-buffer-path ()
+  "Show and copy the full path to the current file in the minibuffer."
+  (interactive)
+  ;; list-buffers-directory is the variable set in dired buffers
+  (let ((file-name (or (buffer-file-name) list-buffers-directory)))
+    (if file-name
+        (message (kill-new file-name))
+      (error "Buffer not visiting a file"))))
+(defun dt/show-buffer-path-name ()
+  "Show the full path to the current file in the minibuffer."
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (if file-name
+        (progn
+          (message file-name)
+          (kill-new file-name))
+      (error "Buffer not visiting a file"))))
 #+end_src
 
 * FONTS
@@ -54,7 +129,8 @@ Defining our fonts.  Right now I'm using Source Code Pro (SauceCodePro) from the
   :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
   :slant 'italic)
-
+;; Increment in Big mode
+;; (setq doom-big-font-increment 8)
 ;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
 
@@ -62,6 +138,11 @@ Defining our fonts.  Right now I'm using Source Code Pro (SauceCodePro) from the
 (add-to-list 'default-frame-alist '(font . "Source Code Pro-11"))
 ;; changes certain keywords to symbols, such as lamda!
 (setq global-prettify-symbols-mode t)
+
+;; (setq doom-font (font-spec :family "JetBrainsMono" :size 12 :weight 'light)
+;;       doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13)
+;;       doom-unicode-font (font-spec :family "Symbola")
+;;       doom-big-font (font-spec :family "JetBrainsMono" :size 24))
 #+end_src
 
 ** Zooming In and Out
@@ -87,27 +168,101 @@ This determines the style of line numbers in effect. If set to `nil', line numbe
 #+end_src
 
 ** Display Line Numbers and Truncated Lines
+t            normal line numbers
+'relative    relative line numbers
+'visual      relative line numbers in screen space
+nil          no line numbers
 #+begin_src emacs-lisp
 ;; (global-display-line-numbers-mode 1)
 ;; (global-visual-line-mode t)
-(setq display-line-numbers-type t)
+;; (setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
+#+end_src
+** Toggle Fullscreen by default
+SPC t F -> Frame Fullscreen
+
+#+begin_src emacs-lisp
+(setq toggle-frame-fullscreen t)
+#+end_src
+* LSP
+** TODO Go
+*** Go - lsp-mode
+- Set up before-save hooks to format buffer and add/delete imports.
+  - https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#configuring-gopls-via-lsp-mode
+  - https://geeksocket.in/posts/emacs-lsp-go/
+
+#+begin_src emacs-lisp
+;; https://geeksocket.in/posts/emacs-lsp-go/
+;; (defun lsp-go-install-save-hooks ()
+;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;; ;; Start LSP Mode and YASnippet mode
+;; (add-hook 'go-mode-hook #'lsp-deferred)
+;; (add-hook 'go-mode-hook #'yas-minor-mode)
+;; (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#configuring-lsp-mode
+;; (require 'lsp-mode)
+;; (add-hook 'go-mode-hook #'lsp-deferred)
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+;; (defun lsp-go-install-save-hooks ()
+;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;; (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#configuring-gopls-via-lsp-mode
+;; (lsp-register-custom-settings
+;;  '(("gopls.completeUnimported" t t)
+;;    ("gopls.staticcheck" t t)))
 #+end_src
 
-* ORG MODE
-Org Mode is =THE= killer feature within Emacs.  But it does need some tweaking.
+* MAGIT
+** Enable Gravatars
+To enable gravatars when viewing commits:
 
-If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
+#+begin_src emacs-lisp
+(after! magit
+  (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
+#+end_src
+** TODO CONFIG
+https://github.com/doomemacs/doomemacs/blob/master/docs/faq.org#changes-to-my-config-arent-taking-effect
+(after! magit
+  (setq magit-repository-directories '(("~/projects" . 2))
+        magit-save-repository-buffers nil))
+
+* ORG MODE
+Org Mode is =THE= killer feature within Emacs. But it does need some tweaking.
+If you use `org' and don't want your org files in the default location below, change `org-directory'.
+It must be set before org loads!
 
 ** Defining A Few Things
 #+begin_src emacs-lisp
-(setq org-directory "~/org/")
+(setq org-directory "~/Documents/org/")
+;; For Emacs version >= 25
+(setq org-agenda-files
+      (directory-files-recursively "~/Documents/org/" "\\.org$"))
 #+end_src
-** TODO Enabling Org Bullets
-Org-bullets gives us attractive bullets rather than asterisks.
+
+*** References:
+- https://www.philnewton.net/blog/how-i-get-work-done-with-emacs/
+
+** Set Org Bullets for superstar mode
+org +pretty OR Org-bullets gives us attractive bullets rather than asterisks.
 
 #+begin_src emacs-lisp
 ;; (use-package org-bullets)
+;; (setq org-bullets-bullet-list '("•"))
+
+;; (use-package org +pretty)
+(setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
 #+end_src
+
+** Set Org Ellipsis for collapsed headings
+#+begin_src emacs-lisp
+;; (setq org-ellipsis " …")
+#+end_src
+
 ** Org Link Abbreviations
 This allows for the use of abbreviations that will get expanded out into a lengthy URL.
 
@@ -120,6 +275,7 @@ This allows for the use of abbreviations that will get expanded out into a lengt
           ("ddg" . "https://duckduckgo.com/?q=")
           ("wiki" . "https://en.wikipedia.org/wiki/")))
 #+end_src
+
 ** Source Code Block Tag Expansion
 Org-tempo is a package that allows for '<s' followed by TAB to expand to a begin_src tag.  Other expansions available include:
 
@@ -140,6 +296,10 @@ Org-tempo is a package that allows for '<s' followed by TAB to expand to a begin
 (use-package org-tempo
   :ensure nil) ;; tell use-package not to try to install org-tempo since it's already there.
 #+end_src
+
+*** Literate Programming
+- `SPC-m-'` OR C-c (or M-x org-edit-special) Gives a separate editor for that language
+    - No need for "my-paredit-in-code-block"
 
 ** Source Code Block Syntax Highlighting
 We want the same syntax highlighting in source blocks as in the native language files.
@@ -172,6 +332,67 @@ Toc-org helps you to have an up-to-date table of contents in org files without e
   :ensure nil)
 #+end_src
 
+** Counsel Org Mode goto
+#+begin_src emacs-lisp
+(map! (:localleader
+        (:after evil-org
+          :map evil-org-mode-map
+          "/" #'counsel-org-goto)))
+#+end_src
+
+** Custom Templates OR Functions
+*** Tangle | Babel
+**** "SKELETON" in my ".emacs" file so as to start writing Org file quickly:
+#+begin_src emacs-lisp
+(define-skeleton org-skeleton
+  "Header info for a emacs-org file."
+  "Title: "
+  "#+TITLE: " str " \n"
+  "#+AUTHOR: lloydlobo\n"
+  "#+STARTUP: overview\n"
+  "#+OPTIONS: num:nil ^:{}\n"
+  "#+PROPERTY: header-args :tangle yes :results none\n"
+  "-----"
+
+  * Table of Contents :TOC:
+ )
+(global-set-key [C-S-f4] 'org-skeleton)
+#+end_src
+****** Archive
+- "#+BABEL: :session *R* :cache yes :results output graphics :exports both :tangle yes \n"
+- "#+INFOJS_OPT: \n"
+- "#+email: your-email@server.com\n"
+***** About:
+- The #+INFOJS_OPT option will generat a HTML document that is foldable and follows the style of GNU/INFO document.
+- The :session *R* option makes sure all the R code is run in the same session so objects generated in one code block can be accessed from other code blocks.
+- the :cache yes option is used to avoid re-evaluating unchanged code blocks. This can save significant time when you revise a document with a lot of R code frequently.
+- The :results output graphics :exports both option will put both the R code and its text and graphics output in the generated document.
+- The :tangle yes option allows the document to be "tangled" to generate pure code file. The short-cut key for tangling is C-c C-v t, which generates a .R file with all the R code extracted.
+- Note the "–—" string will generate a horizontal line in HTML file.
+- Finally, a hotkey C-S-f4 (while pressing Ctrl and Shift keys, press F4 key) is assigned to invoke this skeleton quickly.
+- URL: https://orgmode.org/worg/org-contrib/babel/how-to-use-Org-Babel-for-R.html
+**** TODO Toggle - Auto Tangle Org File when we save them
+#+begin_src emacs-lisp
+;; Tangle Org files when we save them
+;;  Look into babel-detangle as well
+(defun toggle-org-tangle-on-save()
+  (interactive)
+  ;; TODO create the following function OR replace with org-bable-tangle
+  (if (bound-and-true-p org-tangle-on-save)
+      (setq-local org-tangle-on-save nil)
+    (setq-local org-tabgle-on-save t))
+  (message (if org-tangle-on-save "Enabled tangling on save" "Disabled tangling on save")))
+
+#+end_src
+***** About
+- Toggle tangling of org to source file: ON & OFF
+- URL: https://news.ycombinator.com/item?id=17653224#17653412
+** Super Agenda Mode
+#+begin_src emacs-lisp
+;; (use-package org-super-agenda)
+
+#+end_src
+
 * SCROLLING
 Emacs' default scrolling is annoying because of the sudden half-page jumps.  Also, I wanted to adjust the scrolling speed.
 
@@ -183,20 +404,126 @@ Emacs' default scrolling is annoying because of the sudden half-page jumps.  Als
 #+end_src
 
 * THEME
-We need a nice colorscheme.  The Doom Emacs guys have a nice collection of themes, so let's install them!
+We need a nice color-scheme. The Doom Emacs guys have a nice collection of themes, so let's install them!
 
+** Color Theme
 #+begin_src emacs-lisp
 (use-package doom-themes)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 ;; (load-theme 'doom-one t)
-(setq doom-theme 'doom-solarized-dark)
 
+;; (setq doom-theme 'doom-solarized-dark)
+;; (setq doom-theme 'doom-solarized-light)
+;; (setq doom-theme 'doom-tomorrow-night)
+;; (setq doom-theme 'doom-gruvbox)
+;; (setq doom-theme 'doom-monokai-pro)
+(setq doom-theme 'doom-tokyo-night)
+#+end_src
+** Frame Opacity (Transparency)
+#+begin_src emacs-lisp
+(doom/set-frame-opacity 80)
 #+end_src
 
-* TODO WRITEROOM MODE
-A minor mode for Emacs that implements a distraction-free writing mode similar to the famous Writeroom editor for OS X.
+* VIM
+** vim-vinegar
+Use - to jump up to the previous directory
 
-# #+begin_src emacs-lisp
-# (use-package writeroom-mode)
-# #+end_src
+#+begin_src emacs-lisp
+(after! evil
+    (map! :m  "-"  #'dired-jump))
+#+end_src
+
+** vim-unimpaired
+Use ] SPC and [ SPC to insert newlines above and below
+
+#+begin_src emacs-lisp
+(map!
+ (:after evil
+   :m  "] SPC" #'evil-motion-insert-newline-below
+   :m  "[ SPC" #'evil-motion-insert-newline-above))
+#+end_src
+
+** TODO Sort a region with gS
+URL: https://github.com/Brettm12345/doom-emacs-literate-config/blob/master/config.org#sort-a-region-with-gs
+
+#+begin_src emacs-lisp
+(map!
+ (:after evil
+    :m "gS" #'sort-lines))
+    ;; :m "gS" #'+brett/sort))**
+#+end_src
+
+** Easy window navigation
+#+begin_src emacs-lisp
+(map!
+ (:after evil
+   :en "C-h"   #'evil-window-left
+   :en "C-j"   #'evil-window-down
+   :en "C-k"   #'evil-window-up
+   :en "C-l"   #'evil-window-right))
+#+end_src
+
+* TODO -----
+
+* customize
+(setq doom-modeline-height 40
+      +doom-modeline-buffer-file-name-style 'relative-from-project
+      doom-theme 'doom-nord
+      x-super-keysym 'super
+      x-meta-keysym 'meta
+      +workspaces-switch-project-function #'ignore
+      +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
+** URL: https://github.com/niklaseklund/doom-private/blob/master/config.el
+
+* Dired
+- Get `peep-dired`
+- Ranger
+  - If +ranger is enabled often a buffer will be opened in minimal ranger mode (deer-mode). In this case z P can be used to toggle between full ranger and deer-mode.
+#+begin_src emacs-lisp
+(map!
+ (:after dired
+    (:map dired-mode-map
+    "C-SPC" #'peep-dired)))
+#+end_src
+* Buffers
+** Treemacs
+Allow C-h and C-l to switch buffers
+
+#+begin_src emacs-lisp
+(map!
+ (:after treemacs-evil
+   (:map evil-treemacs-state-map
+     "C-h" #'evil-window-left
+     "C-l" #'evil-window-right)))
+#+end_src
+
+* Keybindings
+** Show keybind help with less of a delay
+#+begin_src emacs-lisp
+(after! which-key
+  (setq which-key-idle-delay 0.5
+        which-key-idle-secondary-delay 0.01
+        which-key-sort-order 'which-key-key-order-alpha))
+#+end_src
+
+* -----
+
+* DOCS
+** Shortcuts
+*** Export
+| CMD     | Command                   |
+| C-c C-e | Export to writable buffer |
+
+*** Table
+| CMD       | Command                |
+|-----------+------------------------|
+| SPC m b - | org-table-insert-hline |
+|           |                        |
+
+*** Insert Code Snippets
+| CMD     | Command                          |
+|---------+----------------------------------|
+| C-c C-, | Block structure  #+begin/end_foo |
+|         |                                  |
+

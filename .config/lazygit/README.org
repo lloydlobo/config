@@ -23,7 +23,6 @@
 * GUI
 These define the graphical user interface of lazygit.
 #+begin_src yaml
-
 gui:
   scrollHeight: 2
   scrollPastBottom: true
@@ -49,7 +48,6 @@ gui:
   commitLength:
     show: true
   skipNoStagedFilesWarning: false
-
 #+end_src
 
 * GIT

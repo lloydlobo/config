@@ -1,0 +1,21 @@
+lastupdatecheck: 0
+recentrepos:
+- /home/whatami/.ghq/github.com/lloydlobo/devlog
+- /home/whatami/.ghq/github.com/lloydlobo/leetcode
+- /home/whatami/projects/go/okejoke
+- /home/whatami/.local/share/lunarvim/lvim
+- /home/whatami/.emacs.d
+- /home/whatami/.ghq/github.com/lloydlobo/progcli
+- /home/whatami/.ghq/github.com/lloydlobo/go-dad-jokes-cli
+- /home/whatami/.ghq/github.com/lloydlobo/go-react-todo
+- /home/whatami/.ghq/github.com/lloydlobo/hello-go
+- /home/whatami/.ghq/github.com/lloydlobo/go-greetings
+- /home/whatami/.ghq/github.com/lloydlobo/bashingthrudashell
+- /home/whatami/.config/nvim
+- /home/whatami/.ghq/github.com/lloydlobo/rustspace
+- /home/whatami/scratchpad/grrs
+- /home/whatami/.ghq/github.com/lloydlobo/mononom-alkhwarizmi
+startuppopupversion: 5
+customcommandshistory:
+- q
+hidecommandlog: false
