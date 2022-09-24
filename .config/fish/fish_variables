@@ -7,6 +7,7 @@ SETUVAR _fish_abbr_dcm:config\x20commit\x20\x2dm
 SETUVAR _fish_abbr_dd:config\x20diff
 SETUVAR _fish_abbr_dds:config\x20diff\x20\x2d\x2dstaged
 SETUVAR _fish_abbr_dl:config\x20l
+SETUVAR _fish_abbr_dlg:lazygit\x20\x2d\x2dgit\x2ddir\x3d/home/whatami/\x2ecfg\x20\x2d\x2dwork\x2dtree\x3d/home/whatami
 SETUVAR _fish_abbr_dp:config\x20push
 SETUVAR _fish_abbr_ds:config\x20status\x20\x2ds\x20\x2db
 SETUVAR _fish_abbr_ga:git\x20add

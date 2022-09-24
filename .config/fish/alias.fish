@@ -18,6 +18,8 @@ alias ll "ls -l"
 alias lt="ls --tree"
 alias lla "ll -A"
 
+# sampler
+alias sampler="sampler --config ~/.config/sampler/example.yml"
 # tmux
 alias ta='tmux attach -t'
 alias ts='tmux new-session -s'

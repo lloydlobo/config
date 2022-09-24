@@ -8,6 +8,7 @@ set fish_greeting ""
 if status is-interactive
     # neofetch replacement --> display system info
     macchina
+
 end
 
 # PATH Global Variables
@@ -85,6 +86,10 @@ set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
 if test -f $LOCAL_CONFIG
     source $LOCAL_CONFIG
 end
+
+# ERROR: Cursor animation disabled when it runs. TODO: Traced to spinner.!!
+# Get random jokes from API calls to icanhazdadjoke.com
+okejoke random
 
 # ##################################################
 #                   EOF
