@@ -89,7 +89,10 @@ end
 
 # ERROR: Cursor animation disabled when it runs. TODO: Traced to spinner.!!
 # Get random jokes from API calls to icanhazdadjoke.com
-okejoke random
+if status is-interactive
+    prep go
+    okejoke random
+end
 
 # ##################################################
 #                   EOF
