@@ -91,6 +91,7 @@ end
 # Get random jokes from API calls to icanhazdadjoke.com
 if status is-interactive
     prep go
+    studybuddy note
     okejoke random
 end
 
