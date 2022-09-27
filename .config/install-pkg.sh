@@ -247,3 +247,41 @@ doom sync
 sudo dnf install rust_ledger
 sudo dnf install sqlite
 # Fedora dnf snapd setup ends here
+
+# [[file:install-pkg.org::C clang][C clang]]
+sudo dnf install clang
+# C clang ends here
+
+# [[file:install-pkg.org::robotgo/Fedora][robotgo/Fedora]]
+sudo dnf install libXtst-devel
+
+# Bitmap
+sudo dnf install libpng-devel
+
+# Hook
+sudo dnf install libxkbcommon-devel libxkbcommon-x11-devel xorg-x11-xkb-utils-devel
+sudo dnf install libxkbcommon-x11-devel
+
+# Clipboard
+sudo dnf install xsel xclip
+
+# Install package 'xorg-x11-server-Xvfb' to provide command 'xvfb-run'? [N/y] y
+# For gohooks load_input_helper [1883]: XkbGetKeyboard failed to locate a valid keyboard!
+# Run COMMAND (usually an X client) in a virtual X server environment.
+sudo dnf install xorg-x11-server-Xvfb
+# robotgo/Fedora ends here
+
+# [[file:install-pkg.org::Formatters/shfmt][Formatters/shfmt]]
+sudo dnf install shfmt
+# Formatters/shfmt ends here
+
+# [[file:install-pkg.org::Go Tools Environment/Debugging][Go Tools Environment/Debugging]]
+# Installing 6 tools at /$HOME/go/bin in module mode.
+# gotests # gomodifytags # impl # goplay # dlv # staticchec
+go get github.com/cweill/gotests/gotests@latest
+go get github.com/fatih/gomodifytags@latest
+go get github.com/josharian/impl@latest
+go get github.com/haya14busa/goplay/cmd/goplay@latest
+go get github.com/go-delve/delve/cmd/dlv@latest
+go get honnef.co/go/tools/cmd/staticcheck@latest
+# Go Tools Environment/Debugging ends here

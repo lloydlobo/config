@@ -4,11 +4,19 @@
 #+STARTUP: fold
 -----
 
-* Table of Contents :TOC:
+* Table of Contents :toc:
 - [[#bash-shebang][bash shebang]]
 - [[#git-setup][git setup]]
 - [[#arch-pacman-yay][Arch pacman yay]]
 - [[#fedora-dnf-snapd-setup][Fedora dnf snapd setup]]
+- [[#c-clang][C clang]]
+  - [[#packages-installed][Packages installed]]
+- [[#robotgo][robotgo]]
+  - [[#fedora][Fedora]]
+- [[#formatters][Formatters]]
+  - [[#shfmt][shfmt]]
+- [[#go-tools-environment][Go Tools Environment]]
+  - [[#debugging][Debugging]]
 
 * bash shebang
 #+NAME: bash shebang
@@ -272,3 +280,63 @@ sudo dnf install rust_ledger
 sudo dnf install sqlite
 
 #+END_SRC
+
+* C clang
+#+NAME: C clang
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install clang
+#+END_SRC
+** Packages installed
+ - clang-14.0.5-1.fc36.x86_64     A C language family front-end for LLVM
+ - clang-libs-14.0.5-1.fc36.x86_64        Runtime library for clang
+ - clang-resource-filesystem-14.0.5-1.fc36.x86_64 Filesystem package that owns the clang resource directory
+ - compiler-rt-14.0.5-1.fc36.x86_64       LLVM "compiler-rt" runtime libraries
+ - libomp-14.0.5-1.fc36.x86_64    OpenMP runtime for clang
+ - libomp-devel-14.0.5-1.fc36.x86_64      OpenMP header files
+ - llvm-14.0.5-1.fc36.x86_64      The Low Level Virtual Machine
+
+* robotgo
+** Fedora
+#+NAME: robotgo/Fedora
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install libXtst-devel
+
+# Bitmap
+sudo dnf install libpng-devel
+
+# Hook
+sudo dnf install libxkbcommon-devel libxkbcommon-x11-devel xorg-x11-xkb-utils-devel
+sudo dnf install libxkbcommon-x11-devel
+
+# Clipboard
+sudo dnf install xsel xclip
+
+# Install package 'xorg-x11-server-Xvfb' to provide command 'xvfb-run'? [N/y] y
+# For gohooks load_input_helper [1883]: XkbGetKeyboard failed to locate a valid keyboard!
+# Run COMMAND (usually an X client) in a virtual X server environment.
+sudo dnf install xorg-x11-server-Xvfb
+#+end_src
+
+* Formatters
+** shfmt
+**shfmt** formats shell programs. If the only argument is a dash (1m-22m) or no arguments are given, standard input will be used.
+
+#+NAME: Formatters/shfmt
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install shfmt
+#+end_src
+
+If a given path is a directory, all shell scripts found under that directory will be used.
+* Go Tools Environment
+** Debugging
+#+NAME: Go Tools Environment/Debugging
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+# Installing 6 tools at /$HOME/go/bin in module mode.
+# gotests # gomodifytags # impl # goplay # dlv # staticchec
+go get github.com/cweill/gotests/gotests@latest
+go get github.com/fatih/gomodifytags@latest
+go get github.com/josharian/impl@latest
+go get github.com/haya14busa/goplay/cmd/goplay@latest
+go get github.com/go-delve/delve/cmd/dlv@latest
+go get honnef.co/go/tools/cmd/staticcheck@latest
+#+end_src
