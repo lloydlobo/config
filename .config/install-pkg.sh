@@ -285,3 +285,7 @@ go get github.com/haya14busa/goplay/cmd/goplay@latest
 go get github.com/go-delve/delve/cmd/dlv@latest
 go get honnef.co/go/tools/cmd/staticcheck@latest
 # Go Tools Environment/Debugging ends here
+
+# [[file:install-pkg.org::cheatsheets/cheat][cheatsheets/cheat]]
+sudo dnf install cheat
+# cheatsheets/cheat ends here

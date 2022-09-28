@@ -17,6 +17,8 @@
   - [[#shfmt][shfmt]]
 - [[#go-tools-environment][Go Tools Environment]]
   - [[#debugging][Debugging]]
+- [[#cheatsheets][cheatsheets]]
+  - [[#cheat][cheat]]
 
 * bash shebang
 #+NAME: bash shebang
@@ -339,4 +341,51 @@ go get github.com/josharian/impl@latest
 go get github.com/haya14busa/goplay/cmd/goplay@latest
 go get github.com/go-delve/delve/cmd/dlv@latest
 go get honnef.co/go/tools/cmd/staticcheck@latest
+#+end_src
+* cheatsheets
+** cheat
+cheat-community-cheatsheets
+#+NAME: cheatsheets/cheat
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install cheat
+
+#+END_SRC
+
+#+begin_src shell
+Examples:
+  To initialize a config file:
+    mkdir -p ~/.config/cheat && cheat --init > ~/.config/cheat/conf.yml
+
+  To view the tar cheatsheet:
+    cheat tar
+
+  To edit (or create) the foo cheatsheet:
+    cheat -e foo
+
+  To edit (or create) the foo/bar cheatsheet on the "work" cheatpath:
+    cheat -p work -e foo/bar
+
+  To view all cheatsheet directories:
+    cheat -d
+
+  To list all available cheatsheets:
+    cheat -l
+
+  To list all cheatsheets whose titles match "apt":
+    cheat -l apt
+
+  To list all tags in use:
+    cheat -T
+
+  To list available cheatsheets that are tagged as "personal":
+    cheat -l -t personal
+
+  To search for "ssh" among all cheatsheets, and colorize matches:
+    cheat -c -s ssh
+
+  To search (by regex) for cheatsheets that contain an IP address:
+    cheat -c -r -s '(?:[0-9]{1,3}\.){3}[0-9]{1,3}'
+
+  To remove (delete) the foo/bar cheatsheet:
+    cheat --rm foo/bar
 #+end_src
