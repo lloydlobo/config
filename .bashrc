@@ -29,6 +29,7 @@ alias lg="lazygit"
 alias dlg="lazygit --git-dir=$HOME/.cfg --work-tree=$HOME"
 alias emacs="emacsclient -c -a 'emacs'"
 alias lvim="$HOME/.local/bin/lvim"
+alias shgofmt='~/.local/scripts/gofmt.sh'
 
 # alias utility
 alias pmem="/usr/bin/procs --sortd mem"
