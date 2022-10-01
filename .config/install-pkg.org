@@ -9,8 +9,21 @@
 - [[#git-setup][git setup]]
 - [[#arch-pacman-yay][Arch pacman yay]]
 - [[#fedora-dnf-snapd-setup][Fedora dnf snapd setup]]
-- [[#c-clang][C clang]]
+- [[#vimneovim][Vim/Neovim]]
+- [[#utilities][Utilities]]
+- [[#databases][Databases]]
+- [[#rust-tools][Rust tools]]
+- [[#go-lang][Go lang]]
+- [[#vs-code][VS Code]]
+- [[#browsers][Browsers]]
+- [[#fonts][Fonts]]
+- [[#shell-terminals-extras][Shell Terminals Extras]]
+- [[#node][NODE]]
+- [[#yay-extras][YAY Extras]]
+- [[#emacs][EMACS]]
+- [[#c-libraries][C Libraries]]
   - [[#packages-installed][Packages installed]]
+  - [[#sdl2][SDL2]]
 - [[#robotgo][robotgo]]
   - [[#fedora][Fedora]]
 - [[#formatters][Formatters]]
@@ -19,6 +32,7 @@
   - [[#debugging][Debugging]]
 - [[#cheatsheets][cheatsheets]]
   - [[#cheat][cheat]]
+  - [[#examples-only][Examples only]]
 
 * bash shebang
 #+NAME: bash shebang
@@ -68,8 +82,8 @@ yay -Y --devel --save
 #+END_SRC
 
 * Fedora dnf snapd setup
-#+NAME: Fedora dnf snapd setup
-#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#+name: fedora dnf snapd setup
+#+begin_src shell :tangle install-pkg.sh :main no :comments link :noweb yes
 #
 # snap
 #
@@ -115,9 +129,20 @@ yay vlc
 sudo pacman -S timidity
 yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
 
-#
-# NeoVim
-#
+#+end_src
+
+#+begin_example
+null-ls: require("null-ls.health").check()
+========================================================================
+  - ERROR: flake8: the command "flake8" is not executable.
+  - OK: shellcheck: the command "shellcheck" is executable.
+  - ERROR: codespell: the command "codespell" is not executable.
+#+end_example
+
+* Vim/Neovim
+#+NAME: Vim/Neovim
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+
 yay lua-language-server
 npm install -g typescript-language-server typescript
 yay tree-sitter                 #  An incremental parsing system for programming tools
@@ -147,16 +172,26 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
   nvim
 '
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+#+end_src
+
+* Utilities
+#+NAME: Utilities
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
 #------------------------------------------------------------------------------------------------------#
 # disk analyzer with ncurses interface
 yay ncdu
 cargo install --locked code-minimap
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 sudo dnf install btop htop
-yay lf
-yay ripgrep
-yay zoxide                      # A smarter cd command
-yay bat
+# Simple X Hot Key Daemon.
+yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
+
+# OTHER YAY
+yay git-delta
+yay macchina-bin
+yay procs
+yay hyperfine
+
 yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
@@ -168,6 +203,35 @@ cronie                          # Cron daemon for executing programs at set time
 cronie-anacron                  #   Utility for running regular jobs
 crontabs                        # Root crontab files used to schedule the execution of programs
 
+#+end_src
+
+* Databases
+#+NAME: Databases
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
+
+sudo dnf install sqlite
+
+#+end_src
+
+* Rust tools
+#+NAME: Rust tools
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
+# rust tools
+yay lf
+yay ripgrep
+yay zoxide                      # A smarter cd command
+yay exa # 10 - ls replacement
+yay bat
+sudo dnf install rust_ledger
+
+#+end_src
+
+* Go lang
+#+NAME: Go lang
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
 # Go lang
 ## Sampler:  Tool for shell commands execution, visualization and alerting.
 sudo wget https://github.com/sqshq/sampler/releases/download/v1.1.0/sampler-1.1.0-linux-amd64 -O /usr/local/bin/sampler
@@ -175,11 +239,12 @@ sudo chmod +x /usr/local/bin/sampler # Please specify config file using --config
 ### OR (FEDORA)
 sudo dnf install golang-github-sqshq-sampler
 
+#+end_src
 
-yay exa # 10 - ls replacement
-# Simple X Hot Key Daemon.
-yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
-
+* VS Code
+#+NAME: VS Code
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
 
 # VSCODE -- https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -187,6 +252,12 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 dnf check-update
 sudo dnf install code
 
+#+end_src
+
+* Browsers
+#+NAME: Browsers
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
 # BROWSER
 # Qutebrowser & dependency
 yay qutebrowser
@@ -195,13 +266,12 @@ yay asciidoc
 sudo dnf install qt5-qtwebengine-freeworld   # RPM Fusion - codecs to play videos
 # yay python-pygments # for :view-source syntax highlighting
 
-# OTHER YAY
-yay git-delta
-yay macchina-bin
-yay procs
-yay hyperfine
+#+end_src
 
-# FONTS
+* Fonts
+#+NAME: Fonts
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
 yay nerd-fonts-complete         # aur but conflicts with ttf-nerd-fonts-symbols
 yay powerline-fonts-git
 yay fontmatrix
@@ -209,25 +279,12 @@ yay powerline-fonts
 yay powerline-common
 yay xorg-xlsfonts
 
-# Shell Prompt
-yay starship
+#+end_src
 
-# Navi & dependencies
-yay navi # man-page alternative in Rust
-yay fzf
-yay skim
-
-# REPL
-yay evcxr                       # a RUST based repl based on evcxr
-
-# fast Node Version Manager
-yay fnm-bin
-eval "$(fnm env)"               # source the shell instead of restarting terminal
-fnm install --lts               # Install latest node version -- $ node $ .exit
-# YARN
-sudo dnf install yarnpkg        # Fast, reliable, and secure dependency management.
-sudo yarn global add create-vite # then use create-vite my-app
-
+* Shell Terminals Extras
+#+NAME: Shell Terminals Extras
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
 # terminal
 yay wezterm kitty alacritty
 
@@ -241,6 +298,43 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 yay mcfly
 echo "source /usr/share/doc/mcfly/mcfly.bash" >> .bashrc
 
+# Shell Prompt
+yay starship
+
+# Navi & dependencies
+yay navi # man-page alternative in Rust
+yay fzf
+yay skim
+
+# REPL
+yay evcxr                       # a RUST based repl based on evcxr
+
+# ASCII
+# live ascii bonsai tree animation @chonsai
+yay cbonsai
+yay rmatrix
+
+
+#+end_src
+
+* NODE
+#+NAME: NODE
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
+# fast Node Version Manager
+yay fnm-bin
+eval "$(fnm env)"               # source the shell instead of restarting terminal
+fnm install --lts               # Install latest node version -- $ node $ .exit
+# YARN
+sudo dnf install yarnpkg        # Fast, reliable, and secure dependency management.
+sudo yarn global add create-vite # then use create-vite my-app
+
+#+end_src
+
+* YAY Extras
+#+NAME: YAY Extras
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
 # wallppaper theme
 yay python-pywal
 yay redshift
@@ -264,27 +358,24 @@ yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-
 yay noto-fonts-emoji noto-fonts-extra
 # sudo pacman -S ttf-font-awesome-4
 
-# ASCII
-# live ascii bonsai tree animation @chonsai
-yay cbonsai
-yay rmatrix
+#+end_src
 
-#
-# EMACS
-#
+* EMACS
+#+NAME: EMACS
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
+
 yay emacs
 # Doom Emacs
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
    ~/.emacs.d/bin/doom install
 # source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
 doom sync
-sudo dnf install rust_ledger
-sudo dnf install sqlite
 
 #+END_SRC
 
-* C clang
-#+NAME: C clang
+* C Libraries
+#+NAME: C Libraries
 #+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
 sudo dnf install clang
 #+END_SRC
@@ -296,6 +387,41 @@ sudo dnf install clang
  - libomp-14.0.5-1.fc36.x86_64    OpenMP runtime for clang
  - libomp-devel-14.0.5-1.fc36.x86_64      OpenMP header files
  - llvm-14.0.5-1.fc36.x86_64      The Low Level Virtual Machine
+
+** SDL2
+NOTE: Using it for chip8 emulation.
+https://github.com/libsdl-org/SDL
+- Simple DirectMedia Layer is a cross-platform development library designed to provide
+  low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
+- It is used by video playback software, emulators, and popular games including Valve's
+  award winning catalog and many Humble Bundle games.
+
+#+NAME: C Libraries/SDL2
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install SDL2{,_image,_mixer,_ttf,_gfx}-devel
+#+END_SRC
+
+*** Packages Summary
+ Package                                        Architecture                      Version                                      Repository                          Size
+
+Installing:
+ SDL2-devel                                     x86_64                            2.24.0-1.fc36                                updates                            364 k
+ SDL2_gfx-devel                                 x86_64                            1.0.4-7.fc36                                 fedora                              17 k
+ SDL2_image-devel                               x86_64                            2.0.5-8.fc36                                 fedora                              11 k
+ SDL2_mixer-devel                               x86_64                            2.0.4-10.fc36                                fedora                              18 k
+ SDL2_ttf-devel                                 x86_64                            2.0.18-2.fc36                                fedora                              12 k
+Installing dependencies:
+ SDL2_gfx                                       x86_64                            1.0.4-7.fc36                                 fedora                              40 k
+ SDL2_mixer                                     x86_64                            2.0.4-10.fc36                                fedora                              82 k
+ SDL2_ttf                                       x86_64                            2.0.18-2.fc36                                fedora                              39 k
+ libglvnd-core-devel                            x86_64                            1:1.4.0-4.fc36                               updates                             17 k
+ libglvnd-devel                                 x86_64                            1:1.4.0-4.fc36                               updates                            155 k
+ mesa-libEGL-devel                              x86_64                            22.1.7-1.fc36                                updates                             19 k
+
+Install  11 Packages
+
+Total download size: 774 k
+Installed size: 5.1 M
 
 * robotgo
 ** Fedora
@@ -351,6 +477,7 @@ sudo dnf install cheat
 
 #+END_SRC
 
+** Examples only
 #+begin_src shell
 Examples:
   To initialize a config file:

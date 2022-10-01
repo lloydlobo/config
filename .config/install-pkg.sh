@@ -35,7 +35,7 @@ yay -Y --devel --save
 #
 # Arch pacman yay ends here
 
-# [[file:install-pkg.org::Fedora dnf snapd setup][Fedora dnf snapd setup]]
+# [[file:install-pkg.org::fedora dnf snapd setup][fedora dnf snapd setup]]
 #
 # snap
 #
@@ -80,10 +80,9 @@ yay vlc
 # Prerequisite mpc mpd ncmpcpp
 sudo pacman -S timidity
 yay ncspot  spicetify-cli spotify spotify-adblock-git spotify-tui
+# fedora dnf snapd setup ends here
 
-#
-# NeoVim
-#
+# [[file:install-pkg.org::Vim/Neovim][Vim/Neovim]]
 yay lua-language-server
 npm install -g typescript-language-server typescript
 yay tree-sitter                 #  An incremental parsing system for programming tools
@@ -113,16 +112,24 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
   nvim
 '
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+# Vim/Neovim ends here
+
+# [[file:install-pkg.org::Utilities][Utilities]]
 #------------------------------------------------------------------------------------------------------#
 # disk analyzer with ncurses interface
 yay ncdu
 cargo install --locked code-minimap
 # lf aur/lf Ranger in Go-lang - Option 98 in yay.,. first in aur
 sudo dnf install btop htop
-yay lf
-yay ripgrep
-yay zoxide                      # A smarter cd command
-yay bat
+# Simple X Hot Key Daemon.
+yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
+
+# OTHER YAY
+yay git-delta
+yay macchina-bin
+yay procs
+yay hyperfine
+
 yay thefuck
 sudo pacman -S ack
 sudo pacman -S fd
@@ -133,26 +140,47 @@ sudo dnf install cronie         # Run arbitrary commands when files change
 cronie                          # Cron daemon for executing programs at set times
 cronie-anacron                  #   Utility for running regular jobs
 crontabs                        # Root crontab files used to schedule the execution of programs
+# Utilities ends here
 
+# [[file:install-pkg.org::Databases][Databases]]
+#------------------------------------------------------------------------------------------------------#
+
+sudo dnf install sqlite
+# Databases ends here
+
+# [[file:install-pkg.org::Rust tools][Rust tools]]
+#------------------------------------------------------------------------------------------------------#
+# rust tools
+yay lf
+yay ripgrep
+yay zoxide                      # A smarter cd command
+yay exa # 10 - ls replacement
+yay bat
+sudo dnf install rust_ledger
+# Rust tools ends here
+
+# [[file:install-pkg.org::Go lang][Go lang]]
+#------------------------------------------------------------------------------------------------------#
 # Go lang
 ## Sampler:  Tool for shell commands execution, visualization and alerting.
 sudo wget https://github.com/sqshq/sampler/releases/download/v1.1.0/sampler-1.1.0-linux-amd64 -O /usr/local/bin/sampler
 sudo chmod +x /usr/local/bin/sampler # Please specify config file using --config flag. Example: sampler --config example.yml
 ### OR (FEDORA)
 sudo dnf install golang-github-sqshq-sampler
+# Go lang ends here
 
-
-yay exa # 10 - ls replacement
-# Simple X Hot Key Daemon.
-yay sxhkd                       # You can remap individual keys with Xmodmap quite easily, but not arbitrary combinations of keys.
-
+# [[file:install-pkg.org::VS Code][VS Code]]
+#------------------------------------------------------------------------------------------------------#
 
 # VSCODE -- https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 dnf check-update
 sudo dnf install code
+# VS Code ends here
 
+# [[file:install-pkg.org::Browsers][Browsers]]
+#------------------------------------------------------------------------------------------------------#
 # BROWSER
 # Qutebrowser & dependency
 yay qutebrowser
@@ -160,40 +188,20 @@ yay python-adblock
 yay asciidoc
 sudo dnf install qt5-qtwebengine-freeworld   # RPM Fusion - codecs to play videos
 # yay python-pygments # for :view-source syntax highlighting
+# Browsers ends here
 
-# OTHER YAY
-yay git-delta
-yay macchina-bin
-yay procs
-yay hyperfine
-
-# FONTS
+# [[file:install-pkg.org::Fonts][Fonts]]
+#------------------------------------------------------------------------------------------------------#
 yay nerd-fonts-complete         # aur but conflicts with ttf-nerd-fonts-symbols
 yay powerline-fonts-git
 yay fontmatrix
 yay powerline-fonts
 yay powerline-common
 yay xorg-xlsfonts
+# Fonts ends here
 
-# Shell Prompt
-yay starship
-
-# Navi & dependencies
-yay navi # man-page alternative in Rust
-yay fzf
-yay skim
-
-# REPL
-yay evcxr                       # a RUST based repl based on evcxr
-
-# fast Node Version Manager
-yay fnm-bin
-eval "$(fnm env)"               # source the shell instead of restarting terminal
-fnm install --lts               # Install latest node version -- $ node $ .exit
-# YARN
-sudo dnf install yarnpkg        # Fast, reliable, and secure dependency management.
-sudo yarn global add create-vite # then use create-vite my-app
-
+# [[file:install-pkg.org::Shell Terminals Extras][Shell Terminals Extras]]
+#------------------------------------------------------------------------------------------------------#
 # terminal
 yay wezterm kitty alacritty
 
@@ -207,6 +215,36 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 yay mcfly
 echo "source /usr/share/doc/mcfly/mcfly.bash" >> .bashrc
 
+# Shell Prompt
+yay starship
+
+# Navi & dependencies
+yay navi # man-page alternative in Rust
+yay fzf
+yay skim
+
+# REPL
+yay evcxr                       # a RUST based repl based on evcxr
+
+# ASCII
+# live ascii bonsai tree animation @chonsai
+yay cbonsai
+yay rmatrix
+# Shell Terminals Extras ends here
+
+# [[file:install-pkg.org::NODE][NODE]]
+#------------------------------------------------------------------------------------------------------#
+# fast Node Version Manager
+yay fnm-bin
+eval "$(fnm env)"               # source the shell instead of restarting terminal
+fnm install --lts               # Install latest node version -- $ node $ .exit
+# YARN
+sudo dnf install yarnpkg        # Fast, reliable, and secure dependency management.
+sudo yarn global add create-vite # then use create-vite my-app
+# NODE ends here
+
+# [[file:install-pkg.org::YAY Extras][YAY Extras]]
+#------------------------------------------------------------------------------------------------------#
 # wallppaper theme
 yay python-pywal
 yay redshift
@@ -229,28 +267,26 @@ yay -S ttf-gelasio-ib ttf-caladea ttf-carlito ttf-liberation-sans-narrow ttf-ms-
 # Essential for starship glyphs emoji etc
 yay noto-fonts-emoji noto-fonts-extra
 # sudo pacman -S ttf-font-awesome-4
+# YAY Extras ends here
 
-# ASCII
-# live ascii bonsai tree animation @chonsai
-yay cbonsai
-yay rmatrix
+# [[file:install-pkg.org::EMACS][EMACS]]
+#------------------------------------------------------------------------------------------------------#
 
-#
-# EMACS
-#
 yay emacs
 # Doom Emacs
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
    ~/.emacs.d/bin/doom install
 # source .bashrc # after adding to ./bashrc >> export PATH="$HOME/.emacs.d/bin:$PATH"
 doom sync
-sudo dnf install rust_ledger
-sudo dnf install sqlite
-# Fedora dnf snapd setup ends here
+# EMACS ends here
 
-# [[file:install-pkg.org::C clang][C clang]]
+# [[file:install-pkg.org::C Libraries][C Libraries]]
 sudo dnf install clang
-# C clang ends here
+# C Libraries ends here
+
+# [[file:install-pkg.org::C Libraries/SDL2][C Libraries/SDL2]]
+sudo dnf install SDL2{,_image,_mixer,_ttf,_gfx}-devel
+# C Libraries/SDL2 ends here
 
 # [[file:install-pkg.org::robotgo/Fedora][robotgo/Fedora]]
 sudo dnf install libXtst-devel
