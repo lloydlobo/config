@@ -81,7 +81,28 @@ lvim.keys.visual_mode["<leader>["] = "<esc>`>a]<esc>`<i[<esc>"
 lvim.keys.visual_mode["<leader>{"] = "<esc>`>a}<esc>`<i{<esc>"
 
 -- Select all
-lvim.keys.normal_mode["<leader><C-a>"] = "gg<S-v>G"
+-- lvim.keys.normal_mode["<leader><C-a>"] = "gg<S-v>G"
+lvim.builtin.which_key.mappings["<C-a>"] = {
+    name = "+Text",
+    a = { "gg<S-v>G", "Select All Text" },
+    v = { "gg<S-v>GY", "Copy All Text" },
+    w = { "<cmd>set wrap<cr>", "Word Wrap Enable" },
+    n = { "<cmd>set nowrap<cr>", "Word Wrap Disable" },
+    -- f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    -- d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+    -- q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    -- l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    -- w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+}
+
+-- <Esc>l<Cmd>lua require('nvim-autopairs.fastwrap').show()<CR>
+-- require("zen-mode").toggle({ window = { width = .85 -- width will be 85% of the editor width } })
+lvim.builtin.which_key.mappings["z"] = {
+    name = "+Zen",
+    m = { "<C-w>+", "Maximize Window Height" },
+    z = { "<Esc><cmd>ZenMode<cr>", "Toggle Zen Mode"
+    },
+}
 
 -- [[       SETUP          ]]
 -- Remap for dealing with word wrap
@@ -233,11 +254,17 @@ linters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-    { "folke/tokyonight.nvim" },
     {
         "folke/trouble.nvim",
         cmd = "TroubleToggle",
     },
+    {
+        "folke/zen-mode.nvim",
+        config = function()
+            require("zen-mode").setup {}
+        end
+    },
+    { "folke/tokyonight.nvim" },
     { "Tsuzat/NeoSolarized.nvim" }, --  NeoSolarized colorscheme for NeoVim with full transparency
     { "cpea2506/one_monokai.nvim" },
     {
@@ -249,9 +276,32 @@ lvim.plugins = {
     {
         'RishabhRD/popfix',
         'RishabhRD/nvim-cheat.sh'
-    } -- https://github.com/RishabhRD/nvim-cheat.sh
-
+    }, -- https://github.com/RishabhRD/nvim-cheat.sh
+    {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("todo-comments").setup {
+                keywords = {
+                    FIX = {
+                        icon = " ", -- icon used for the sign, and in search results
+                        color = "error", -- can be a hex color, or a named color (see below)
+                        alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+                        -- signs = false, -- configure signs for some keywords individually
+                    },
+                    TODO = { icon = " ", color = "info" },
+                    HACK = { icon = " ", color = "warning" },
+                    WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+                    PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+                    NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+                    TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+                },
+            }
+        end
+    },
 }
+-- TODO: dh
+
 --[[ nvim-cheat.sh 
 -- :Cheat
 -- :Cheat cpp reverse number
