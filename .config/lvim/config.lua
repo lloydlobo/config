@@ -24,6 +24,10 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+
+-- q ➜  /\. ^Ma^M * ^[
+lvim.keys.normal_mode["<C-i>"] = "/\\. <S-a><CR> * <C-[>"
+
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -61,9 +65,6 @@ lvim.keys.normal_mode["-"] = "<C-x>"
 -- Default delete word backwards
 lvim.keys.normal_mode["dw"] = 'vb"_d'
 
--- Select all
-lvim.keys.normal_mode["<C-a>"] = "gg<S-v>G"
-
 -- Vim tweaks
 -- goto start/end of line in insert mode
 lvim.keys.insert_mode["<C-d>"] = "<C-o>0" -- Ctrl-d go start (down)
@@ -78,6 +79,9 @@ lvim.keys.visual_mode['<leader>`'] = '<esc>`>a`<esc>`<i`<esc>'
 lvim.keys.visual_mode["<leader>("] = "<esc>`>a)<esc>`<i(<esc>"
 lvim.keys.visual_mode["<leader>["] = "<esc>`>a]<esc>`<i[<esc>"
 lvim.keys.visual_mode["<leader>{"] = "<esc>`>a}<esc>`<i{<esc>"
+
+-- Select all
+lvim.keys.normal_mode["<leader><C-a>"] = "gg<S-v>G"
 
 -- [[       SETUP          ]]
 -- Remap for dealing with word wrap
