@@ -8,6 +8,16 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+-- In my config I go with nanotee's advice and define a helper function
+-- to avoid spelling out that insanely long function name.
+-- https://stackoverflow.com/a/69142336
+local function t(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+-- Maximize window height on startup.
+vim.cmd(t("normal <C-w>+"))
+
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -45,8 +55,7 @@ function Set_default_option_settings()
     }
 
     for k, v in pairs(default_options) do
-        vim.opt[k] = v
-        -- print("defaults", k, "is", v)
+        vim.opt[k] = v -- print("defaults", k, "is", v)
     end
 end
 
@@ -88,20 +97,22 @@ lvim.builtin.which_key.mappings["<C-a>"] = {
     v = { "gg<S-v>GY", "Copy All Text" },
     w = { "<cmd>set wrap<cr>", "Word Wrap Enable" },
     n = { "<cmd>set nowrap<cr>", "Word Wrap Disable" },
-    -- f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-    -- d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-    -- q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    -- l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-    -- w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    s = {
+        function()
+            vim.o.spell = not vim.o.spell
+            print("spell: " .. tostring(vim.o.spell))
+        end,
+        "Toggle spell check" -- https://www.reddit.com/r/neovim/comments/ua544z/how_do_i_toggle_and_read_spell_using_lua/
+    }
 }
 
--- <Esc>l<Cmd>lua require('nvim-autopairs.fastwrap').show()<CR>
--- require("zen-mode").toggle({ window = { width = .85 -- width will be 85% of the editor width } })
 lvim.builtin.which_key.mappings["z"] = {
     name = "+Zen",
     m = { "<C-w>+", "Maximize Window Height" },
-    z = { "<Esc><cmd>ZenMode<cr>", "Toggle Zen Mode"
-    },
+    z = { "<Esc><cmd>ZenMode<cr>", "Toggle Zen Mode" },
+    w = { function()
+        require("zen-mode").toggle({ window = { width = .85 } })
+    end, "Toggle zen with width 85% width" },
 }
 
 -- [[       SETUP          ]]
@@ -421,7 +432,7 @@ local function theme_NeoSolarized_cmd()
 
 end
 
--- theme_NeoSolarized_cmd()
+theme_NeoSolarized_cmd()
 
 ---@diagnostic disable-next-line: unused-function, unused-local
 local function theme_one_monokai()
