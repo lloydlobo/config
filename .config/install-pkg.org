@@ -14,6 +14,7 @@
 - [[#databases][Databases]]
 - [[#rust-tools][Rust tools]]
 - [[#go-lang][Go lang]]
+- [[#lsp][LSP]]
 - [[#vs-code][VS Code]]
 - [[#browsers][Browsers]]
 - [[#fonts][Fonts]]
@@ -30,9 +31,12 @@
   - [[#shfmt][shfmt]]
 - [[#go-tools-environment][Go Tools Environment]]
   - [[#debugging][Debugging]]
+- [[#gnu][GNU]]
+  - [[#gnuplot][gnuplot]]
 - [[#cheatsheets][cheatsheets]]
   - [[#cheat][cheat]]
   - [[#examples-only][Examples only]]
+- [[#docker][Docker]]
 
 * bash shebang
 #+NAME: bash shebang
@@ -225,6 +229,10 @@ yay zoxide                      # A smarter cd command
 yay exa # 10 - ls replacement
 yay bat
 sudo dnf install rust_ledger
+cargo install sd nu # sd like sed. nu(shell)
+cargo install just  # save and run project commands. like `make`.
+cargo install kondo kondo-cli # kondo like npxkill for different large files dependencies.
+cargo install --locked zellij   # tmux
 
 #+end_src
 
@@ -238,6 +246,18 @@ sudo wget https://github.com/sqshq/sampler/releases/download/v1.1.0/sampler-1.1.
 sudo chmod +x /usr/local/bin/sampler # Please specify config file using --config flag. Example: sampler --config example.yml
 ### OR (FEDORA)
 sudo dnf install golang-github-sqshq-sampler
+
+#+end_src
+
+* LSP
+#+NAME: LSP
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+#------------------------------------------------------------------------------------------------------#
+
+# codespell-2.1.0-4.fc36.noarch  Fix common misspellings in text files
+sudo dnf install codespell # For null-ls neovim
+sudo dnf install python3-flake8 # For null-ls neovim
+
 
 #+end_src
 
@@ -468,6 +488,15 @@ go get github.com/haya14busa/goplay/cmd/goplay@latest
 go get github.com/go-delve/delve/cmd/dlv@latest
 go get honnef.co/go/tools/cmd/staticcheck@latest
 #+end_src
+* GNU
+** gnuplot
+Installed:
+  dejavu-sans-fonts-2.37-18.fc36.noarch  gnuplot-5.4.3-3.fc36.x86_64
+  gnuplot-common-5.4.3-3.fc36.x86_64     libcerf-2.1-1.fc36.x86_64
+#+NAME: GNU/gnuplot
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install gnuplot
+#+END_SRC
 * cheatsheets
 ** cheat
 cheat-community-cheatsheets
@@ -516,3 +545,21 @@ Examples:
   To remove (delete) the foo/bar cheatsheet:
     cheat --rm foo/bar
 #+end_src
+* Docker
+  ** Installation
+#+NAME: Docker/installation
+#+BEGIN_SRC shell :tangle install-pkg.sh :main no :comments link :noweb yes
+sudo dnf install cheat
+
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager \
+--add-repo \
+https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+dnf list docker-ce --showduplicates | sort -r
+sudo systemctl start docker # Start docker post installation.
+sudo docker run hello-world # Verify that Docker Engine is installed right.
+#+END_SRC
+sudo dnf install ./docker-desktop-4.12.0-x86_64.rpm
+systemctl --user start docker-desktop .config/install-pkg.sh
+sudo dnf install nasm
