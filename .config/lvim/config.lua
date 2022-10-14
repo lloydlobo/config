@@ -20,10 +20,21 @@ vim.cmd(t("normal <C-w>+"))
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
-lvim.colorscheme = "tokyonight-night"
+lvim.format_on_save = false
+
+-- External program to use for "=" command.
+-- autocmd FileType c,cpp setlocal equalprg=clang-format
+-- format <CMD>gg=G<CR> -- Explanation: gg goes to the top of the file, = is a command to fix the indentation and G tells it to perform the operation to the end of the file.
+
+-- lvim.colorscheme = "tokyonight-night"
+-- lvim.colorscheme = "catppuccin"
 -- lvim.colorscheme = "one_monokai"
--- lvim.colorscheme = "NeoSolarized" -- enable the theme_NeoSolarized_cmd() at end of file too
+-- lvim.colorscheme = "onenord"
+-- lvim.colorscheme = "gruvbox"
+-- lvim.colorscheme = "kanagawa"
+lvim.colorscheme = "solarized"
+-- lvim.colorscheme = "cobalt2"
+-- lvim.colorscheme = "NeoSolarized"
 
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -47,19 +58,27 @@ lvim.keys.normal_mode["<C-i>"] = "/\\. <S-a><CR> * <C-[>"
 
 function Set_default_option_settings()
     local default_options = {
+        -- indents will have width of 4.
         shiftwidth = 4, -- the number of spaces inserted for each indentation
         tabstop = 4, -- insert 2 spaces for a tab
+        softtabstop = 4, -- number of columns fro a tab.
         relativenumber = true, -- set relative numbered lines
         numberwidth = 2, -- set number column width to 2 {default 4} -- Thus with the Vim default of 4 there is room for a line number up to 999. When the buffer has 1000 lines five columns will be used. The minimum value is 1, the maximum value is 20.
         wrap = false, -- display lines as one long line
     }
-
     for k, v in pairs(default_options) do
         vim.opt[k] = v -- print("defaults", k, "is", v)
     end
 end
 
 Set_default_option_settings()
+
+--[[ Every wrapped line will continue visually indented (same amount of space 
+    as the beginning of that line), thus preserving horizontal blocks of text. ]]
+-- Enable break indent.
+vim.o.breakindent = true
+-- Set highlight on search. This will remove the highlight after searching for text.
+vim.o.hlsearch = false
 
 -- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
 vim.opt.foldlevel = 20
@@ -97,6 +116,7 @@ lvim.builtin.which_key.mappings["<C-a>"] = {
     v = { "gg<S-v>GY", "Copy All Text" },
     w = { "<cmd>set wrap<cr>", "Word Wrap Enable" },
     n = { "<cmd>set nowrap<cr>", "Word Wrap Disable" },
+    i = { "gg=G<C-o>", "Vim Indent" },
     s = {
         function()
             vim.o.spell = not vim.o.spell
@@ -106,13 +126,34 @@ lvim.builtin.which_key.mappings["<C-a>"] = {
     }
 }
 
+lvim.builtin.which_key.mappings["m"] = {
+    name = "+MiniMap",
+    c = { "<cmd>lua MiniMap.close<cr>", "Close MiniMap" },
+    o = { "<cmd>lua MiniMap.open<cr>", "Close MiniMap" },
+    -- vim.keymap.set('n', '<Leader>mc', MiniMap.close)
+    -- vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus)
+    -- vim.keymap.set('n', '<Leader>mo', MiniMap.open)
+    -- vim.keymap.set('n', '<Leader>mr', MiniMap.refresh)
+    -- vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side)
+    -- vim.keymap.set('n', '<Leader>mt', MiniMap.toggle)
+}
+
 lvim.builtin.which_key.mappings["z"] = {
     name = "+Zen",
+    i = { "<cmd>IndentBlanklineToggle<cr>", "Toggle IndentBlankLine Guides" },
     m = { "<C-w>+", "Maximize Window Height" },
-    z = { "<Esc><cmd>ZenMode<cr>", "Toggle Zen Mode" },
     w = { function()
         require("zen-mode").toggle({ window = { width = .85 } })
     end, "Toggle zen with width 85% width" },
+    -- s = { function() vim.opt.listchars:append "space:⋅" end, "Toggle space dot" },
+    c = {
+        name = "+IndentListChars",
+        d = { function() vim.opt.listchars:append "space:⋅" end, "Enable space char dot" },
+        s = { function() vim.opt.listchars:append "space: " end, "Disable space char blank" },
+        e = { function() vim.opt.listchars:append "eol:↴" end, "Enable char blank end of line" },
+        n = { function() vim.opt.listchars:append "eol: " end, "Disable char blank end of line" },
+    },
+    z = { "<Esc><cmd>ZenMode<cr>", "Toggle Zen Mode" },
 }
 
 -- [[       SETUP          ]]
@@ -230,20 +271,21 @@ lvim.lsp.installer.setup.ensure_installed = {
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+    -- { command = "black", filetypes = { "python" } },
+    -- { command = "isort", filetypes = { "python" } },
+    { command = "isort", filetypes = { "python" } },
+    {
+        -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+        command = "prettier",
+        ---@usage arguments to pass to the formatter
+        -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+        extra_args = { "--print-with", "100" },
+        ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+        filetypes = { "typescript", "typescriptreact" },
+    },
+}
 
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
@@ -262,9 +304,18 @@ linters.setup {
         filetypes = { "javascript", "python" },
     },
 }
-
 -- Additional Plugins
+
 lvim.plugins = {
+    { "lunarvim/colorschemes" },
+    { "catppuccin/nvim",
+        as = "catppuccin",
+        config = function()
+            vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+            require("catppuccin").setup()
+            -- vim.api.nvim_command "colorscheme catppuccin"
+        end
+    },
     {
         "folke/trouble.nvim",
         cmd = "TroubleToggle",
@@ -275,8 +326,18 @@ lvim.plugins = {
             require("zen-mode").setup {}
         end
     },
-    { "folke/tokyonight.nvim" },
+    { "folke/tokyonight.nvim" }, -- { "sainhe/everforest" },
     { "Tsuzat/NeoSolarized.nvim" }, --  NeoSolarized colorscheme for NeoVim with full transparency
+    { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' },
+    { -- https://github.com/maxmx03/solarized.nvim
+        'maxmx03/solarized.nvim',
+        config = function()
+            local success, solarized = pcall(require, 'solarized')
+            if not success then return end
+            solarized.setup()
+        end
+    },
+    { "rebelot/kanagawa.nvim" },
     { "cpea2506/one_monokai.nvim" },
     {
         "nvim-orgmode/orgmode",
@@ -288,6 +349,12 @@ lvim.plugins = {
         'RishabhRD/popfix',
         'RishabhRD/nvim-cheat.sh'
     }, -- https://github.com/RishabhRD/nvim-cheat.sh
+    {
+        'echasnovski/mini.nvim',
+        config = function()
+            require("mini.map").setup()
+        end
+    },
     {
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
@@ -310,31 +377,86 @@ lvim.plugins = {
             }
         end
     },
+    -- indent highlighting { "Yggdroot/indentLine" },
+    -- show character on end of lines
+    { "lukas-reineke/indent-blankline.nvim" },
+    -- "morhetz/gruvbox"
+    -- { "morhetz/gruvbox" },
+    { "ellisonleao/gruvbox.nvim" },
+    -- Colorful CSV highlighting
+    { "mechatroner/rainbow_csv" },
+    -- Keybindings for navigating between vim and tmux
+    { "christoomey/vim-tmux-navigator" },
+    -- get some nicer UI around lsp issues
+    { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
+    -- Run tests from vim
+    { "vim-test/vim-test" },
+    -- use("airblade/vim-gitgutter")
+    -- Markdown preview
+    { "iamcco/markdown-preview.nvim", run = "cd app & yarn install", cmd = "MarkdownPreview" },
+    -- Debug Go
+    { "sebdah/vim-delve" },
+    -- formatter to format on save
+    -- { "mhartington/formatter.nvim" },
+    -- dev tools
+    { 'tpope/vim-dispatch', ft = { 'cpp', 'c', 'fortran' }, cmd = { 'Make' } },
+    { 'lervag/vimtex', ft = { 'tex' } },
+    -- find and search
+    { "junegunn/fzf", run = ":call fzf#install()" },
+    { 'junegunn/vim-easy-align' },
+    -- use 'terryma/vim-multiple-cursors',
+    { 'majutsushi/tagbar', cmd = { 'TagbarToggle' } },
+    { 'tpope/vim-fugitive' },
+    { 'tpope/vim-surround' },
+    { 'tpope/vim-repeat' },
+    { 'mhinz/vim-grepper' },
 }
--- TODO: dh
 
---[[ nvim-cheat.sh 
--- :Cheat
--- :Cheat cpp reverse number
--- :CheatWithoutComments
--- :CheatWithoutComments cpp reverse number
 
-Keymaps for prompt are:
-    -- In insert mode:
-    <CR> : Open result in default layout.      <C-x> : Open result in horizontal split.
-    <C-t> : Open result in a new tab.          <C-v> : Open result in a vertical split.
-    <C-y> : Open result in floating window.    <C-f> : Open result in floating window.
-    <C-c> : Close window without any action.   <C-p> : Previous in history
-    <C-n> : Next in history
+local function opt_blankline()
+    vim.opt.list = true
+    vim.opt.listchars:append "space: "
+    -- vim.opt.listchars:append "space:⋅"
+    vim.opt.listchars:append "eol: "
+    -- vim.opt.listchars:append "eol:↴"
+    vim.opt.termguicolors = true
+    vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+    vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+end
 
-    -- In normal mode:
-    <CR> : Open result in default layout.      <C-x> : Open result in horizontal split.
-    <C-t> : Open result in a new tab.          <C-v> : Open result in a vertical split.
-    <C-y> : Open result in floating window.    <C-f> : Open result in floating window.
-    <C-c> : Close window without any action.   <Esc> : Close window without any action.
-    q : Close window without any action.        
-    k : Previous in history j : Next in history 
-]]
+local function blankline_simple()
+    opt_blankline()
+    require("indent_blankline").setup { -- char = "", -- this erases all indent guides.
+        show_trailing_blankline_indent = false,
+        show_end_of_line = true,
+        show_current_context = true,
+        show_current_context_start = true,
+        -- char = "⋅",
+        char_highlight_list = {
+            "IndentBlanklineIndent1",
+            "IndentBlanklineIndent2",
+            "IndentBlanklineIndent3",
+            "IndentBlanklineIndent4",
+            "IndentBlanklineIndent5",
+            "IndentBlanklineIndent6",
+        },
+        space_char_blankline = "↴", -- space_char_blankline = " ",
+        space_char_highlight_list = {
+            "IndentBlanklineIndent1",
+            "IndentBlanklineIndent2",
+            "IndentBlanklineIndent3",
+            "IndentBlanklineIndent4",
+            "IndentBlanklineIndent5",
+            "IndentBlanklineIndent6",
+        },
+    }
+end
+
+blankline_simple()
 
 -- -------------------------------------------------------------
 -- ORG-MODE
@@ -358,31 +480,6 @@ require('orgmode').setup({
     org_default_notes_file = '~/Dropbox/org/refile.org',
 })
 
--- FIXME
--- Install nvim-cmp, and buffer source as a dependency
--- {
---   "hrsh7th/nvim-cmp",
---   config = function()
---     if lvim.builtin.cmp then
---       require("lvim.core.cmp").setup()
---     end
---   end,
---   requires = {
---     "L3MON4D3/LuaSnip",
---   },
--- },
--- require('nvim-cmp').setup({
---     sources = {
---         { name = 'orgmode' }
---     }
--- })
--- sources = cmp.config.sources({
---       { name = 'nvim_lsp' },
---       { name = 'vsnip' }, -- For vsnip users.
---       -- { name = 'luasnip' }, -- For luasnip users.
---       -- { name = 'ultisnips' }, -- For ultisnips users.
---       -- { name = 'snippy' }, -- For snippy users.
---     }, {
 -- -------------------------------------------------------------
 -- ORG-MODE
 -- -------------------------------------------------------------
@@ -443,6 +540,100 @@ end
 
 theme_one_monokai()
 
+-- THEME Solarized.
+local success, solarized = pcall(require, 'solarized')
+if not success then
+    return
+end
+local solarized_config = {
+    mode = 'dark', -- dark(default)/light
+    theme = 'neovim', -- vim(default)/neovim/vscode
+    transparent = false, -- false(default)/true } ,),
+    -- colors = function(c)
+    --     local colors = {
+    --         -- fg = c.cyan, -- override the default foreground color
+    --         indigo = '#4B0082', -- new color
+    --     }
+    --     return colors
+    -- end,
+    highlights = function(colors)
+        local highlights = {
+            LineNr = { bg = colors.bg, }, -- Line bg is window bg.
+            -- CmpItemKindTabnine = { fg = colors.magenta },
+            -- CmpItemKindEmoji = { fg = colors.yellow },
+            -- LineNr = { bg = solarized:is_transparent(colors.bg_alt) }, -- bg_alt if solarized is not transparent
+            -- CursorLineNr = { fg = colors.fg }, -- new color being used
+        }
+        return highlights
+    end,
+}
+solarized.setup(solarized_config)
+
+-- local latte = require("catppuccin.palettes").get_palette "latte"
+local frappe = require("catppuccin.palettes").get_palette "frappe"
+local macchiato = require("catppuccin.palettes").get_palette "macchiato"
+local mocha = require("catppuccin.palettes").get_palette "mocha"
+vim.g.catppuccin_flavour = "mocha" -- Has to be set in order for empty argument to work
+local colors = require("catppuccin.palettes").get_palette() -- g:catppuccin_flavour's palette
+-- latte, frappe, macchiato, mocha
+require("catppuccin").setup({
+    transparent_background = true,
+    term_colors = true,
+    dim_inactive = {
+        enabled = true,
+        shade = "dark",
+        percentage = 0.15,
+    },
+    styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        treesitter = true, -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+    custom_highlights = {
+        Comment = { fg = colors.flamingo },
+        TSConstBuiltin = { fg = colors.peach, style = {} },
+        TSConstant = { fg = colors.sky },
+        TSComment = { fg = colors.surface2, style = { "italic" } }
+    },
+    color_overrides = {},
+    highlight_overrides = {
+        all = {
+            CmpBorder = { fg = "#3e4145" },
+        },
+        -- latte = {
+        --     Normal = { fg = ucolors.darken(latte.base, 0.7, latte.mantle) }, -- BUG: ucolors undefined..
+        -- },
+        frappe = {
+            TSConstBuiltin = { fg = frappe.peach, style = {} },
+            TSConstant = { fg = frappe.sky },
+            TSComment = { fg = frappe.surface2, style = { "italic" } },
+        },
+        macchiato = {
+            LineNr = { fg = macchiato.overlay1 }
+        },
+        mocha = {
+            Comment = { fg = mocha.flamingo },
+        },
+    },
+})
+
+
 -- TODO
 --[[
 --  Is there a way to interact with bare git repos, say for a dotfiles repo? #1201 
@@ -479,3 +670,29 @@ wk.register({
     end , 'lazygit'},
 }, { prefix = 'g' })
 ]]
+
+-- FIXME
+-- Install nvim-cmp, and buffer source as a dependency
+-- {
+--   "hrsh7th/nvim-cmp",
+--   config = function()
+--     if lvim.builtin.cmp then
+--       require("lvim.core.cmp").setup()
+--     end
+--   end,
+--   requires = {
+--     "L3MON4D3/LuaSnip",
+--   },
+-- },
+-- require('nvim-cmp').setup({
+--     sources = {
+--         { name = 'orgmode' }
+--     }
+-- })
+-- sources = cmp.config.sources({
+--       { name = 'nvim_lsp' },
+--       { name = 'vsnip' }, -- For vsnip users.
+--       -- { name = 'luasnip' }, -- For luasnip users.
+--       -- { name = 'ultisnips' }, -- For ultisnips users.
+--       -- { name = 'snippy' }, -- For snippy users.
+--     }, {
