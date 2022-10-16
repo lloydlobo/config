@@ -1,12 +1,9 @@
 --[[
 lvim is the global options object
 
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
+Linters should be filled in as strings with either
+a global executable or a path to an executable
 ]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- In my config I go with nanotee's advice and define a helper function
 -- to avoid spelling out that insanely long function name.
@@ -501,8 +498,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local theme_NeoSolarized = {
     NeoSolarized_italics = 1, -- 0 or 1
-    NeoSolarized_visibility = 'normal', -- low, normal, high
-    NeoSolarized_diffmode = 'normal', -- low, normal, high
+    NeoSolarized_visibility = 'high', -- low, normal, high
+    NeoSolarized_diffmode = 'low', -- low, normal, high
     NeoSolarized_termtrans = 1, -- 0(default) or 1 -> Transparency
     NeoSolarized_lineNr = 0, -- 0 or 1 (default) -> To Show backgroung in LineNr
 }
@@ -580,7 +577,7 @@ require("catppuccin").setup({
     transparent_background = true,
     term_colors = true,
     dim_inactive = {
-        enabled = true,
+        enabled = false,
         shade = "dark",
         percentage = 0.15,
     },
@@ -632,67 +629,3 @@ require("catppuccin").setup({
         },
     },
 })
-
-
--- TODO
---[[
---  Is there a way to interact with bare git repos, say for a dotfiles repo? #1201 
--- https://github.com/jesseduffield/lazygit/discussions/1201
-local Terminal = require'toggleterm.terminal'.Terminal
-
-local function close_terminal_on_zero_exit(terminal, _, exit_code)
-    if exit_code == 0 then
-        terminal:close()
-    end
-end
-
-local lazygit = Terminal:new({
-    cmd = 'lazygit',
-    direction = 'float',
-    hidden = true,
-    on_exit = close_terminal_on_zero_exit,
-})
-
-local dotfileslazygit = Terminal:new({
-    cmd = 'lazygit --git-dir=$HOME/.cfg --work-tree=$HOME',
-    direction = 'float',
-    hidden = true,
-    on_exit = close_terminal_on_zero_exit,
-})
-
-wk.register({
-    G = { function()
-        if vim.loop.cwd() == vim.call('expand', '~/.config') then
-            dotfileslazygit:toggle()
-        else
-            lazygit:toggle()
-        end
-    end , 'lazygit'},
-}, { prefix = 'g' })
-]]
-
--- FIXME
--- Install nvim-cmp, and buffer source as a dependency
--- {
---   "hrsh7th/nvim-cmp",
---   config = function()
---     if lvim.builtin.cmp then
---       require("lvim.core.cmp").setup()
---     end
---   end,
---   requires = {
---     "L3MON4D3/LuaSnip",
---   },
--- },
--- require('nvim-cmp').setup({
---     sources = {
---         { name = 'orgmode' }
---     }
--- })
--- sources = cmp.config.sources({
---       { name = 'nvim_lsp' },
---       { name = 'vsnip' }, -- For vsnip users.
---       -- { name = 'luasnip' }, -- For luasnip users.
---       -- { name = 'ultisnips' }, -- For ultisnips users.
---       -- { name = 'snippy' }, -- For snippy users.
---     }, {
