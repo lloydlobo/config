@@ -12,9 +12,36 @@ local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+-- lvim.lang
 -- Maximize window height on startup.
 vim.cmd(t("normal <C-w>+"))
-
+-- vim.cmd(let g:LanguageClient_useVirtualText = 0)
+-- vim.cmd("normal hl-DiagnosticVirtualTextHint=0")
+-- Show diagnostics in a pop-up window on hover
+-- https://www.reddit.com/r/neovim/comments/uqb50c/with_native_lsp_nvimcmp_how_do_you_prevent_the/
+_G.LspDiagnosticsPopupHandler = function()
+    local current_cursor = vim.api.nvim_win_get_cursor(0)
+    local last_popup_cursor = vim.w.lsp_diagnostics_last_cursor or { nil, nil }
+    -- Show the popup diagnostics window,
+    -- but only once for the current cursor location (unless moved afterwards).
+    if not (current_cursor[1] == last_popup_cursor[1] and current_cursor[2] == last_popup_cursor[2]) then
+        vim.w.lsp_diagnostics_last_cursor = current_cursor
+        vim.diagnostic.open_float(0, { scope = "cursor" })
+    end
+    local reset_group = vim.api.nvim_create_augroup('reset_group', {})
+    vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+        callback = function()
+            _G.LspDiagnosticsPopupHandler()
+        end,
+        group = reset_group,
+    })
+end
+vim.cmd [[
+augroup LSPDiagnosticsOnHover
+  autocmd!
+  autocmd CursorHold *   lua _G.LspDiagnosticsPopupHandler()
+augroup END
+]]
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
@@ -28,8 +55,8 @@ lvim.format_on_save = false
 -- lvim.colorscheme = "one_monokai"
 -- lvim.colorscheme = "onenord"
 -- lvim.colorscheme = "gruvbox"
--- lvim.colorscheme = "kanagawa"
-lvim.colorscheme = "solarized"
+lvim.colorscheme = "kanagawa"
+-- lvim.colorscheme = "solarized"
 -- lvim.colorscheme = "cobalt2"
 -- lvim.colorscheme = "NeoSolarized"
 
@@ -328,11 +355,11 @@ lvim.plugins = {
     { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' },
     { -- https://github.com/maxmx03/solarized.nvim
         'maxmx03/solarized.nvim',
-        config = function()
-            local success, solarized = pcall(require, 'solarized')
-            if not success then return end
-            solarized.setup()
-        end
+        -- config = function()
+        --     local success, solarized = pcall(require, 'solarized')
+        --     if not success then return end
+        --     solarized.setup()
+        -- end
     },
     { "rebelot/kanagawa.nvim" },
     { "cpea2506/one_monokai.nvim" },
