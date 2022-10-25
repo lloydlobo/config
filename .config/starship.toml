@@ -35,7 +35,7 @@ add_newline = true
 [username]
 style_user = "fg:black bg:cyan bold"
 style_root = "fg:white bg:cyan bold"
-format = "[]($style)"               # format = "[ $user ]($style) "
+format = "[ ]($style)"              # format = "[ $user ]($style) "
 disabled = false
 show_always = true
 
@@ -46,12 +46,17 @@ trim_at = ".fritz.box"
 disabled = true
 
 [directory]
-style = "fg:black bg:cyan bold"
-format = "[ $path ]($style)"
-home_symbol = "~"
 truncation_length = 3
+truncate_to_repo = true
+style = "fg:black bg:cyan"
+format = "[$path]($style)"
+read_only = "🔒"                                                                                                             # or " ro"
+read_only_style = "red"
 truncation_symbol = "../"
-read_only = "🔒"                 # or " ro"
+repo_root_style = "fg:black bg:cyan bold dimmed"
+repo_root_format = "[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
+home_symbol = "~"
+use_os_path_sep = true
 
 [directory.substitutions]
 "Documents" = " "
@@ -71,10 +76,10 @@ error_symbol = "[❯](bold red) "
 # min_time = 60_0000
 # format = "[ $duration ]($style)"
 min_time = 500
-format = "[$duration]($style)"
-style = "fg:black bg:cyan"
+format = "[ $duration]($style)"
+style = "fg:black bg:cyan dimmed"
 show_milliseconds = false
-show_notifications = false     # Desktop notification of terminal cmd_duration.
+show_notifications = false        # Desktop notification of terminal cmd_duration.
 disabled = false
 
 [jobs]
@@ -86,20 +91,19 @@ disabled = false
 
 [memory_usage]
 threshold = -1
-symbol = ""
-format = "$symbol[$ram(|$swap)]($style)"
+symbol = "🐏"
+format = "[$symbol$ram(|$swap)]($style)"
 style = "bold dimmed fg:black bg:cyan"
 disabled = true
 
 [time]
 disabled = false
-time_format = "%b%d %R"          # Hour:Minute Format | "%R|T" https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
-style = "fg:black bg:cyan"
-format = '[ $time]($style)'
+# time_format = "%b%d %R"           # Hour:Minute Format | "%R|T" https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+time_format = "%R"
+style = "fg:black bg:cyan dimmed"
+format = '[$time]($style)'
 use_12hr = false
-time_range = "10:00:00-14:00:00" # Sets the time range during which the module will be shown. Times must be specified in 24-hours format
-
-# [fill] symbol = "-" style = "bold green"
+time_range = "10:00:00-14:00:00"  # Sets the time range during which the module will be shown. Times must be specified in 24-hours format
 
 # Utilities
 
@@ -118,13 +122,11 @@ disabled = false
 
 [shlvl]
 disabled = false
-# symbol = ":"                       
 symbol = "⬍"
 repeat = true
-format = "[$symbol]($style)"
-# format = "[$symbol$shlvl]($style)"
+format = "[$symbol]($style)"      # "[$symbol$shlvl]($style)"
 threshold = 3
-style = "fg:black bg:cyan"
+style = "fg:black bg:cyan dimmed"
 
 [sudo]
 style = "fg:black bg:cyan bold" # style = "bold green"
@@ -132,88 +134,97 @@ symbol = "👩‍💻"
 disabled = false
 
 [status]
-style = "fg:black bg:cyan bold"
-format = '[ $symbol$common_meaning$signal_name$maybe_int]($style)'
+style = "fg:black bg:cyan dimmed"
+format = '[$symbol$common_meaning$signal_name$maybe_int]($style)'
 map_symbol = true
 disabled = false
 
 [git_branch]
 symbol = ""
-style = "fg:black bg:cyan bold"        # style = "bg:#FCA17D"
-format = '[ $symbol $branch ]($style)'
+style = "fg:black bg:cyan dimmed"     # style = "bg:#FCA17D"
+format = '[ $symbol $branch]($style)'
+
+# Git added/deleted lines
+[git_metrics]
+added_style = "fg:black bg:cyan dimmed"
+deleted_style = "fg:black bg:cyan dimmed"
+only_nonzero_diffs = true
+format = '[ +$added]($added_style)[-$deleted]($deleted_style)'
+disabled = true
 
 [git_state]
-style = "fg:black bg:cyan bold"                                      # style = "bright-black"
+style = "fg:black bg:cyan dimmed"                                    # style = "bright-black"
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 
 [git_status]
-style = "fg:black bg:cyan bold"                # style = "bg:#FCA17D"
-format = '[$all_status$ahead_behind ]($style)' # format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "fg:black bg:cyan dimmed"             # style = "bg:#FCA17D"
+format = '[ $all_status$ahead_behind]($style)' # format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
 ahead = ">"
 behind = "<"
 diverged = "<>"
 renamed = "r"
 deleted = "x"
 # conflicted = "​" untracked = "​" modified = "​" staged = "​" renamed = "​" deleted = "​" stashed = "≡"
+disabled = false
 
 # Languages
 
 [c]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [docker_context]
-symbol = " "
-style = "fg:black bg:cyan bold"               # style = "bg:#06969A"
-format = '[ $symbol $context ]($style) $path'
+symbol = ""
+style = "fg:black bg:cyan dimmed"            # style = "bg:#06969A"
+format = '[ $symbol $context]($style) $path'
 
 [elixir]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [elm]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [golang]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [haskell]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [java]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [julia]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [nodejs]
 symbol = ""
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [nim]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [rust]
 symbol = ""
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "fg:black bg:cyan dimmed"        # style = "bg:#86BBD8"
+format = '[ $symbol]($style)'
 
 [scala]
-symbol = " "
-style = "fg:black bg:cyan bold"           # style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = ""
+style = "fg:black bg:cyan dimmed"       # style = "bg:#86BBD8"
+format = '[$symbol]($style)'
