@@ -26,7 +26,7 @@ _G.LspDiagnosticsPopupHandler = function()
     -- but only once for the current cursor location (unless moved afterwards).
     if not (current_cursor[1] == last_popup_cursor[1] and current_cursor[2] == last_popup_cursor[2]) then
         vim.w.lsp_diagnostics_last_cursor = current_cursor
-        vim.diagnostic.open_float(0, { scope = "cursor" })
+        vim.diagnostic.open_float({ scope = "cursor" }, 0)
     end
     local reset_group = vim.api.nvim_create_augroup('reset_group', {})
     vim.api.nvim_create_autocmd({ 'CursorHold' }, {
@@ -55,7 +55,8 @@ lvim.format_on_save = false
 -- lvim.colorscheme = "one_monokai"
 -- lvim.colorscheme = "onenord"
 -- lvim.colorscheme = "gruvbox"
-lvim.colorscheme = "kanagawa"
+-- lvim.colorscheme = "kanagawa"
+lvim.colorscheme = "no-clown-fiesta"
 -- lvim.colorscheme = "solarized"
 -- lvim.colorscheme = "cobalt2"
 -- lvim.colorscheme = "NeoSolarized"
@@ -164,7 +165,7 @@ lvim.builtin.which_key.mappings["m"] = {
 
 lvim.builtin.which_key.mappings["z"] = {
     name = "+Zen",
-    i = { "<cmd>IndentBlanklineToggle<cr>", "Toggle IndentBlankLine Guides" },
+    -- i = { "<cmd>IndentBlanklineToggle<cr>", "Toggle IndentBlankLine Guides" },
     m = { "<C-w>+", "Maximize Window Height" },
     w = { function()
         require("zen-mode").toggle({ window = { width = .85 } })
@@ -226,7 +227,7 @@ lvim.builtin.which_key.mappings["t"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
+-- lvim.builtin.notify.active = true // DEPRECATED
 lvim.builtin.terminal.active = true -- NOTE Use <C-\>>C-n> to get in normal_mode in terminal (neovim feature)
 lvim.builtin.nvimtree.setup.view.width = 30
 lvim.builtin.nvimtree.setup.view.side = "right"
@@ -295,21 +296,21 @@ lvim.lsp.installer.setup.ensure_installed = {
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-    -- { command = "black", filetypes = { "python" } },
-    -- { command = "isort", filetypes = { "python" } },
-    { command = "isort", filetypes = { "python" } },
-    {
-        -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-        command = "prettier",
-        ---@usage arguments to pass to the formatter
-        -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-        extra_args = { "--print-with", "100" },
-        ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-        filetypes = { "typescript", "typescriptreact" },
-    },
-}
+-- local formatters = require "lvim.lsp.null-ls.formatters"
+-- formatters.setup {
+--     -- { command = "black", filetypes = { "python" } },
+--     -- { command = "isort", filetypes = { "python" } },
+--     { command = "isort", filetypes = { "python" } },
+--     {
+--         -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+--         command = "prettier",
+--         ---@usage arguments to pass to the formatter
+--         -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+--         extra_args = { "--print-with", "100" },
+--         ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--         filetypes = { "typescript", "typescriptreact" },
+--     },
+-- }
 
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
@@ -331,7 +332,7 @@ linters.setup {
 -- Additional Plugins
 
 lvim.plugins = {
-    { "lunarvim/colorschemes" },
+    -- { "lunarvim/colorschemes" },
     { "catppuccin/nvim",
         as = "catppuccin",
         config = function()
@@ -350,7 +351,7 @@ lvim.plugins = {
             require("zen-mode").setup {}
         end
     },
-    { "folke/tokyonight.nvim" }, -- { "sainhe/everforest" },
+    -- { "folke/tokyonight.nvim" }, -- { "sainhe/everforest" },
     { "Tsuzat/NeoSolarized.nvim" }, --  NeoSolarized colorscheme for NeoVim with full transparency
     { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' },
     { -- https://github.com/maxmx03/solarized.nvim
@@ -403,10 +404,13 @@ lvim.plugins = {
     },
     -- indent highlighting { "Yggdroot/indentLine" },
     -- show character on end of lines
-    { "lukas-reineke/indent-blankline.nvim" },
+    -- { "lukas-reineke/indent-blankline.nvim" },
     -- "morhetz/gruvbox"
     -- { "morhetz/gruvbox" },
     { "ellisonleao/gruvbox.nvim" },
+    { "aktersnurra/no-clown-fiesta.nvim", config = function()
+        require("no-clown-fiesta").setup({ type = "bold,italic" })
+    end },
     -- Colorful CSV highlighting
     { "mechatroner/rainbow_csv" },
     -- Keybindings for navigating between vim and tmux
@@ -430,10 +434,10 @@ lvim.plugins = {
     { 'junegunn/vim-easy-align' },
     -- use 'terryma/vim-multiple-cursors',
     { 'majutsushi/tagbar', cmd = { 'TagbarToggle' } },
-    { 'tpope/vim-fugitive' },
-    { 'tpope/vim-surround' },
-    { 'tpope/vim-repeat' },
-    { 'mhinz/vim-grepper' },
+    -- { 'tpope/vim-fugitive' },
+    -- { 'tpope/vim-surround' },
+    -- { 'tpope/vim-repeat' },
+    -- { 'mhinz/vim-grepper' },
 }
 
 
@@ -480,7 +484,7 @@ local function blankline_simple()
     }
 end
 
-blankline_simple()
+-- blankline_simple()
 
 -- -------------------------------------------------------------
 -- ORG-MODE
@@ -553,7 +557,7 @@ local function theme_NeoSolarized_cmd()
 
 end
 
-theme_NeoSolarized_cmd()
+-- theme_NeoSolarized_cmd()
 
 ---@diagnostic disable-next-line: unused-function, unused-local
 local function theme_one_monokai()
@@ -562,7 +566,7 @@ local function theme_one_monokai()
     })
 end
 
-theme_one_monokai()
+-- theme_one_monokai()
 
 -- THEME Solarized.
 local success, solarized = pcall(require, 'solarized')
@@ -591,7 +595,7 @@ local solarized_config = {
         return highlights
     end,
 }
-solarized.setup(solarized_config)
+-- solarized.setup(solarized_config)
 
 -- local latte = require("catppuccin.palettes").get_palette "latte"
 local frappe = require("catppuccin.palettes").get_palette "frappe"
@@ -600,59 +604,61 @@ local mocha = require("catppuccin.palettes").get_palette "mocha"
 vim.g.catppuccin_flavour = "mocha" -- Has to be set in order for empty argument to work
 local colors = require("catppuccin.palettes").get_palette() -- g:catppuccin_flavour's palette
 -- latte, frappe, macchiato, mocha
-require("catppuccin").setup({
-    transparent_background = true,
-    term_colors = true,
-    dim_inactive = {
-        enabled = false,
-        shade = "dark",
-        percentage = 0.15,
-    },
-    styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
-    },
-    integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        telescope = true,
-        treesitter = true, -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-    },
-    custom_highlights = {
-        Comment = { fg = colors.flamingo },
-        TSConstBuiltin = { fg = colors.peach, style = {} },
-        TSConstant = { fg = colors.sky },
-        TSComment = { fg = colors.surface2, style = { "italic" } }
-    },
-    color_overrides = {},
-    highlight_overrides = {
-        all = {
-            CmpBorder = { fg = "#3e4145" },
+local function setup_catppuccin_theme()
+    require("catppuccin").setup({
+        transparent_background = true,
+        term_colors = true,
+        dim_inactive = {
+            enabled = false,
+            shade = "dark",
+            percentage = 0.15,
         },
-        -- latte = {
-        --     Normal = { fg = ucolors.darken(latte.base, 0.7, latte.mantle) }, -- BUG: ucolors undefined..
-        -- },
-        frappe = {
-            TSConstBuiltin = { fg = frappe.peach, style = {} },
-            TSConstant = { fg = frappe.sky },
-            TSComment = { fg = frappe.surface2, style = { "italic" } },
+        styles = {
+            comments = { "italic" },
+            conditionals = { "italic" },
+            loops = {},
+            functions = {},
+            keywords = {},
+            strings = {},
+            variables = {},
+            numbers = {},
+            booleans = {},
+            properties = {},
+            types = {},
+            operators = {},
         },
-        macchiato = {
-            LineNr = { fg = macchiato.overlay1 }
+        integrations = {
+            cmp = true,
+            gitsigns = true,
+            nvimtree = true,
+            telescope = true,
+            treesitter = true, -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
-        mocha = {
-            Comment = { fg = mocha.flamingo },
+        custom_highlights = {
+            Comment = { fg = colors.flamingo },
+            TSConstBuiltin = { fg = colors.peach, style = {} },
+            TSConstant = { fg = colors.sky },
+            TSComment = { fg = colors.surface2, style = { "italic" } }
         },
-    },
-})
+        color_overrides = {},
+        highlight_overrides = {
+            all = {
+                CmpBorder = { fg = "#3e4145" },
+            },
+            -- latte = {
+            --     Normal = { fg = ucolors.darken(latte.base, 0.7, latte.mantle) }, -- BUG: ucolors undefined..
+            -- },
+            frappe = {
+                TSConstBuiltin = { fg = frappe.peach, style = {} },
+                TSConstant = { fg = frappe.sky },
+                TSComment = { fg = frappe.surface2, style = { "italic" } },
+            },
+            macchiato = {
+                LineNr = { fg = macchiato.overlay1 }
+            },
+            mocha = {
+                Comment = { fg = mocha.flamingo },
+            },
+        },
+    })
+end
