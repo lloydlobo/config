@@ -169,6 +169,14 @@ sudo chmod +x /usr/local/bin/sampler # Please specify config file using --config
 sudo dnf install golang-github-sqshq-sampler
 # Go lang ends here
 
+# [[file:install-pkg.org::LSP][LSP]]
+#------------------------------------------------------------------------------------------------------#
+
+# codespell-2.1.0-4.fc36.noarch  Fix common misspellings in text files
+sudo dnf install codespell # For null-ls neovim
+sudo dnf install python3-flake8 # For null-ls neovim
+# LSP ends here
+
 # [[file:install-pkg.org::VS Code][VS Code]]
 #------------------------------------------------------------------------------------------------------#
 
@@ -322,6 +330,19 @@ go get github.com/go-delve/delve/cmd/dlv@latest
 go get honnef.co/go/tools/cmd/staticcheck@latest
 # Go Tools Environment/Debugging ends here
 
+# [[file:install-pkg.org::GNU/gnuplot][GNU/gnuplot]]
+sudo dnf install gnuplot
+# GNU/gnuplot ends here
+
 # [[file:install-pkg.org::cheatsheets/cheat][cheatsheets/cheat]]
 sudo dnf install cheat
 # cheatsheets/cheat ends here
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager \
+--add-repo \
+https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+dnf list docker-ce --showduplicates | sort -r
+sudo systemctl start docker # Start docker post installation.
+sudo docker run hello-world # Verify that Docker Engine is installed right.
+sudo dnf install ./docker-desktop-4.12.0-x86_64.rpm

@@ -563,3 +563,47 @@ sudo docker run hello-world # Verify that Docker Engine is installed right.
 sudo dnf install ./docker-desktop-4.12.0-x86_64.rpm
 systemctl --user start docker-desktop .config/install-pkg.sh
 sudo dnf install nasm
+sudo dnf install gv
+sudo dnf copr enable varlad/helix
+sudo dnf install helix
+cargo install rust_cli
+sudo dnf install sqlitebrowser
+
+* PostgreSQL
+sudo yum install pgadmin4
+sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/F-36-x86_64/pgdg-fedora-repo-latest.noarch.rpm
+sudo dnf install -y postgresql15-server
+sudo /usr/pgsql-15/bin/postgresql-15-setup initdb
+sudo systemctl enable postgresql-15
+sudo systemctl start postgresql-15
+
+** https://www.if-not-true-then-false.com/2012/install-postgresql-on-fedora-centos-red-hat-rhel/
+*** 1. Install PostgreSQL 14 Database Server on Fedora 35/34/33, CentOS/Red Hat (RHEL)/Rocky Linux 8.5
+sudo mkdir /var/lib/pgsql
+sudo chown whatami /var/lib/pgsql
+initdb --pgdata=/var/lib/pgsql/
+
+initdb: warning: enabling trust authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/pgsql/ -l logfile start
+
+*** 2. Configure PostreSQL 14
+**** 2. Open /var/lib/pgsql/14/data/postgresql.conf file, and add/uncomment/modify following:
+
+listen_addresses = '*'
+port = 5432
+
+If you want just localhost setup, then use following:
+
+listen_addresses = 'localhost'
+port = 5432
+
+Or if you want use specific ip, then use following:
+
+listen_addresses = '192.1.2.33'
+port = 5432
+
