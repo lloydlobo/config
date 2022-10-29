@@ -179,7 +179,17 @@ format = '[ $symbol]($style)'
 [docker_context]
 symbol = ""
 style = "fg:black bg:cyan dimmed"            # style = "bg:#06969A"
-format = '[ $symbol $context]($style) $path'
+format = '[ $symbol $context $path]($style)'
+disabled = false
+
+# ⚠️ The version being shown is that of the package whose 
+# source code is in your current directory, not your package manager.
+[package]
+format = "[is $symbol$version]($style)"
+symbol = "📦 "
+style = "fg:black bg:cyan dimmed" # "bold 208" bold yellow.
+display_private = false
+disabled = false
 
 [elixir]
 symbol = ""
